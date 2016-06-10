@@ -1,5 +1,8 @@
 package moteur;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Automate {
 	
@@ -26,13 +29,21 @@ public class Automate {
 	}
 	
 	//prend en entée l'état actuel et le symbole et renvoie le nouvelle état;
-		public int action(int etat,int symbole){
+		public int action(int etat,List<Integer> symboles){
+			List<Integer> actionsPossibles = new ArrayList<Integer>();
 			int i;
-			for(i=0;i<position.getY();i++){
-				if (partie.decor()[position.getY()+i][position.getX()].valeur()==symbole) 
-				return partie.decor()[position.getY()+i][position.getX()].valeur();
+			//i<position.getY()+ hauteur de l'automate d'action (nombre de conditions). 
+			for(i=position.getY();i<position.getY()+1;i++){
+				if (symboles.contains(partie.decor()[position.getY()+i][position.getX()].valeur()))
+				
+				actionsPossibles.add(partie.decor()[position.getY()+i][position.getX()+etat+1].valeur());
 			}
-			return 0; //symbole non trouvé
+			if (actionsPossibles.isEmpty())
+				return 0;
+			else
+				//+code de l'action minimum
+				//(int)(Math.random()*(actionsPossibles.size())
+				return actionsPossibles.get(0);
 		}
 	
 }

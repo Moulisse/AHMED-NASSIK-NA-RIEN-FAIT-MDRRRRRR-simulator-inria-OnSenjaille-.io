@@ -8,7 +8,7 @@ import java.util.List;
 public class Partie {
 
 	private Cellule decor[][];
-	private Ordonnanceur horloge;
+	private Ordonnanceur ordonnanceur;
 	private List<Personnage> personnages;
 	
 	public Partie() {
@@ -18,8 +18,12 @@ public class Partie {
 				decor[i][j]=new Cellule();
 			}
 		}
-		this.horloge = new Ordonnanceur(this);
+		this.ordonnanceur = new Ordonnanceur(this);
 		this.personnages=new ArrayList<Personnage>();
+	}
+	
+	public void tour(){
+		ordonnanceur.tour();
 	}
 	
 	public void ajouterPersonnage(Personnage p){
@@ -39,7 +43,7 @@ public class Partie {
 		int i,j;
 		for(i=0;i<a.length;i++){
 			for(j=0;j<a[i].length;j++){
-				this.decor[posX+i][posY+j].setValeur(a[i][j]);
+				this.decor[posY+i][posX+j].setValeur(a[i][j]);
 			}
 		}
 		return new Position(posX,posY);
@@ -60,13 +64,18 @@ public class Partie {
 	
 	public void affichageText(){
 		int i,j;
+		
+		for(j=0;j<this.decor()[0].length;j++){
+			System.out.print("----");
+		}
+		System.out.print("-\n");
 		for(i=0;i<this.decor().length;i++){
 			System.out.print("|");
 			for(j=0;j<this.decor()[i].length;j++){
 				if(this.occupe(j, i)!=null){
 					System.out.print(" * ");
 				}else{
-					System.out.print("   ");
+					System.out.print(" "+this.decor[i][j].valeur()+" ");
 				}
 				System.out.print("|");
 			}
@@ -77,6 +86,7 @@ public class Partie {
 			}
 			System.out.print("\n");
 		}
+		System.out.print("\n");
 	}
 	
 	

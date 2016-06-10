@@ -25,7 +25,13 @@ public abstract class Personnage {
 		return pos;
 	}
 	
-	public void AvancerNord(){
+	public void agir(int action){
+		switch(action){
+		case 1 : this.avancerNord();
+		}
+	}
+	
+	public void avancerNord(){
 		pos.setY(pos.getY()-1);	//verif au niveau de l'ordonanceur.
 	}
 	

@@ -15,6 +15,19 @@ public class Main {
 		Automate aut = new Automate(t, p.placerActions(t2), p);
 		p.ajouterPersonnage(new Guerrier(0,aut,new Position(3,3)));
 		p.affichageText();
-		
+		try {
+		    Thread.sleep(1000);                 //1000 milliseconds is one second.
+		} catch(InterruptedException ex) {
+		    Thread.currentThread().interrupt();
+		}
+		while(true){
+			p.tour();
+			p.affichageText();
+			try {
+			    Thread.sleep(1000);                 //1000 milliseconds is one second.
+			} catch(InterruptedException ex) {
+			    Thread.currentThread().interrupt();
+			}
+		}
 	}
 }
