@@ -6,7 +6,6 @@ import org.jdom2.filter.*;
 import java.util.List;
 import java.util.Iterator;
 
-
 public class JDOM2
 {
 static org.jdom2.Document document;
