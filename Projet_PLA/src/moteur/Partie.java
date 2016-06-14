@@ -9,7 +9,7 @@ public class Partie {
 
 	private Cellule decor[][];
 	private Ordonnanceur ordonnanceur;
-	private List<Personnage> personnages;
+	private List<Personnage> personnages;//penser a distinguer la team des personnages
 	
 	public Partie() {
 		this.decor = new Cellule[10][10];
@@ -21,6 +21,20 @@ public class Partie {
 		this.ordonnanceur = new Ordonnanceur(this);
 		this.personnages=new ArrayList<Personnage>();
 	}
+	
+	public Partie(int nbLigne,int nbColonne) {
+		this.decor = new Cellule[nbLigne][nbColonne];
+		for(int i = 0; i < decor.length; i++){
+			for (int j = 0; j < decor[i].length; j++) {
+				decor[nbLigne][nbColonne]=new Cellule();
+			}
+		}
+		this.ordonnanceur = new Ordonnanceur(this);
+		this.personnages=new ArrayList<Personnage>();
+	}
+	
+	
+	
 	
 	public void tour(){
 		ordonnanceur.tour();
