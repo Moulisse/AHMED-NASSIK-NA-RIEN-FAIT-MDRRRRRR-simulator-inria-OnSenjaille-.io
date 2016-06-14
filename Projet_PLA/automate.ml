@@ -42,26 +42,26 @@ let (cellule_to_int: cellule -> int) = function
   | O -> 3;;
 
 let (condition_to_int: condition -> int) =  function
-  | EnnemiEloigne (cellule) -> 21+(cellule_to_int cellule )
-  | Ennemi (cellule) -> 25+(cellule_to_int cellule )
-  | Allie (cellule) -> 29+(cellule_to_int cellule )
-  | CaseBlancheEloignee (cellule) -> 33+(cellule_to_int cellule )
-  | CaseRougeEloignee (cellule) -> 37+(cellule_to_int cellule )
-  | CaseBleuEloignee (cellule) -> 41+(cellule_to_int cellule )
-  | CaseBlanche (cellule) -> 45+(cellule_to_int cellule )
-  | CaseRouge (cellule) -> 49+(cellule_to_int cellule )
-  | CaseBleu (cellule) -> 53+(cellule_to_int cellule )
-  | Mur (cellule) -> 57+(cellule_to_int cellule )
+  | EnnemiEloigne (cellule) -> 1+(cellule_to_int cellule )
+  | Ennemi (cellule) -> 5+(cellule_to_int cellule )
+  | Allie (cellule) -> 9+(cellule_to_int cellule )
+  | CaseBlancheEloignee (cellule) -> 13+(cellule_to_int cellule )
+  | CaseRougeEloignee (cellule) -> 17+(cellule_to_int cellule )
+  | CaseBleuEloignee (cellule) -> 21+(cellule_to_int cellule )
+  | CaseBlanche (cellule) -> 25+(cellule_to_int cellule )
+  | CaseRouge (cellule) -> 29+(cellule_to_int cellule )
+  | CaseBleu (cellule) -> 33+(cellule_to_int cellule )
+  | Mur (cellule) -> 37+(cellule_to_int cellule )
 ;;
 
 
 let (action_to_int: action -> int) = function
  | Na -> 0
- | Avancer (cellule) -> 1 + (cellule_to_int cellule)
- | Frapper (cellule) -> 5 + (cellule_to_int cellule)
- | Peindre_R (cellule) -> 9 + (cellule_to_int cellule)
- | Peindre_B (cellule) -> 14 + (cellule_to_int cellule)
- | Attendre -> 19
+ | Avancer (cellule) -> 41 + (cellule_to_int cellule)
+ | Frapper (cellule) -> 45 + (cellule_to_int cellule)
+ | Peindre_R (cellule) -> 49 + (cellule_to_int cellule)
+ | Peindre_B (cellule) -> 54 + (cellule_to_int cellule)
+ | Attendre -> 59
 ;;
   
 let (traduction_transition: transition -> int*int*int*int) = fun
