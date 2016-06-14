@@ -13,6 +13,7 @@ public class Joueur {
 	public void ajoutPersonnage(Personnage perso)
 	{
 		this.personnages.add(perso);
+		perso.equipe=this;//changement équipe du perso ajouté
 	}
 	
 	

@@ -2,11 +2,13 @@ package moteur;
 
 public abstract class Personnage {
 	
+
 	protected int sante=1;
 	protected int etat; //TODO limite des états de l'automate.
 	protected Automate automate;
 	protected Position pos;
 	protected Partie partie;
+	protected Joueur equipe; //equipe du personnage
 	
 	Personnage(int e,Automate a,Position p){
 		etat=e;
