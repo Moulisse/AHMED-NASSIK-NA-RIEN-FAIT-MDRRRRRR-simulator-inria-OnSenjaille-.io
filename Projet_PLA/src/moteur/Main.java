@@ -12,7 +12,7 @@ public class Main {
 		int[][] t2 = new int[1][2];
 		t2[0][0]=11;
 		t2[0][1]=1;
-		Automate aut = new Automate(t, p.placerActions(t2), p);
+		Automate aut = new Automate(t,t, p.placerActions(t2), p);
 		p.ajouterPersonnage(new Guerrier(0,aut,new Position(3,3)));
 		p.affichageText();
 		try {

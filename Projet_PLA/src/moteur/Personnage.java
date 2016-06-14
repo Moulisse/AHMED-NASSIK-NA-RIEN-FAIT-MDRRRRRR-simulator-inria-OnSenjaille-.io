@@ -6,6 +6,7 @@ public abstract class Personnage {
 	private int etat; //TODO limite des états de l'automate.
 	private Automate automate;
 	private Position pos;
+	public Joueur equipe; //equipe du personnage
 	
 	Personnage(int e,Automate a,Position p){
 		etat=e;
