@@ -2,6 +2,9 @@ package Parser;
 import java.io.*;
 import org.jdom2.*;
 import org.jdom2.input.*;
+
+import moteur.Partie;
+
 import org.jdom2.filter.*;
 import java.util.List;
 import java.util.Iterator;
@@ -110,12 +113,17 @@ static int nbAuto()//renvoie le nombre d'automates
 }
 
 
-/*
-public Partie(String nomFichier)
+
+public Partie buildGame(String nomFichier)
 {
+	Partie partieInitiale = null;
 	
+	
+	
+	
+	return partieInitiale;
 }
-*/
+
 
 
 
