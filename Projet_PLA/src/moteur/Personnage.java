@@ -14,7 +14,7 @@ public abstract class Personnage {
 		pos = p;
 	}
 	
-	public void frappé(){
+	public void beaten(){
 		sante=0;
 	}
 	
