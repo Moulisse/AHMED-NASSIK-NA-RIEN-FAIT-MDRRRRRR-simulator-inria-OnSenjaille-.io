@@ -40,8 +40,9 @@ public class Partie {
 		ordonnanceur.tour();
 	}
 	
-	public void ajouterPersonnage(Personnage p){
-		personnages.add(p);
+	public void ajouterPersonnage(Personnage pers){
+		personnages.add(pers);
+		pers.setPartie(this);
 		
 	}
 	
