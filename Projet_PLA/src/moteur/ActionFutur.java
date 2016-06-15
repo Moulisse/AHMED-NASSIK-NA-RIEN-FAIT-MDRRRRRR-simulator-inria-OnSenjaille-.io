@@ -35,8 +35,12 @@ public class ActionFutur implements Comparable<ActionFutur>{
 	public void executer(){
 		switch (type){
 		case MOUVEMENT :
-			//if this.cible()=
-			
+			if (!this.perso.partie().blocke(this.cible().getX(), this.cible().getY())){
+				this.perso.avancer(codeAction);
+			}else{
+				this.perso.avancer(4);
+			}
+		case 
 		}
 	}
 	

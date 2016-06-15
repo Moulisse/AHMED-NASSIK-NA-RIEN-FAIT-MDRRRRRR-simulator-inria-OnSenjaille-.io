@@ -107,6 +107,10 @@ public class Partie {
 		return null;
 	}
 	
+	public boolean blocke(int x,int y){
+		return (this.decor[y][x].valeur()==65);
+	}
+	
 	public void affichageText(){
 		int i,j;
 		
