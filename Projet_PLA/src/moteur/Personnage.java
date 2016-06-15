@@ -45,20 +45,19 @@ public abstract class Personnage {
 		return equipe;
 	}
 	
-	/*
-	public void avancerNord(){
-		pos.setY(pos.getY()-1);	//verif au niveau de l'ordonanceur.
+	public void avancer(int code){
+		switch (code){
+		case 0 :	//Nord
+			pos.setY(position().getY()-1);
+		case 1 : 	//Est
+			pos.setX(position().getX()+1);
+		case 2 : 	//Sud
+			pos.setY(position().getY()+1);
+		case 3 : 	//Ouest
+			pos.setX(position().getX()-1);
+		case 4 : 	//Sur Place
+		}
 	}
-	public void avancerEst(){
-		pos.setY(pos.getX()+1);	//verif au niveau de l'ordonanceur.
-	}
-	public void avancerSud(){
-		pos.setY(pos.getY()+1);	//verif au niveau de l'ordonanceur.
-	}
-	public void avancerOuest(){
-		pos.setY(pos.getX()-1);	//verif au niveau de l'ordonanceur.
-	}
-	*/
 	
 	/*
 	 * @ensure i<= nombre max d'etat

@@ -1,6 +1,8 @@
 package moteur;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Ordonnanceur {
@@ -20,7 +22,7 @@ public class Ordonnanceur {
 			act = p.automate().action(p.etat(), conds);
 			actions.add(new ActionFutur(p,act));
 		}
-		actions.sort(null);
+		Collections.sort(actions);
 		double roll;
 		for(ActionFutur a : actions){
 			for(ActionFutur b : actions){
@@ -50,9 +52,9 @@ public class Ordonnanceur {
 					if(a.cible()==b.cible()){ //Si deux personnages avance sur la même case.
 						roll = Math.random();
 						if (roll<=0.50){
-							a.setType(TypeAction.RATE);
+							a.setCible(4); //Avancer sur place.
 						}else{
-							b.setType(TypeAction.RATE);
+							b.setCible(4);
 						}
 					}
 				}

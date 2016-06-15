@@ -33,9 +33,6 @@ public class Partie {
 		this.personnages=new ArrayList<Personnage>();
 	}
 	
-	
-	
-	
 	public void tour(){
 		ordonnanceur.tour();
 	}
@@ -108,6 +105,10 @@ public class Partie {
 			}
 		}
 		return null;
+	}
+	
+	public boolean blocke(int x,int y){
+		return (this.decor[y][x].valeur()==65);
 	}
 	
 	public void affichageText(){
