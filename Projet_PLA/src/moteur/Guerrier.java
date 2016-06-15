@@ -3,20 +3,16 @@ package moteur;
 
 public class Guerrier extends Personnage {
 
-	Guerrier(int e,Automate a, Position p){
+	public Guerrier(int e,Automate a, Position p){
 		super(e,a, p);
 	}
 	
+	/*
+	
 	public void frapperNord(){
 		Personnage cible = this.partie.occupe(pos.getX(),pos.getY()-1);	//verif au niveau de l'ordonanceur.
-		if (cible!=null){
-			if(this.sante!=0){
+		if (cible!=null)
 				cible.beaten();
-			}
-		}
-		
-	
-			
 	}
 	public void frapperEst(){
 		Personnage cible = this.partie.occupe(pos.getX(),pos.getY()+1);	//verif au niveau de l'ordonanceur.
@@ -33,5 +29,5 @@ public class Guerrier extends Personnage {
 		if (cible!=null)
 			cible.beaten();
 	}
-	
+	*/
 }
