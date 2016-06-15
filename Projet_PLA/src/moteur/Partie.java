@@ -33,9 +33,6 @@ public class Partie {
 		this.personnages=new ArrayList<Personnage>();
 	}
 	
-	
-	
-	
 	public void tour(){
 		ordonnanceur.tour();
 	}

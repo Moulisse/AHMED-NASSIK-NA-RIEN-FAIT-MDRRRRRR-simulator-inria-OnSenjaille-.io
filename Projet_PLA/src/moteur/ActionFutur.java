@@ -1,6 +1,6 @@
 package moteur;
 
-public class ActionFutur implements Comparable{
+public class ActionFutur implements Comparable<ActionFutur>{
 	
 	private TypeAction type;
 	private Personnage perso;
@@ -33,9 +33,11 @@ public class ActionFutur implements Comparable{
 	}
 	
 	public void executer(){
-		/*if (this.type==TypeAction.MOUVEMENT){
+		switch (type){
+		case MOUVEMENT :
+			//if this.cible()=
 			
-		}*/
+		}
 	}
 	
 	public void setType(TypeAction t){
@@ -56,7 +58,7 @@ public class ActionFutur implements Comparable{
 	}
 	
 	//TODO généraliser dans Position.Java
-	private void setCible(int i){
+	public void setCible(int i){
 		switch (i){
 		case 0 :	//Nord
 			cible.setX(perso.position().getX());
@@ -75,20 +77,8 @@ public class ActionFutur implements Comparable{
 			cible.setY(perso.position().getY());
 		}
 	}
-
-	public int compareTo(Object arg0) {
-		if(arg0.getClass()!=this.getClass())
-			try {
-				throw(new Exception());
-			} catch (Exception e) {
-				System.out.print("Comparaison sur typeAction impossible\n");
-				e.printStackTrace();
-				return 0;
-			}
-		else{
-			return this.type().ordinal() - ((ActionFutur)arg0).type().ordinal();
-		}
-
+	public int compareTo(ActionFutur arg0) {
+		return this.type().ordinal() - ((ActionFutur)arg0).type().ordinal();
 	}
 	
 	
