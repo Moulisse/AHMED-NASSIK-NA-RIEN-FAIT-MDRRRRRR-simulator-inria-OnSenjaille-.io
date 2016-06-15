@@ -9,9 +9,9 @@ public class mainXMLtest {
 		ParserXML parser=new ParserXML();
 		
 		
-		Partie jeu;
-		jeu=parser.buildGame("modeleJ1.xml","modeleJ2.xml");
-		
+		//Partie jeu;
+		Partie jeu=parser.buildGame("modeleJ1.xml","modeleJ2.xml");
+		jeu.affichageText();
 		
 	}
 
