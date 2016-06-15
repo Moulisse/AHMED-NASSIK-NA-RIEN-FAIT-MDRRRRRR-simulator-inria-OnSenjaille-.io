@@ -14,10 +14,14 @@ public class Ordonnanceur {
 	public void tour(){
 		List<Integer> conds;
 		int act;
+		List<ActionFutur> actions = new ArrayList<ActionFutur>();
 		for(Personnage p : part.personnages()){
 			conds = this.calculConditions(p);
 			act = p.automate().action(p.etat(), conds);
-			p.agir(act);
+			actions.add(new ActionFutur(p,act));
+		}
+		for(ActionFutur a : actions){
+			a.executer();
 		}
 	}
 	

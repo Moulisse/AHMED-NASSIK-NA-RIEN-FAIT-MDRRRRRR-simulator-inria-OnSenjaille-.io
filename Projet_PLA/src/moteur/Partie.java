@@ -26,7 +26,7 @@ public class Partie {
 		this.decor = new Cellule[nbLigne][nbColonne];
 		for(int i = 0; i < decor.length; i++){
 			for (int j = 0; j < decor[i].length; j++) {
-				decor[i][j]=new Cellule();
+				decor[nbLigne][nbColonne]=new Cellule();
 			}
 		}
 		this.ordonnanceur = new Ordonnanceur(this);

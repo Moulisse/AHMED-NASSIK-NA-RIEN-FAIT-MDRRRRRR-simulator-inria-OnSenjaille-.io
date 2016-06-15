@@ -2,16 +2,26 @@ package moteur;
 
 public abstract class Personnage {
 	
-	private int sante=1;
-	private int etat; //TODO limite des états de l'automate.
-	private Automate automate;
-	private Position pos;
-	public Joueur equipe; //equipe du personnage
+
+	protected int sante=1;
+	protected int etat; //TODO limite des états de l'automate.
+	protected Automate automate;
+	protected Position pos;
+	protected Partie partie;
+	protected Joueur equipe; //equipe du personnage
 	
 	Personnage(int e,Automate a,Position p){
 		etat=e;
 		automate=a;
 		pos = p;
+	}
+	
+	public void beaten(){
+		sante=0;
+	}
+	
+	public void setPartie(Partie p){
+		this.partie=p;
 	}
 	
 	
@@ -35,6 +45,15 @@ public abstract class Personnage {
 	
 	public void avancerNord(){
 		pos.setY(pos.getY()-1);	//verif au niveau de l'ordonanceur.
+	}
+	public void avancerEst(){
+		pos.setY(pos.getX()+1);	//verif au niveau de l'ordonanceur.
+	}
+	public void avancerSud(){
+		pos.setY(pos.getY()+1);	//verif au niveau de l'ordonanceur.
+	}
+	public void avancerOuest(){
+		pos.setY(pos.getX()-1);	//verif au niveau de l'ordonanceur.
 	}
 	
 	/*
