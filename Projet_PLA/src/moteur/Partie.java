@@ -40,9 +40,13 @@ public class Partie {
 		ordonnanceur.tour();
 	}
 	
-	public void ajouterPersonnage(Personnage pers){
-		personnages.add(pers);
-		pers.setPartie(this);
+	public void ajouterPersonnage(Personnage p){
+		personnages.add(p);
+		
+	}
+	
+	public void ajouterListe(List<Personnage> p){
+		personnages.addAll(p);
 		
 	}
 	
@@ -63,6 +67,35 @@ public class Partie {
 		}
 		return new Position(posX,posY);
 	}
+	
+	//Place l'automate d'action et renvoie ses coordonnées
+	public void placerActions(int[][] a, int x, int y){
+		//TODO vérifier les positions disponibles
+		int posX=x;
+		int posY=y;
+		int i,j;
+		for(i=0;i<a.length;i++){
+			for(j=0;j<a[i].length;j++){
+				this.decor[posY+i][posX+j].setValeur(a[i][j]);
+			}
+		}
+	}
+	
+	//Place l'automate d'action et renvoie ses coordonnées
+	public Position placerActions(int[][] a, int indicePlacement){
+		//TODO vérifier les positions disponibles
+		int i,j;
+		int randomPlacement=(int)(Math.random()*19);
+		for(i=0;i<a.length;i++){
+			for(j=0;j<a[i].length;j++){
+				this.decor[6*indicePlacement][randomPlacement+j].setValeur(a[i][j]);
+			}
+		}
+		
+		return new Position(6*indicePlacement,randomPlacement+j);
+	}
+	
+	
 	
 	public Cellule[][] decor(){
 		return decor;

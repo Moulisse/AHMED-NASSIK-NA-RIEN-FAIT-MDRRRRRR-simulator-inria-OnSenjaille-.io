@@ -24,6 +24,7 @@ public abstract class Personnage {
 		this.partie=p;
 	}
 	
+	
 	public int etat(){
 		return etat;
 	}
@@ -57,6 +58,12 @@ public abstract class Personnage {
 	public void setEtat(int e){
 		etat = e;
 	}
+	/*
+	public void setAutomateTransition(int t[][])
+	{
+		this.automate.transitions=t;
+	}
+	}*/
 	
 
 }
