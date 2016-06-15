@@ -248,8 +248,9 @@ public Partie buildGame(String fichierJoueur1, String fichierJoueur2)
 	
 	//initialisation JOUEUR 1
 
-	partieInitiale.ajouterListe(joueur1.personnages);
-	
+	partieInitiale.ajouterListe(joueur1.getPersonnages());
+	partieInitiale.ajouterListe(joueur2.getPersonnages());
+
 	
 	
 	

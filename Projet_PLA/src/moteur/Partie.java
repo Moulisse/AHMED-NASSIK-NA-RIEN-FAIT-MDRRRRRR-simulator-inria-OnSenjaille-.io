@@ -84,7 +84,7 @@ public class Partie {
 	//Place l'automate d'action et renvoie ses coordonnées
 	public Position placerActions(int[][] a, int indicePlacement){
 		//TODO vérifier les positions disponibles
-		int i,j;
+		int i=0,j = 0;
 		int randomPlacement=(int)(Math.random()*19);
 		for(i=0;i<a.length;i++){
 			for(j=0;j<a[i].length;j++){
@@ -92,7 +92,7 @@ public class Partie {
 			}
 		}
 		
-		return new Position(6*indicePlacement,randomPlacement+j);
+		return new Position(6*indicePlacement,(randomPlacement+j));
 	}
 	
 	
