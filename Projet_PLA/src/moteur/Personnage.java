@@ -37,6 +37,14 @@ public abstract class Personnage {
 		return pos;
 	}
 	
+	public Partie partie(){
+		return partie;
+	}
+	
+	public Joueur equipe(){
+		return equipe;
+	}
+	
 	/*
 	public void avancerNord(){
 		pos.setY(pos.getY()-1);	//verif au niveau de l'ordonanceur.
