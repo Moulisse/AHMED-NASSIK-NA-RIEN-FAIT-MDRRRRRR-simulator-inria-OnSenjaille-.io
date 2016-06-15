@@ -36,12 +36,7 @@ public abstract class Personnage {
 		return pos;
 	}
 	
-	public void agir(int action){
-		switch(action){
-		case 1 : this.avancerNord();
-		}
-	}
-	
+	/*
 	public void avancerNord(){
 		pos.setY(pos.getY()-1);	//verif au niveau de l'ordonanceur.
 	}
@@ -54,6 +49,7 @@ public abstract class Personnage {
 	public void avancerOuest(){
 		pos.setY(pos.getX()-1);	//verif au niveau de l'ordonanceur.
 	}
+	*/
 	
 	/*
 	 * @ensure i<= nombre max d'etat
