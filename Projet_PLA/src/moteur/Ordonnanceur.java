@@ -48,7 +48,7 @@ public class Ordonnanceur {
 						}
 					}
 				}
-				if(a.type()==TypeAction.MOUVEMENT&&b.type()==TypeAction.MOUVEMENT){
+				if(a.type()==TypeAction.MOUVEMENT&&b.type()==TypeAction.MOUVEMENT){	
 					if(a.cible()==b.cible()){ //Si deux personnages avance sur la même case.
 						roll = Math.random();
 						if (roll<=0.50){
@@ -70,9 +70,65 @@ public class Ordonnanceur {
 	
 	public List<Integer> calculConditions(Personnage p){
 		List<Integer> conditions = new ArrayList<Integer>();
-		if (p.position().getY()!=0){
-			conditions.add(11);
+		
+		/*
+		 * if (p.position().getY()!=0){
+		 * conditions.add(11);
+		 * }
+		*/
+		
+		//Personnage au nord
+		if (p.partie().occupe(p.position().getX(), p.position().getY()-1)!=null){
+			
+			//Allie
+			if(p.partie().occupe(p.position().getX(), p.position().getY()-1).equipe()==p.equipe()){
+				conditions.add(8);
+			}
+			else 
+			{
+				conditions.add(5);
+			}
 		}
+		
+		//Personnage a l'ouest
+		if (p.partie().occupe(p.position().getX()+1, p.position().getY())!=null){
+			
+			//Allie
+			if(p.partie().occupe(p.position().getX()+1, p.position().getY()).equipe()==p.equipe()){
+				conditions.add(11);
+			}
+			else 
+			{
+				conditions.add(8);
+			}
+		}
+		
+		//Personnage a l'est
+		if (p.partie().occupe(p.position().getX()-1, p.position().getY())!=null){
+			
+			//Allie
+			if(p.partie().occupe(p.position().getX()-1, p.position().getY()).equipe()==p.equipe()){
+				conditions.add(9);
+			}
+			else 
+			{
+				conditions.add(6);
+			}
+		}
+		
+		//Personnage au sud
+		if (p.partie().occupe(p.position().getX(), p.position().getY()+1)!=null){
+			
+			//Allie
+			if(p.partie().occupe(p.position().getX(), p.position().getY()+1).equipe()==p.equipe()){
+				conditions.add(10);
+			}
+			else 
+			{
+				conditions.add(7);
+			}
+		}
+		
 		return conditions;
 	}
 	

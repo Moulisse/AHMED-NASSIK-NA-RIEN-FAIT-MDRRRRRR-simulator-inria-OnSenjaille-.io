@@ -37,6 +37,14 @@ public abstract class Personnage {
 		return pos;
 	}
 	
+	public Partie partie(){
+		return partie;
+	}
+	
+	public Joueur equipe(){
+		return equipe;
+	}
+	
 	public void avancer(int code){
 		switch (code){
 		case 0 :	//Nord
