@@ -40,7 +40,6 @@ public class ActionFutur implements Comparable<ActionFutur>{
 			}else{
 				this.perso.avancer(4);
 			}
-		case 
 		}
 	}
 	
