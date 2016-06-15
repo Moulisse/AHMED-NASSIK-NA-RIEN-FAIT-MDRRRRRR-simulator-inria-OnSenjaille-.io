@@ -1,6 +1,8 @@
 package moteur;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Ordonnanceur {
@@ -20,7 +22,7 @@ public class Ordonnanceur {
 			act = p.automate().action(p.etat(), conds);
 			actions.add(new ActionFutur(p,act));
 		}
-		actions.sort(null);
+		Collections.sort(actions);
 		double roll;
 		for(ActionFutur a : actions){
 			for(ActionFutur b : actions){
@@ -50,9 +52,9 @@ public class Ordonnanceur {
 					if(a.cible()==b.cible()){ //Si deux personnages avance sur la même case.
 						roll = Math.random();
 						if (roll<=0.50){
-							a.setType(TypeAction.RATE);
+							a.setCible(4); //Avancer sur place.
 						}else{
-							b.setType(TypeAction.RATE);
+							b.setCible(4);
 						}
 					}
 				}
@@ -80,9 +82,9 @@ public class Ordonnanceur {
 			
 			//Allie
 			if(p.partie().occupe(p.position().getX(), p.position().getY()-1).equipe()==p.equipe()){
-				conditions.add(8);
+				conditions.add(9);
 			}
-			else 
+			else //Ennemi 
 			{
 				conditions.add(5);
 			}
@@ -92,10 +94,10 @@ public class Ordonnanceur {
 		if (p.partie().occupe(p.position().getX()+1, p.position().getY())!=null){
 			
 			//Allie
-			if(p.partie().occupe(p.position().getX()+1, p.position().getY()).equipe()==p.equipe()){
-				conditions.add(11);
+			if(p.partie().occupe(p.position().getX()-1, p.position().getY()).equipe()==p.equipe()){
+				conditions.add(12);
 			}
-			else 
+			else //Ennemi 
 			{
 				conditions.add(8);
 			}
@@ -105,10 +107,10 @@ public class Ordonnanceur {
 		if (p.partie().occupe(p.position().getX()-1, p.position().getY())!=null){
 			
 			//Allie
-			if(p.partie().occupe(p.position().getX()-1, p.position().getY()).equipe()==p.equipe()){
-				conditions.add(9);
+			if(p.partie().occupe(p.position().getX()+1, p.position().getY()).equipe()==p.equipe()){
+				conditions.add(10);
 			}
-			else 
+			else //Ennemi 
 			{
 				conditions.add(6);
 			}
@@ -119,13 +121,94 @@ public class Ordonnanceur {
 			
 			//Allie
 			if(p.partie().occupe(p.position().getX(), p.position().getY()+1).equipe()==p.equipe()){
-				conditions.add(10);
+				conditions.add(11);
 			}
-			else 
+			else //Ennemi 
 			{
 				conditions.add(7);
 			}
 		}
+		
+		//CaseBlanche(N)
+		if(p.partie().decor()[p.position().getX()][p.position().getY()-1].couleur()==0)
+		{
+			conditions.add(25);
+		}
+		else if(p.partie().decor()[p.position().getX()][p.position().getY()-1].couleur()==1)
+		//CaseBleu(N)
+		{
+			conditions.add(35);
+		}
+		else
+		//CaseRouge(N)
+		{
+			conditions.add(30);
+		}
+		
+		//CaseBlanche(E)
+		if(p.partie().decor()[p.position().getX()+1][p.position().getY()].couleur()==0)
+		{
+			conditions.add(26);
+		}
+		else if(p.partie().decor()[p.position().getX()+1][p.position().getY()].couleur()==1)
+		//CaseBleu(E)	
+		{
+			conditions.add(36);
+		}
+		else
+		//CaseRouge(E)
+		{
+			conditions.add(31);
+		}
+			
+		
+		//CaseBlanche(S)
+		if(p.partie().decor()[p.position().getX()][p.position().getY()+1].couleur()==0)
+		{
+			conditions.add(27);
+		}
+		else if(p.partie().decor()[p.position().getX()][p.position().getY()+1].couleur()==1)
+		//CaseBleu(S)
+		{
+			conditions.add(37);
+		}
+		else
+		//CaseRouge(S)
+		{
+			conditions.add(32);
+		}
+		
+		//CaseBlanche(W)
+		if(p.partie().decor()[p.position().getX()-1][p.position().getY()].couleur()==0)
+		{
+			conditions.add(28);
+		}
+		else if(p.partie().decor()[p.position().getX()-1][p.position().getY()].couleur()==1)
+		//CaseBleu(W)
+		{
+			conditions.add(38);
+		}
+		else
+		//CaseRouge(W)
+		{
+			conditions.add(33);
+		}
+		
+		//CaseBlanche(cellule actuelle)
+		if(p.partie().decor()[p.position().getX()][p.position().getY()].couleur()==0)
+		{
+			conditions.add(29);
+		}
+		else if(p.partie().decor()[p.position().getX()][p.position().getY()].couleur()==1)
+		//CaseBleu(Cellule actuelle)	
+		{
+			conditions.add(39);
+		}
+		else
+		{
+			conditions.add(34);
+		}
+	
 		
 		return conditions;
 	}

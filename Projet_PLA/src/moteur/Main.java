@@ -4,7 +4,6 @@ public class Main {
 	
 	
 	public static void main(String[] args) {
-		/*		
 		Partie p = new Partie();
 		int[][] t = new int[1][2];
 		t[0][0]=1;
@@ -29,7 +28,5 @@ public class Main {
 			    Thread.currentThread().interrupt();
 			}
 		}
-		*/
-		Parser.parserXML.
 	}
 }
