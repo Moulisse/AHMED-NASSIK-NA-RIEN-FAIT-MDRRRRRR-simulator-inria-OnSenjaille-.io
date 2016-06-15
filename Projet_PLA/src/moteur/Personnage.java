@@ -48,15 +48,28 @@ public abstract class Personnage {
 	public void avancer(int code){
 		switch (code){
 		case 0 :	//Nord
-			pos.setY(position().getY()-1);
+			if(!this.partie().blocke(this.position().getX(),this.position().getY()-1))
+				pos.setY(position().getY()-1);
+			break;
 		case 1 : 	//Est
-			pos.setX(position().getX()+1);
+			if(!this.partie().blocke(this.position().getX()+1,this.position().getY()))
+				pos.setX(position().getX()+1);
+			break;
 		case 2 : 	//Sud
-			pos.setY(position().getY()+1);
+			if(!this.partie().blocke(this.position().getX(),this.position().getY()+1))
+				pos.setY(position().getY()+1);
+			break;
 		case 3 : 	//Ouest
-			pos.setX(position().getX()-1);
-		case 4 : 	//Sur Place
+			if(!this.partie().blocke(this.position().getX()-1,this.position().getY()))
+				pos.setX(position().getX()-1);
+			break;
+		default : 	//Sur Place
+			break;
 		}
+	}
+	
+	public void rate(){
+		
 	}
 	
 	/*

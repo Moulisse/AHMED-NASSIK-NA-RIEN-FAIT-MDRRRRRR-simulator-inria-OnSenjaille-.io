@@ -108,7 +108,7 @@ public class Partie {
 	}
 	
 	public boolean blocke(int x,int y){
-		return (this.decor[y][x].valeur()==65);
+		return (this.decor[y][x].valeur()==codes.mur);
 	}
 	
 	public void affichageText(){

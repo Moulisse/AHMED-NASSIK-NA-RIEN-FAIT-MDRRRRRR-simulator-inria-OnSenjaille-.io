@@ -9,17 +9,17 @@ public class ActionFutur implements Comparable<ActionFutur>{
 	
 	ActionFutur(Personnage p,int i){
 		perso = p;
-		if(i>=41&&i<=44){
+		if(i>=codes.avancer&&i<=codes.avancer+3){
 			type = TypeAction.MOUVEMENT;
-			codeAction = i-41;
+			codeAction = i-codes.avancer;
 			setCible(codeAction); //Code de l'action - premier code = direction cf.codes.odt
-		}else if(codeAction>=45&&codeAction<=48){
+		}else if(codeAction>=codes.frapper&&codeAction<=codes.frapper+3){
 			type = TypeAction.FRAPPE;
-			codeAction = i-45;
+			codeAction = i-codes.frapper;
 			setCible(codeAction); 
-		}else if(codeAction>=49&&codeAction<=58){
+		}else if(codeAction>=codes.peindreR&&codeAction<=codes.peindreB+4){
 			type = TypeAction.PEINT;
-			codeAction = i-49;
+			codeAction = i-codes.peindreR;
 			setCible((codeAction)%5); //%5 dans le cas codeAction>=54
 		}
 	}
@@ -40,6 +40,23 @@ public class ActionFutur implements Comparable<ActionFutur>{
 			}else{
 				this.perso.avancer(4);
 			}
+		case RATE :
+			this.perso().rate();
+		case FRAPPE :
+			if(this.getClass().isInstance(Guerrier.class)){
+				((Guerrier)this.perso).frapper(codeAction);
+			}
+		case PEINT:
+			if(this.getClass().isInstance(Peintre.class)){
+				if(codeAction>5){
+					((Peintre)this.perso).peindre(codeAction, 1);
+				}else{
+					((Peintre)this.perso).peindre(codeAction-5, 2);
+				}
+			}
+			break;
+		default:
+			break;
 		}
 	}
 	

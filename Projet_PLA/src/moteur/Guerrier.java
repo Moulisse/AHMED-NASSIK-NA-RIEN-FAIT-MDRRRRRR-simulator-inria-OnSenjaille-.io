@@ -7,27 +7,27 @@ public class Guerrier extends Personnage {
 		super(e,a, p);
 	}
 	
-	/*
-	
-	public void frapperNord(){
-		Personnage cible = this.partie.occupe(pos.getX(),pos.getY()-1);	//verif au niveau de l'ordonanceur.
-		if (cible!=null)
-				cible.beaten();
-	}
-	public void frapperEst(){
-		Personnage cible = this.partie.occupe(pos.getX(),pos.getY()+1);	//verif au niveau de l'ordonanceur.
-		if (cible!=null)
+	public void frapper(int code){
+		Personnage cible=null;	//verif au niveau de l'ordonanceur.
+
+		switch (code){
+		case 0 :	//Nord
+			cible = this.partie.occupe(pos.getX(),pos.getY()-1);
+			break;
+		case 1 : 	//Est
+			cible = this.partie.occupe(pos.getX()+1,pos.getY());
+			break;
+		case 2 : 	//Sud
+			cible = this.partie.occupe(pos.getX(),pos.getY()+1);
+			break;
+		case 3 : 	//Ouest
+			cible = this.partie.occupe(pos.getX()-1,pos.getY());
+			break;
+		default :
+			cible = null;
+			break;
+		}
+		if (cible != null)
 			cible.beaten();
 	}
-	public void frapperSud(){
-		Personnage cible = this.partie.occupe(pos.getX(),pos.getY()+1);	//verif au niveau de l'ordonanceur.
-		if (cible!=null)
-			cible.beaten();
-	}
-	public void frapperOuest(){
-		Personnage cible = this.partie.occupe(pos.getX(),pos.getY()-1);	//verif au niveau de l'ordonanceur.
-		if (cible!=null)
-			cible.beaten();
-	}
-	*/
 }
