@@ -9,16 +9,18 @@ public class ActionFutur implements Comparable{
 	
 	ActionFutur(Personnage p,int i){
 		perso = p;
-		codeAction = i;
-		if(codeAction>=41&&codeAction<=44){
+		if(i>=41&&i<=44){
 			type = TypeAction.MOUVEMENT;
-			setCible(codeAction - 41); //Code de l'action - premier code = direction cf.codes.odt
+			codeAction = i-41;
+			setCible(codeAction); //Code de l'action - premier code = direction cf.codes.odt
 		}else if(codeAction>=45&&codeAction<=48){
 			type = TypeAction.FRAPPE;
-			setCible(codeAction - 45); 
+			codeAction = i-45;
+			setCible(codeAction); 
 		}else if(codeAction>=49&&codeAction<=58){
 			type = TypeAction.PEINT;
-			setCible((codeAction - 49)%5); //%5 dans le cas codeAction>=54
+			codeAction = i-49;
+			setCible((codeAction)%5); //%5 dans le cas codeAction>=54
 		}
 	}
 	
