@@ -34,10 +34,19 @@ public class Cellule {
 	
 	public void peindre(int c){
 		couleur = c;
-		if(this.valeur>=codes.peindreR&&this.valeur<=codes.peindreR+4)
-			this.valeur=this.valeur-codes.peindreR+codes.peindreB;
-		//else if()
-			//TODO FINIR L'AUTRE COULEUR + LES 6 SYMBOLES COULEUR CASE
+		if(valeur==codes.rouge){
+			if(this.valeur>=codes.peindreB&&this.valeur<=codes.peindreB+4)
+				this.valeur=this.valeur-codes.peindreB+codes.peindreR;
+		}else if(valeur==codes.bleu){
+			if(this.valeur>=codes.peindreR&&this.valeur<=codes.peindreR+4)
+				this.valeur=this.valeur-codes.peindreR+codes.peindreB;
+		}
+		/*
+		else if(this.valeur>=codes.peindreB&&this.valeur<=codes.peindreB+4)
+			this.valeur=this.valeur-codes.peindreB+codes.peindreR;
+		else if(this.valeur>=codes.caseBlancheEloigneeNord&&this.valeur<=codes.caseBlancheEloigneeOuest){
+			this.valeur=this.valeur - codes.caseBlancheEloigneeNord + codes.case
+		}*/
 	}
 	
 }

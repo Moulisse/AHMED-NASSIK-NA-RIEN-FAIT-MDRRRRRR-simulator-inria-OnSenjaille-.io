@@ -48,10 +48,10 @@ public class ActionFutur implements Comparable<ActionFutur>{
 			}
 		case PEINT:
 			if(this.getClass().isInstance(Peintre.class)){
-				if(codeAction>5){
-					((Peintre)this.perso).peindre(codeAction, 1);
+				if(codeAction<5){
+					((Peintre)this.perso).peindre(codeAction, codes.bleu );
 				}else{
-					((Peintre)this.perso).peindre(codeAction-5, 2);
+					((Peintre)this.perso).peindre(codeAction-5, codes.rouge );
 				}
 			}
 			break;
