@@ -21,7 +21,7 @@ public class Partie {
 		this.ordonnanceur = new Ordonnanceur(this);
 		this.personnages=new ArrayList<Personnage>();
 	}
-	
+	/*
 	public Partie(int nbLigne,int nbColonne) {
 		this.decor = new Cellule[nbLigne][nbColonne];
 		for(int i = 0; i < decor.length; i++){
@@ -31,8 +31,50 @@ public class Partie {
 		}
 		this.ordonnanceur = new Ordonnanceur(this);
 		this.personnages=new ArrayList<Personnage>();
+	}*/		
+	public Partie(int nbLigne,int nbColonne) {
+		this.decor = new Cellule[nbLigne+2][nbColonne+2];
+		for(int i = 0; i < decor.length; i++){
+			for (int j = 0; j < decor[i].length; j++) {
+				decor[i][j]=new Cellule();
+			}
+		}
+		
+		//creation murs
+		
+		for(int j=1;j < decor[0].length-1; j++) {
+			decor[0][j].setValeur(9);;
+			decor[decor.length][j].setValeur(9);
+		}
+		
+		this.ordonnanceur = new Ordonnanceur(this);
+		this.personnages=new ArrayList<Personnage>();
 	}
+	/*
+	public Partie(int nbLigne,int nbColonne) {
+		this.decor = new Cellule[nbLigne+2][nbColonne+2];
+		
 	
+		
+		
+		for(int i = 0; i < decor.length; i++){
+			for (int j = 0; j < decor[i].length; j++) {
+				decor[i][j]=new Cellule();
+			}
+		}
+		
+		//creation murs
+		
+		for(int j=1;j < decor[0].length-1; j++) {
+			decor[0][j].setValeur(9);;
+			decor[decor.length][j].setValeur(9);
+		}
+		
+		
+		this.ordonnanceur = new Ordonnanceur(this);
+		this.personnages=new ArrayList<Personnage>();
+	}
+	*/
 	public void tour(){
 		ordonnanceur.tour();
 	}
@@ -64,7 +106,7 @@ public class Partie {
 		}
 		return new Position(posX,posY);
 	}
-	
+	/*
 	//Place l'automate d'action et renvoie ses coordonnées
 	public void placerActions(int[][] a, int x, int y){
 		//TODO vérifier les positions disponibles
@@ -76,7 +118,7 @@ public class Partie {
 				this.decor[posY+i][posX+j].setValeur(a[i][j]);
 			}
 		}
-	}
+	}*/
 	
 	//Place l'automate d'action et renvoie ses coordonnées
 	public Position placerActions(int[][] a, int indicePlacement){
@@ -84,6 +126,23 @@ public class Partie {
 		int i=0,j = 0;
 		
 		int randomPlacement=(int)(Math.random()*19);
+		for(i=0;i<a.length;i++){
+			for(j=0;j<a[i].length;j++){
+				System.out.print((6*indicePlacement)+i+" ");
+				System.out.print((randomPlacement+j)+" ");
+				System.out.println("i="+i+" j="+j+" "+a[i][j]);
+				this.decor[(6*indicePlacement)+i][randomPlacement+j].setValeur(a[i][j]);
+			}
+		}
+		return new Position(6*indicePlacement,(randomPlacement));
+	}
+	
+	//Place l'automate d'action et renvoie ses coordonnées, place en random selon la taille de l'automate
+	public Position placerActions(int[][] a, int indicePlacement, int tailleAutomate, int tailleMax){
+		//TODO vérifier les positions disponibles
+		int i=0,j = 0;
+		
+		int randomPlacement=(int)(Math.random()*(tailleMax-tailleAutomate));
 		for(i=0;i<a.length;i++){
 			for(j=0;j<a[i].length;j++){
 				System.out.print((6*indicePlacement)+i+" ");
@@ -116,7 +175,7 @@ public class Partie {
 	
 	public void affichageText(){
 		int i,j;
-		
+			
 		for(j=0;j<this.decor()[0].length;j++){
 			System.out.print("----");
 		}
@@ -124,7 +183,7 @@ public class Partie {
 		for(i=0;i<this.decor().length;i++){
 			System.out.print("|");
 			for(j=0;j<this.decor()[i].length;j++){
-				if(this.occupe(j, i)!=null){
+				if(this.occupe(i, j)!=null){
 					System.out.print(" * ");
 				}else{
 					System.out.print(" "+this.decor[i][j].valeur()+" ");

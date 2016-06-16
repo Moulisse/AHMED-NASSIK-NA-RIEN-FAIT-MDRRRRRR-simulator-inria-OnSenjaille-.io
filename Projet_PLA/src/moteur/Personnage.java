@@ -10,7 +10,7 @@ public abstract class Personnage {
 	protected Partie partie;
 	protected Joueur equipe; //equipe du personnage
 	
-	Personnage(int e,Automate a,Position p){
+	public Personnage(int e,Automate a,Position p){
 		etat=e;
 		automate=a;
 		pos = p;

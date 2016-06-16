@@ -170,7 +170,7 @@ public class ParserXML {
 
 			System.out.println("");
 		}
-		Position automatePosition = partie.placerActions(actions, indicePlacement);
+		Position automatePosition = partie.placerActions(actions, indicePlacement,Integer.parseInt(action.getAttributeValue("nb_c")),15);
 		System.out.println("Positionnement en "+i);
 		Element transition = element.getChild("transition");
 
@@ -206,6 +206,7 @@ public class ParserXML {
 		auto = new Automate(transi, automatePosition, partie);
 
 		Personnage persoCourant = null;
+		
 		/*if (element.getAttributeValue("personnage") == "guerrier") {
 			persoCourant = new Guerrier(0, auto, automatePosition);
 		} else {
@@ -213,7 +214,13 @@ public class ParserXML {
 				persoCourant = new Peintre(0, auto, automatePosition);
 			}
 		}*/
-		persoCourant = new Peintre(0, auto, automatePosition);
+		System.out.println("X: "+automatePosition.getX()+" Y : "+automatePosition.getY());
+	//	persoCourant = new Guerrier(0, auto, automatePosition);
+		persoCourant = new Guerrier(0, auto, new Position(automatePosition.getX(),automatePosition.getY()));
+		System.out.println("X: "+persoCourant.position().getX()+" Y : "+persoCourant.position().getY());
+
+		//persoCourant = new Guerrier(0, auto, new Position(1,2));
+		partie.ajouterPersonnage(persoCourant);
 		return persoCourant;
 
 	}
@@ -272,7 +279,7 @@ public class ParserXML {
 
 		// taille map : chaque perso peut prendre la taille max
 
-		Partie partieInitiale = new Partie(6 * nbTotalAutomates, 60);// peut
+		Partie partieInitiale = new Partie(6 * nbTotalAutomates, 15);// peut
 																		// etre
 																		// modif
 																		// 40
