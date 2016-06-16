@@ -137,7 +137,7 @@ public class ParserXML {
 	public Personnage createPersonnage(Element element, Partie partie, int indicePlacement) {
 		int i = 0, j = 0;
 
-		System.out.println("Type du personnage : " + element.getAttributeValue("personnage"));
+		System.out.println("1Type du personnage : " + element.getAttributeValue("personnage"));
 
 		Element action = element.getChild("action");
 		System.out.println("Nombre de lignes automate actions : " + action.getAttributeValue("nb_l")
@@ -159,10 +159,10 @@ public class ParserXML {
 			while (it_colonnes.hasNext()) {
 				colonne_courante = (Element) it_colonnes.next();
 
-				System.out.print(colonne_courante.getText());
+				System.out.println(colonne_courante.getText());
 				actions[i][j] = Integer.parseInt(colonne_courante.getText());
-				System.out.print(actions[i][j]);
-
+				System.out.println("actions "+i+" "+j+" "+actions[i][j]);
+				j++;
 			}
 
 			i++;
@@ -170,7 +170,8 @@ public class ParserXML {
 
 			System.out.println("");
 		}
-		Position automatePosition = partie.placerActions(actions, i);
+		Position automatePosition = partie.placerActions(actions, indicePlacement);
+		System.out.println("Positionnement en "+i);
 		Element transition = element.getChild("transition");
 
 		// TRANSITIONS
@@ -191,7 +192,7 @@ public class ParserXML {
 			while (it_colonnes.hasNext()) {
 				colonne_courante = (Element) it_colonnes.next();
 				transi[i][j] = Integer.parseInt(colonne_courante.getText());
-				System.out.print("j="+j+" i="+i+" "+colonne_courante.getText()+" ");
+				System.out.print("transitions "+"j="+j+" i="+i+" "+colonne_courante.getText()+" ");
 				j++;
 			}
 

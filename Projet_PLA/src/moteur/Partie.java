@@ -82,13 +82,17 @@ public class Partie {
 	public Position placerActions(int[][] a, int indicePlacement){
 		//TODO vérifier les positions disponibles
 		int i=0,j = 0;
-		int randomPlacement=0;//(int)(Math.random()*19);
+		
+		int randomPlacement=(int)(Math.random()*19);
 		for(i=0;i<a.length;i++){
 			for(j=0;j<a[i].length;j++){
-				this.decor[6*indicePlacement+i][randomPlacement+j].setValeur(a[i][j]);
+				System.out.print((6*indicePlacement)+i+" ");
+				System.out.print((randomPlacement+j)+" ");
+				System.out.println("i="+i+" j="+j+" "+a[i][j]);
+				this.decor[(6*indicePlacement)+i][randomPlacement+j].setValeur(a[i][j]);
 			}
 		}
-		return new Position(6*indicePlacement,(randomPlacement+j));
+		return new Position(6*indicePlacement,(randomPlacement));
 	}
 	
 	
