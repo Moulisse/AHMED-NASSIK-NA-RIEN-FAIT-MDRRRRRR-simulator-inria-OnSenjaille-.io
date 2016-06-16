@@ -95,6 +95,11 @@ public class Ordonnanceur {
 		Personnage p_S=null;
 		Personnage p_O=null;
 		
+		boolean EnnemiN=false;
+		boolean EnnemiE=false;
+		boolean EnnemiS=false;
+		boolean EnnemiO=false;
+		
 		Cellule c_N=null;
 		Cellule c_E=null;
 		Cellule c_S=null;
@@ -104,21 +109,22 @@ public class Ordonnanceur {
 		Cellule c_NE=null;
 		Cellule c_SE=null;
 		Cellule c_SO=null;
-
-		boolean blancheN=false;
-		boolean blancheE=false;
-		boolean blancheS=false;
-		boolean blancheO=false;
 		
-		boolean bleueN=false;
-		boolean bleueE=false;
-		boolean bleueS=false;
-		boolean bleueO=false;
+		boolean BlancEl_N=false;
+		boolean BlancEl_E=false;
+		boolean BlancEl_S=false;
+		boolean BlancEl_O=false;
+		
+		boolean RougeEl_N=false;
+		boolean RougeEl_E=false;
+		boolean RougeEl_S=false;
+		boolean RougeEl_O=false;
+		
+		boolean BleueEl_N=false;
+		boolean BleueEl_E=false;
+		boolean BleueEl_S=false;
+		boolean BleueEl_O=false;
 
-		boolean rougeN=false;
-		boolean rougeE=false;
-		boolean rougeS=false;
-		boolean rougeO=false;
 		
 		if(p.position().getY()-1>=0)
 		{
@@ -330,10 +336,6 @@ public class Ordonnanceur {
 			c_O =p.partie().decor()[p.position().getX()-2][p.position().getY()];
 		}
 		
-		boolean EnnemiN=false;
-		boolean EnnemiE=false;
-		boolean EnnemiS=false;
-		boolean EnnemiO=false;
 		
 		//quelqun au NW
 		if(p_NO!=null)
@@ -412,7 +414,180 @@ public class Ordonnanceur {
 				conditions.add(codes.ennemiEloigneOuest);}
 		}
 		
-		return conditions;
-	}
-	
+		//----------------------------------------------------
+		if(c_NO!=null)
+		{
+			//ennemi au NW
+			if (c_NO.couleur()==codes.blanc)
+			{
+				conditions.add(codes.caseBlancheEloigneeNord);
+				conditions.add(codes.caseBlancheEloigneeOuest);
+				BlancEl_N=true;
+				BlancEl_O=true;
+			}
+			else if(c_NO.couleur()==codes.bleu)
+			{
+				conditions.add(codes.caseBleuEloigneeNord);
+				conditions.add(codes.caseBleuEloigneeOuest);
+				BleueEl_N=true;
+				BleueEl_O=true;
+			}
+			else
+			{
+				conditions.add(codes.caseRougeEloigneeNord);
+				conditions.add(codes.caseRougeEloigneeOuest);
+				RougeEl_N=true;
+				RougeEl_O=true;
+			}
+		}
+		
+		if(c_SE!=null)
+		{
+			//ennemi au NW
+			if (c_NO.couleur()==codes.blanc)
+			{
+				conditions.add(codes.caseBlancheEloigneeSud);
+				conditions.add(codes.caseBlancheEloigneeEst);
+				BlancEl_S=true;
+				BlancEl_E=true;
+			}
+			else if(c_NO.couleur()==codes.bleu)
+			{
+				conditions.add(codes.caseBleuEloigneeSud);
+				conditions.add(codes.caseBleuEloigneeEst);
+				BleueEl_S=true;
+				BleueEl_E=true;
+			}
+			else
+			{
+				conditions.add(codes.caseRougeEloigneeSud);
+				conditions.add(codes.caseRougeEloigneeEst);
+				RougeEl_S=true;
+				RougeEl_E=true;
+			}
+		}
+
+		if(c_NE!=null)
+		{
+			if (c_NE.couleur()==codes.blanc)
+			{
+				if (!BlancEl_N){
+					conditions.add(codes.caseBlancheEloigneeNord);
+					BlancEl_N=true;}
+				
+				if (!BlancEl_E){
+					conditions.add(codes.caseBlancheEloigneeEst);
+					BlancEl_E=true;}
+			}
+			else if(c_NE.couleur()==codes.bleu)
+			{
+				if (!BleueEl_N){
+					conditions.add(codes.caseBleuEloigneeNord);
+					BleueEl_N=true;}
+				
+				if (!BleueEl_E){
+					conditions.add(codes.caseBleuEloigneeEst);
+					BleueEl_E=true;}
+			}
+			else
+			{
+				if (!RougeEl_N){
+					conditions.add(codes.caseRougeEloigneeNord);
+					RougeEl_N=true;}
+				
+				if (!BleueEl_E){
+					conditions.add(codes.caseRougeEloigneeEst);
+					RougeEl_E=true;}
+			}
+		}
+		
+		if(c_SO!=null)
+		{
+			if (c_SO.couleur()==codes.blanc)
+			{
+				if (!BlancEl_S){
+					conditions.add(codes.caseBlancheEloigneeSud);
+					BlancEl_S=true;}
+				
+				if (!BlancEl_O){
+					conditions.add(codes.caseBlancheEloigneeOuest);
+					BlancEl_O=true;}
+			}
+			else if(c_SO.couleur()==codes.bleu)
+			{
+				if (!BleueEl_S){
+					conditions.add(codes.caseBleuEloigneeSud);
+					BleueEl_S=true;}
+				
+				if (!BleueEl_O){
+					conditions.add(codes.caseBleuEloigneeOuest);
+					BleueEl_O=true;}
+			}
+			else
+			{
+				if (!RougeEl_S){
+					conditions.add(codes.caseRougeEloigneeSud);
+					RougeEl_S=true;}
+				
+				if (!BleueEl_O){
+					conditions.add(codes.caseRougeEloigneeOuest);
+					RougeEl_O=true;}
+			}
+		}
+		
+		if(c_N!=null)
+		{
+			if(c_N.couleur()==codes.blanc && !BlancEl_N){
+				conditions.add(codes.caseBlancheEloigneeNord);}
+			else if (c_N.couleur()==codes.bleu && !BleueEl_N)
+			{
+				conditions.add(codes.caseBleuEloigneeNord);}
+			else if(c_N.couleur()==codes.rouge && !RougeEl_N)
+			{
+				conditions.add(codes.caseRougeEloigneeNord);
+			}
+		}
+		
+		if(c_E!=null)
+		{
+			if(c_E.couleur()==codes.blanc && !BlancEl_E){
+				conditions.add(codes.caseBlancheEloigneeEst);}
+			else if (c_E.couleur()==codes.bleu && !BleueEl_E)
+			{
+				conditions.add(codes.caseBleuEloigneeNord);}
+			else if(c_E.couleur()==codes.rouge && !RougeEl_E)
+			{
+				conditions.add(codes.caseRougeEloigneeEst);
+			}
+		}
+		
+		if(c_S!=null)
+		{
+			if(c_S.couleur()==codes.blanc && !BlancEl_N){
+				conditions.add(codes.caseBlancheEloigneeSud);}
+			else if (c_S.couleur()==codes.bleu && !BleueEl_S)
+			{
+				conditions.add(codes.caseBleuEloigneeSud);}
+			else if(c_S.couleur()==codes.rouge && !RougeEl_S)
+			{
+				conditions.add(codes.caseRougeEloigneeSud);
+			}
+		}
+		
+		if(c_O!=null)
+		{
+			if(c_O.couleur()==codes.blanc && !BlancEl_O){
+				conditions.add(codes.caseBlancheEloigneeOuest);}
+			else if (c_O.couleur()==codes.bleu && !BleueEl_O)
+			{
+				conditions.add(codes.caseBleuEloigneeOuest);}
+			else if(c_O.couleur()==codes.rouge && !RougeEl_O)
+			{
+				conditions.add(codes.caseRougeEloigneeOuest);
+			}
+		}
+		
+			return conditions;
+		}
 }
+

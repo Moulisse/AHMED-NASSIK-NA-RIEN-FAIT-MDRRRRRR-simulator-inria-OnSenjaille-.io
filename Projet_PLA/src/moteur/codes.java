@@ -70,7 +70,9 @@ public class codes {
 	//code des objets sur le décor		
 
 	public final static int mur = 63;
-
+	
+	
+	public final static int blanc=0;
 	public final static int bleu=1;
 	public final static int rouge=2;
 	
