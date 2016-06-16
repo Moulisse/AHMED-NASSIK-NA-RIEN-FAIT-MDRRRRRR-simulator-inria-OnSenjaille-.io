@@ -1,6 +1,5 @@
 package moteur;
 
-
 public class Cellule {
 
 	private int valeur;
@@ -34,10 +33,49 @@ public class Cellule {
 	
 	public void peindre(int c){
 		couleur = c;
-		if(this.valeur>=codes.peindreR&&this.valeur<=codes.peindreR+4)
-			this.valeur=this.valeur-codes.peindreR+codes.peindreB;
-		//else if()
-			//TODO FINIR L'AUTRE COULEUR + LES 6 SYMBOLES COULEUR CASE
+		if(valeur==codes.rouge){
+			if(this.valeur>=codes.peindreB&&this.valeur<=codes.peindreB+4){
+				this.valeur=this.valeur-codes.peindreB+codes.peindreR;
+			}
+
+			else if(valeur>=codes.caseBlancheEloigneeNord&&valeur<=codes.caseBlancheEloigneeOuest){
+				this.valeur=this.valeur - codes.caseBlancheEloigneeNord + codes.caseRougeEloigneeNord;
+			}
+			
+			else if(valeur>=codes.caseBlancheNord&&valeur<=codes.caseBlancheCentre){
+				this.valeur=this.valeur - codes.caseBlancheNord + codes.caseRougeNord;
+			}
+			
+			else if(valeur>=codes.caseBleuEloigneeNord&&valeur<=codes.caseBleuEloigneeOuest){
+				this.valeur=this.valeur - codes.caseBleuEloigneeNord + codes.caseRougeEloigneeNord;
+			}
+			
+			else if(valeur>=codes.caseBleuNord&&valeur<=codes.caseBleuOuest){
+				this.valeur=this.valeur - codes.caseBleuNord + codes.caseRougeNord;
+			}	
+		
+		}
+		else if(valeur==codes.bleu){
+			if(this.valeur>=codes.peindreR&&this.valeur<=codes.peindreR+4)
+				this.valeur=this.valeur-codes.peindreR+codes.peindreB;
+			
+			else if(valeur>=codes.caseBlancheEloigneeNord&&valeur<=codes.caseBlancheEloigneeOuest){
+				this.valeur=this.valeur - codes.caseBlancheEloigneeNord + codes.caseBleuEloigneeNord;
+			}
+			
+			else if(valeur>=codes.caseBlancheNord&&valeur<=codes.caseBlancheCentre){
+				this.valeur=this.valeur - codes.caseBlancheNord + codes.caseBleuNord;
+			}
+			
+			else if(valeur>=codes.caseRougeEloigneeNord&&valeur<=codes.caseRougeEloigneeOuest){
+				this.valeur=this.valeur - codes.caseRougeEloigneeNord + codes.caseBleuEloigneeNord;
+			}
+			
+			else if(valeur>=codes.caseRougeNord&&valeur<=codes.caseRougeOuest){
+				this.valeur=this.valeur - codes.caseRougeNord + codes.caseBleuNord;
+			}	
+		}
+		
 	}
 	
 }
