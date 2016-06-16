@@ -15,64 +15,64 @@ public class Ordonnanceur {
 	final int EnnemiEl_N=1;
 	final int EnnemiEl_E=2;
 	final int EnnemiEl_S=3;
-	final int EnnemiEl_W=4;
+	final int EnnemiEl_O=4;
 	
 	//Ennemi (proche)
 	final int Ennemi_N=5;
 	final int Ennemi_E=6;
 	final int Ennemi_S=7;
-	final int Ennemi_W=8;
+	final int Ennemi_O=8;
 	
 	//Allie (proche)
 	final int Allie_N=9;
 	final int Allie_E=10;
 	final int Allie_S=11;
-	final int Allie_W=12;
+	final int Allie_O=12;
 	
 	//Case eloignee blanche
 	final int CaseElW_N=13;
 	final int CaseElW_E=14;
 	final int CaseElW_S=15;
-	final int CaseElW_W=16;
+	final int CaseElW_O=16;
 	
 	//Case eloignee rouge
 	final int CaseElR_N=17;
 	final int CaseElR_E=18;
 	final int CaseElR_S=19;
-	final int CaseElR_W=20;
+	final int CaseElR_O=20;
 	
 	//Case eloignee bleue
 	final int CaseElB_N=21;
 	final int CaseElB_E=22;
 	final int CaseElB_S=23;
-	final int CaseElB_W=24;
+	final int CaseElB_O=24;
 	
 	//Case blanche (proche)
 	final int CaseW_N=25;
 	final int CaseW_E=26;
 	final int CaseW_S=27;
-	final int CaseW_W=28;
+	final int CaseW_O=28;
 	final int CaseW_C=29;
 	
 	//Case rouge (proche) 
 	final int CaseR_N=30;
 	final int CaseR_E=31;
 	final int CaseR_S=32;
-	final int CaseR_W=33;
+	final int CaseR_O=33;
 	final int CaseR_C=34;
 	
 	//Case bleue (proche) 
 	final int CaseB_N=35;
 	final int CaseB_E=36;
 	final int CaseB_S=37;
-	final int CaseB_W=38;
+	final int CaseB_O=38;
 	final int CaseB_C=39;
 
 	//Mur (proche)
 	final int Mur_N=40;
 	final int Mur_E=41;
 	final int Mur_S=42;
-	final int Mur_W=43;
+	final int Mur_O=43;
 	
 	private Partie part;
 	
@@ -157,19 +157,6 @@ public class Ordonnanceur {
 			}
 		}
 		
-		//Personnage a l'ouest
-		if (p.partie().occupe(p.position().getX()+1, p.position().getY())!=null){
-			
-			//Allie
-			if(p.partie().occupe(p.position().getX()-1, p.position().getY()).equipe()==p.equipe()){
-				conditions.add(Allie_W);
-			}
-			else //Ennemi 
-			{
-				conditions.add(Ennemi_W);
-			}
-		}
-		
 		//Personnage a l'est
 		if (p.partie().occupe(p.position().getX()-1, p.position().getY())!=null){
 			
@@ -193,6 +180,19 @@ public class Ordonnanceur {
 			else //Ennemi 
 			{
 				conditions.add(Ennemi_S);
+			}
+		}
+		
+		//Personnage a l'ouest
+		if (p.partie().occupe(p.position().getX()+1, p.position().getY())!=null){
+		
+			//Allie
+			if(p.partie().occupe(p.position().getX()-1, p.position().getY()).equipe()==p.equipe()){
+				conditions.add(Allie_O);
+			}	
+			else //Ennemi 
+			{
+				conditions.add(Ennemi_O);
 			}
 		}
 		
@@ -245,20 +245,20 @@ public class Ordonnanceur {
 			conditions.add(CaseR_S);
 		}
 		
-		//CaseBlanche(W)
+		//CaseBlanche(O)
 		if(p.partie().decor()[p.position().getX()-1][p.position().getY()].couleur()==0)
 		{
-			conditions.add(CaseW_W);
+			conditions.add(CaseW_O);
 		}
 		else if(p.partie().decor()[p.position().getX()-1][p.position().getY()].couleur()==1)
-		//CaseBleu(W)
+		//CaseBleu(O)
 		{
-			conditions.add(CaseB_W);
+			conditions.add(CaseB_O);
 		}
 		else
-		//CaseRouge(W)
+		//CaseRouge(O)
 		{
-			conditions.add(CaseR_W);
+			conditions.add(CaseR_O);
 		}
 		
 		//CaseBlanche(cellule actuelle)
@@ -295,11 +295,129 @@ public class Ordonnanceur {
 			conditions.add(Mur_S);
 		}
 		
-		//Mur(W)
+		//Mur(O)
 		if(p.partie().decor()[p.position().getX()-1][p.position().getY()].valeur()==Code_Mur)
 		{
-			conditions.add(Mur_W);
+			conditions.add(Mur_O);
 		}
+		
+		Personnage p_NO=p.partie().occupe(p.position().getX()-1,p.position().getY()-1);
+		Personnage p_NE=p.partie().occupe(p.position().getX()+1,p.position().getY()-1);
+		Personnage p_SE=p.partie().occupe(p.position().getX()+1,p.position().getY()+1);
+		Personnage p_SO=p.partie().occupe(p.position().getX()-1,p.position().getY()+1);
+
+		Personnage p_N=p.partie().occupe(p.position().getX(),p.position().getY()-2);
+		Personnage p_E=p.partie().occupe(p.position().getX()+2,p.position().getY());
+		Personnage p_S=p.partie().occupe(p.position().getX(),p.position().getY()-2);
+		Personnage p_O=p.partie().occupe(p.position().getX()-2,p.position().getY());
+				
+		boolean EnnemiN=false;
+		boolean EnnemiE=false;
+		boolean EnnemiS=false;
+		boolean EnnemiO=false;
+		
+		//quelqun au NW
+		if(p_NO!=null)
+		{
+			//ennemi au NW
+			if (p_NO.equipe()!=p.equipe())
+			{
+				conditions.add(EnnemiEl_N);
+				conditions.add(EnnemiEl_O);
+				EnnemiN=true;
+				EnnemiO=true;
+			}
+			
+		}
+		
+		if(p_SE!=null)
+		{
+			if (p_SE.equipe()!=p.equipe())
+			{
+				conditions.add(EnnemiEl_S);
+				conditions.add(EnnemiEl_E);
+				EnnemiS=true;
+				EnnemiE=true;
+			}
+		}
+
+		if(p_NE!=null)
+		{
+			if (p_NE.equipe()!=p.equipe())
+			{
+				if (!EnnemiN){
+					conditions.add(EnnemiEl_N);
+					EnnemiN=true;}
+				
+				if (!EnnemiE){
+					conditions.add(EnnemiEl_E);
+					EnnemiE=true;}
+			}
+		}
+		
+		if(p_SO!=null)
+		{
+			if (p_SO.equipe()!=p.equipe())
+			{
+				if (!EnnemiS){
+					conditions.add(EnnemiEl_S);
+					EnnemiS=true;}
+				
+				if (!EnnemiO){
+					conditions.add(EnnemiEl_O);
+					EnnemiO=true;}
+			}
+		}
+		
+		if(!EnnemiN && p_N!=null)
+		{
+			if(p_N.equipe()==p.equipe()){
+				conditions.add(EnnemiEl_N);}
+		}
+		
+		if(!EnnemiE && p_E!=null)
+		{
+			if(p_E.equipe()==p.equipe()){
+				conditions.add(EnnemiEl_E);}
+		}
+		
+		if(!EnnemiS && p_S!=null)
+		{
+			if(p_S.equipe()==p.equipe()){
+				conditions.add(EnnemiEl_S);}
+		}
+		
+		if(!EnnemiO && p_O!=null)
+		{
+			if(p_O.equipe()==p.equipe()){
+				conditions.add(EnnemiEl_O);}
+		}
+		
+		Cellule c_N =p.partie().decor()[p.position().getX()][p.position().getY()-2];
+		Cellule c_E =p.partie().decor()[p.position().getX()+2][p.position().getY()];
+		Cellule c_S =p.partie().decor()[p.position().getX()][p.position().getY()+2];
+		Cellule c_O =p.partie().decor()[p.position().getX()-2][p.position().getY()];
+
+		Cellule c_NO =p.partie().decor()[p.position().getX()-1][p.position().getY()-1];
+		Cellule c_NE =p.partie().decor()[p.position().getX()+1][p.position().getY()-1];
+		Cellule c_SE =p.partie().decor()[p.position().getX()+1][p.position().getY()+1];
+		Cellule c_SO =p.partie().decor()[p.position().getX()-1][p.position().getY()+1];
+
+		boolean blancheN=false;
+		boolean blancheE=false;
+		boolean blancheS=false;
+		boolean blancheO=false;
+		
+		boolean bleueN=false;
+		boolean bleueE=false;
+		boolean bleueS=false;
+		boolean bleueO=false;
+
+		boolean rougeN=false;
+		boolean rougeE=false;
+		boolean rougeS=false;
+		boolean rougeO=false;
+
 		
 		return conditions;
 	}
