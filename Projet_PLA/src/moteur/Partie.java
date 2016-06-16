@@ -41,12 +41,20 @@ public class Partie {
 		}
 		
 		//creation murs
-		
-		for(int j=1;j < decor[0].length-1; j++) {
+		decor[0][0].setValeur(9);
+
+		for(int j=0;j < decor[0].length; j++) {
 			decor[0][j].setValeur(9);;
-			decor[decor.length][j].setValeur(9);
+			decor[decor.length-1][j].setValeur(9);
 		}
 		
+		for(int j=1;j < decor.length-1; j++) {
+			decor[j][0].setValeur(9);;
+			decor[j][decor[0].length-1].setValeur(9);
+		}
+		
+		
+
 		this.ordonnanceur = new Ordonnanceur(this);
 		this.personnages=new ArrayList<Personnage>();
 	}
@@ -131,7 +139,7 @@ public class Partie {
 				System.out.print((6*indicePlacement)+i+" ");
 				System.out.print((randomPlacement+j)+" ");
 				System.out.println("i="+i+" j="+j+" "+a[i][j]);
-				this.decor[(6*indicePlacement)+i][randomPlacement+j].setValeur(a[i][j]);
+				this.decor[(6*indicePlacement)+i+1][randomPlacement+j+1].setValeur(a[i][j]);
 			}
 		}
 		return new Position(6*indicePlacement,(randomPlacement));
@@ -148,10 +156,10 @@ public class Partie {
 				System.out.print((6*indicePlacement)+i+" ");
 				System.out.print((randomPlacement+j)+" ");
 				System.out.println("i="+i+" j="+j+" "+a[i][j]);
-				this.decor[(6*indicePlacement)+i][randomPlacement+j].setValeur(a[i][j]);
+				this.decor[(6*indicePlacement)+i+1][randomPlacement+j+1].setValeur(a[i][j]);
 			}
 		}
-		return new Position(6*indicePlacement,(randomPlacement));
+		return new Position(6*indicePlacement+1,(randomPlacement)+1);
 	}
 	
 	
