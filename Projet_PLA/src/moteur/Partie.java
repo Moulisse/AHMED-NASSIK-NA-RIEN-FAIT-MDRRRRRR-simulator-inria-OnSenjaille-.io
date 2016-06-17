@@ -41,16 +41,16 @@ public class Partie {
 		}
 		
 		//creation murs
-		decor[0][0].setValeur(9);
+		decor[0][0].setValeur(codes.mur);
 
 		for(int j=0;j < decor[0].length; j++) {
-			decor[0][j].setValeur(9);;
-			decor[decor.length-1][j].setValeur(9);
+			decor[0][j].setValeur(codes.mur);;
+			decor[decor.length-1][j].setValeur(codes.mur);
 		}
 		
 		for(int j=1;j < decor.length-1; j++) {
-			decor[j][0].setValeur(9);;
-			decor[j][decor[0].length-1].setValeur(9);
+			decor[j][0].setValeur(codes.mur);;
+			decor[j][decor[0].length-1].setValeur(codes.mur);
 		}
 		
 		
