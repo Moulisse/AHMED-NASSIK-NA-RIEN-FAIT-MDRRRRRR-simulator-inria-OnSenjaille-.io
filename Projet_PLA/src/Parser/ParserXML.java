@@ -134,7 +134,7 @@ public class ParserXML {
 
 	}
 
-	public Personnage createPersonnage(Element element, Partie partie, int indicePlacement) {
+	public Personnage createPersonnage(Element element, Partie partie, int indicePlacement, int tailleMap) {
 		int i = 0, j = 0;
 
 		System.out.println("1Type du personnage : " + element.getAttributeValue("personnage"));
@@ -170,7 +170,7 @@ public class ParserXML {
 
 			System.out.println("");
 		}
-		Position automatePosition = partie.placerActions(actions, indicePlacement,Integer.parseInt(action.getAttributeValue("nb_c")),15);
+		Position automatePosition = partie.placerActions(actions, indicePlacement,Integer.parseInt(action.getAttributeValue("nb_c")),tailleMap);
 		System.out.println("Positionnement en "+i);
 		Element transition = element.getChild("transition");
 
@@ -206,7 +206,11 @@ public class ParserXML {
 		auto = new Automate(transi, automatePosition, partie);
 
 		Personnage persoCourant = null;
-		
+
+		System.out.println("X: "+automatePosition.getX()+" Y : "+automatePosition.getY());
+	//	persoCourant = new Guerrier(0, auto, automatePosition);
+		persoCourant = new Guerrier(0, auto, new Position(automatePosition.getX(),automatePosition.getY()));
+		System.out.println("X: "+persoCourant.position().getX()+" Y : "+persoCourant.position().getY());
 		/*if (element.getAttributeValue("personnage") == "guerrier") {
 			persoCourant = new Guerrier(0, auto, automatePosition);
 		} else {
@@ -226,7 +230,7 @@ public class ParserXML {
 	}
 
 	
-	public Joueur createPlayer(Partie partie, String nomFichier, int posInitiale) {
+	public Joueur createPlayer(Partie partie, String nomFichier, int posInitiale,int tailleMap) {
 		// Joueur joueur=new Joueur();
 		// Personnage persoCourant=null;
 		
@@ -260,7 +264,7 @@ public class ParserXML {
 		{
 			automate_courant = (Element) it_automates.next();
 			System.out.println("Type du personnage : " + automate_courant.getAttributeValue("personnage"));
-			personnageListe.add(createPersonnage(automate_courant, partie, posInitiale + i));
+			personnageListe.add(createPersonnage(automate_courant, partie, posInitiale + i,tailleMap));
 			System.out.println("ooooo");
 			i++;
 
@@ -278,8 +282,8 @@ public class ParserXML {
 		// longueur max : 5
 
 		// taille map : chaque perso peut prendre la taille max
-
-		Partie partieInitiale = new Partie(6 * nbTotalAutomates, 15);// peut
+		int longueurAutoMax=40;
+		Partie partieInitiale = new Partie(6 * nbTotalAutomates, longueurAutoMax);// peut
 																		// etre
 																		// modif
 																		// 40
@@ -295,8 +299,8 @@ public class ParserXML {
 																		// sur
 																		// la
 																		// hauteur
-		Joueur joueur1 = createPlayer(partieInitiale, fichierJoueur1, 0);
-		Joueur joueur2 = createPlayer(partieInitiale, fichierJoueur2, nbAuto(fichierJoueur1));
+		Joueur joueur1 = createPlayer(partieInitiale, fichierJoueur1, 0,longueurAutoMax);
+		Joueur joueur2 = createPlayer(partieInitiale, fichierJoueur2, nbAuto(fichierJoueur1),longueurAutoMax);
 
 		// initialisation JOUEUR 1
 

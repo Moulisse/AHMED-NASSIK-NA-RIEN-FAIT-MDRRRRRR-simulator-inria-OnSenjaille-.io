@@ -12,7 +12,7 @@ public class Main {
 		t2[0][0]=codes.caseBlancheEloigneeSud;
 		t2[0][1]=codes.avancer+2;
 		Automate aut = new Automate(t, p.placerActions(t2), p);
-		p.ajouterPersonnage(new Guerrier(0,aut,new Position(3,3)));
+		p.ajouterPersonnage(new Guerrier(0,aut,new Position(5,2)));
 		p.affichageText();
 		try {
 		    Thread.sleep(1000);                 //1000 milliseconds is one second.
