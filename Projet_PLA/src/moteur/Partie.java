@@ -160,7 +160,7 @@ public class Partie {
 				this.decor[(6*indicePlacement)+i+1][randomPlacement+j+1].setValeur(a[i][j]);
 			}
 		}
-		return new Position(6*indicePlacement+1,(randomPlacement)+1);
+		return new Position((randomPlacement)+1,6*indicePlacement+1);
 	}
 	
 	
