@@ -222,7 +222,7 @@ public class ParserXML {
 		System.out.println("X: "+automatePosition.getX()+" Y : "+automatePosition.getY());
 		
 		
-		Position newPos=new Position();
+		Position newPos;
 		newPos=partie.placementAleatoire();
 		
 
