@@ -16,7 +16,8 @@ public class Cellule {
 	}
 	
 	public Cellule(int i){
-		valeur = 1;
+		valeur = i;
+		couleur = codes.blanc;
 	}
 	
 	public int valeur(){
