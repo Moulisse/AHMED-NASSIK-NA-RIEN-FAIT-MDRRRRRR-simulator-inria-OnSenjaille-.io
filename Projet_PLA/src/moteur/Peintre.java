@@ -1,5 +1,8 @@
 package moteur;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Peintre extends Personnage{
 	
@@ -32,4 +35,16 @@ public class Peintre extends Personnage{
 			}
 		}
 	}
+	
+	
+	
+	public boolean actionIntedite(){
+		List<Integer> actionsInterdites=new ArrayList<Integer>();
+		actionsInterdites.add(codes.frapper);
+
+			return super.actionIntedite(actionsInterdites);
+		
+	}
+	
+	
 }
