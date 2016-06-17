@@ -89,6 +89,7 @@ public class Partie {
 	
 	public void ajouterPersonnage(Personnage p){
 		personnages.add(p);
+		p.setPartie(this);
 		
 	}
 	
@@ -191,7 +192,7 @@ public class Partie {
 		for(i=0;i<this.decor().length;i++){
 			System.out.print("|");
 			for(j=0;j<this.decor()[i].length;j++){
-				if(this.occupe(i, j)!=null){
+				if(this.occupe(j, i)!=null){
 					System.out.print(" * ");
 				}else{
 					System.out.print(" "+this.decor[i][j].valeur()+" ");
