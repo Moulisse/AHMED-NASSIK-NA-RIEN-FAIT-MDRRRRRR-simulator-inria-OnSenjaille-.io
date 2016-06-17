@@ -11,7 +11,7 @@ public class Cellule {
 	}
 	
 	public Cellule(int i,int c){
-		valeur = 1;
+		valeur = i;
 		couleur = c;
 	}
 	
