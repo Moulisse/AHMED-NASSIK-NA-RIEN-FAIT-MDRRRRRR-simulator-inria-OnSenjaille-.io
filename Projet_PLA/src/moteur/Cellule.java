@@ -11,12 +11,13 @@ public class Cellule {
 	}
 	
 	public Cellule(int i,int c){
-		valeur = 1;
+		valeur = i;
 		couleur = c;
 	}
 	
 	public Cellule(int i){
-		valeur = 1;
+		valeur = i;
+		couleur = codes.blanc;
 	}
 	
 	public int valeur(){

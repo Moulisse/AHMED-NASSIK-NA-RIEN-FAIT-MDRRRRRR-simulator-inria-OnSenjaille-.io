@@ -16,6 +16,10 @@ public abstract class Personnage {
 		pos = p;
 	}
 	
+	public void setEquipe(Joueur j){
+		this.equipe=j;
+	}
+	
 	public void beaten(){
 		sante=0;
 	}
@@ -43,6 +47,76 @@ public abstract class Personnage {
 	
 	public Joueur equipe(){
 		return equipe;
+	}
+	
+	public void suivreBalise(){
+		int diffX = this.equipe.balise().position().getX()-this.pos.getX();
+		int diffY = this.equipe.balise().position().getY()-this.pos.getY();
+		double roll;
+		
+		if (diffX==0&&diffY<0){ //Balise au Nord
+			this.avancer(0);
+		} else if(diffX>0&&diffY<0){ //Balise au Nord-Est
+			if(diffX>(-diffY)){
+				this.avancer(1);
+			}else if(diffX<((-diffY))){
+				this.avancer(0);
+			}else{
+				roll=Math.random();
+				if(roll>0.5){
+					this.avancer(1);
+				}else{
+					this.avancer(0);
+				}
+			}
+		} else if(diffX>0&&diffY==0){ //Balise a l'Est
+			this.avancer(1);
+		} else if(diffX>0&&diffY>0){ //Balise au Sud-Est
+			if(diffX>(diffY)){
+				this.avancer(1);
+			}else if(diffX<(diffY)){
+				this.avancer(2);
+			}else{
+				roll=Math.random();
+				if(roll>0.5){
+					this.avancer(1);
+				}else{
+					this.avancer(2);
+				}
+			}
+		} else if(diffX==0&&diffY>0){ //Balise au Sud
+			this.avancer(2);
+		} else if(diffX<0&&diffY>0){ //Balise au Sud-Ouest
+			if((-diffX)>diffY){
+				this.avancer(1);
+			}else if((-diffX)<diffY){
+				this.avancer(0);
+			}else{
+				roll=Math.random();
+				if(roll>0.5){
+					this.avancer(3);
+				}else{
+					this.avancer(2);
+				}
+			}
+		} else if(diffX<0&&diffY==0){ //Balise a l'Ouest
+			this.avancer(3);
+		} else if(diffX<0&&diffY<0){ //Balise au Nord-Ouest
+			if((-diffX)>(-diffY)){
+				this.avancer(3);
+			}else if((-diffX)<(-diffY)){
+				this.avancer(0);
+			}else{
+				roll=Math.random();
+				if(roll>0.5){
+					this.avancer(3);
+				}else{
+					this.avancer(0);
+				}
+			}
+		} else if(diffX==0&&diffY==0){
+			avancer(4);
+		}
 	}
 	
 	public void avancer(int code){
@@ -84,6 +158,8 @@ public abstract class Personnage {
 		this.automate.transitions=t;
 	}
 	}*/
+
+
 	
 
 }

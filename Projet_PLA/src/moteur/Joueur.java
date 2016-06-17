@@ -1,24 +1,32 @@
 package moteur;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Joueur {
 	private List<Personnage> personnages;
+	private Balise balise;
 	
 	public Joueur()
 	{
-		personnages=null;
+		personnages=new ArrayList<Personnage>();
+		balise = new Balise();
+	}
+	
+	public Balise balise(){
+		return balise;
 	}
 	
 	public Joueur(List<Personnage> p)
 	{
 		this.personnages=p;
+		balise = new Balise();
 	}
 	
 	public void ajoutPersonnage(Personnage perso)
 	{
 		this.personnages.add(perso);
-		perso.equipe=this;//changement équipe du perso ajouté
+		perso.setEquipe(this); //changement équipe du perso ajouté
 	}
 	
 	public List<Personnage> getPersonnages(){

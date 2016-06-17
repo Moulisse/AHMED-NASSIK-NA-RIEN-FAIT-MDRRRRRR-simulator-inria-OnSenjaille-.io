@@ -40,10 +40,10 @@ public class Automate {
 			}
 			if (actionsPossibles.isEmpty())
 				return 0;
-			else
-				//+code de l'action minimum
-				//(int)(Math.random()*(actionsPossibles.size())
-				return actionsPossibles.get(0);
+			else{
+				int roll = (int)(Math.random()*(actionsPossibles.size()));
+				return actionsPossibles.get(roll);
+			}
 		}
 	
 }
