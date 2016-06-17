@@ -212,7 +212,7 @@ public class Partie {
 	//renvoie une position aléatoire de la classe, non occupée (pas de joueur ni de mur sur la cellule)
 	//utilisée pour le placement des personnages
 	public Position placementAleatoire(){
-		Position pos=new Position();
+		Position pos=new Position(0,0);
 		int coordX;
 		int coordY;
 		do{
