@@ -9,6 +9,7 @@ public class ActionFutur implements Comparable<ActionFutur>{
 	
 	ActionFutur(Personnage p,int i){
 		perso = p;
+		cible = new Position();
 		if(i>=codes.avancer&&i<=codes.avancer+3){
 			type = TypeAction.MOUVEMENT;
 			codeAction = i-codes.avancer;
@@ -21,6 +22,8 @@ public class ActionFutur implements Comparable<ActionFutur>{
 			type = TypeAction.PEINT;
 			codeAction = i-codes.peindreR;
 			setCible((codeAction)%5); //%5 dans le cas codeAction>=54
+		}else {
+			type = TypeAction.RATE; //bug code inconnue.
 		}
 	}
 	
@@ -48,10 +51,10 @@ public class ActionFutur implements Comparable<ActionFutur>{
 			}
 		case PEINT:
 			if(this.getClass().isInstance(Peintre.class)){
-				if(codeAction>5){
-					((Peintre)this.perso).peindre(codeAction, 1);
+				if(codeAction<5){
+					((Peintre)this.perso).peindre(codeAction, codes.bleu );
 				}else{
-					((Peintre)this.perso).peindre(codeAction-5, 2);
+					((Peintre)this.perso).peindre(codeAction-5, codes.rouge );
 				}
 			}
 			break;

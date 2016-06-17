@@ -8,6 +8,7 @@ import moteur.*;
 
 import org.jdom2.filter.*;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class ParserXML {
@@ -33,6 +34,8 @@ public class ParserXML {
 	}*/
 
 	
+	 
+
 	public ParserXML(){
 		
 	}
@@ -134,14 +137,13 @@ public class ParserXML {
 	public Personnage createPersonnage(Element element, Partie partie, int indicePlacement) {
 		int i = 0, j = 0;
 
-		System.out.println("Type du personnage : " + element.getAttributeValue("personnage"));
+		System.out.println("1Type du personnage : " + element.getAttributeValue("personnage"));
 
 		Element action = element.getChild("action");
 		System.out.println("Nombre de lignes automate actions : " + action.getAttributeValue("nb_l")
 				+ "\nNombre de colonnes automate action : " + action.getAttributeValue("nb_c"));
 
-		int actions[][] = new int[Integer.parseInt(action.getAttributeValue("nb_l"))][Integer
-				.parseInt(action.getAttributeValue("nb_c"))];
+		int actions[][] = new int[Integer.parseInt(action.getAttributeValue("nb_l"))][Integer.parseInt(action.getAttributeValue("nb_c"))];
 
 		List listLignesAction = action.getChildren("l");
 		Iterator it_lignes = listLignesAction.iterator(); // iterateur lignes
@@ -157,8 +159,10 @@ public class ParserXML {
 			while (it_colonnes.hasNext()) {
 				colonne_courante = (Element) it_colonnes.next();
 
-				System.out.print(colonne_courante.getText());
+				System.out.println(colonne_courante.getText());
 				actions[i][j] = Integer.parseInt(colonne_courante.getText());
+				System.out.println("actions "+i+" "+j+" "+actions[i][j]);
+				j++;
 			}
 
 			i++;
@@ -166,12 +170,12 @@ public class ParserXML {
 
 			System.out.println("");
 		}
-		Position automatePosition = partie.placerActions(actions, i);
+		Position automatePosition = partie.placerActions(actions, indicePlacement,Integer.parseInt(action.getAttributeValue("nb_c")),15);
+		System.out.println("Positionnement en "+i);
 		Element transition = element.getChild("transition");
 
 		// TRANSITIONS
-		int transi[][] = new int[Integer.parseInt(action.getAttributeValue("nb_l"))][Integer
-				.parseInt(action.getAttributeValue("nb_c"))];
+		int transi[][] = new int[Integer.parseInt(transition.getAttributeValue("nb_l"))][Integer.parseInt(transition.getAttributeValue("nb_c"))];
 		i = 0;
 		j = 0;
 
@@ -188,7 +192,8 @@ public class ParserXML {
 			while (it_colonnes.hasNext()) {
 				colonne_courante = (Element) it_colonnes.next();
 				transi[i][j] = Integer.parseInt(colonne_courante.getText());
-				System.out.print(colonne_courante.getText());
+				System.out.print("transitions "+"j="+j+" i="+i+" "+colonne_courante.getText()+" ");
+				j++;
 			}
 
 			j = 0;
@@ -200,52 +205,72 @@ public class ParserXML {
 		// Position newPos=new Position(i*6,j);
 		auto = new Automate(transi, automatePosition, partie);
 
-		Personnage persoCourant;
-		if (element.getAttributeValue("personnage") == "guerrier") {
+		Personnage persoCourant = null;
+		
+		/*if (element.getAttributeValue("personnage") == "guerrier") {
 			persoCourant = new Guerrier(0, auto, automatePosition);
 		} else {
 			if (element.getAttributeValue("personnage") == "peintre") {
 				persoCourant = new Peintre(0, auto, automatePosition);
 			}
-		}
+		}*/
+		System.out.println("X: "+automatePosition.getX()+" Y : "+automatePosition.getY());
+	//	persoCourant = new Guerrier(0, auto, automatePosition);
+		persoCourant = new Guerrier(0, auto, new Position(automatePosition.getX(),automatePosition.getY()));
+		System.out.println("X: "+persoCourant.position().getX()+" Y : "+persoCourant.position().getY());
 
-		return null;
+		//persoCourant = new Guerrier(0, auto, new Position(1,2));
+		partie.ajouterPersonnage(persoCourant);
+		return persoCourant;
 
 	}
 
+	
 	public Joueur createPlayer(Partie partie, String nomFichier, int posInitiale) {
 		// Joueur joueur=new Joueur();
 		// Personnage persoCourant=null;
+		
+		
 		org.jdom2.Document document = null;
 		Element racine;
 		SAXBuilder sxb = new SAXBuilder();
-		try {
+		//try {
 			// On crée un nouveau document JDOM avec en argument le fichier XML
 			// Le parsing est terminé ;)
-			document = sxb.build(new File(nomFichier));
-		} catch (Exception e) {
-		}
+			try {
+				document = sxb.build(new File(nomFichier));
+			} catch (JDOMException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	//	} catch (Exception e) 
+		
 		
 		racine = document.getRootElement();
 
-		
-		List<Personnage> personnages = null;
 		int i = 0;
-		List listAutomates = racine.getChildren("au");
-		Iterator it_automates = listAutomates.iterator();// iterateur automates
+		List<Element> listAutomates = racine.getChildren("au");
+		Iterator<Element> it_automates = listAutomates.iterator();// iterateur automates
+		List<Personnage> personnageListe = new ArrayList<Personnage>();
 		Element automate_courant;
 		while (it_automates.hasNext()) // parcours automates
 		{
 			automate_courant = (Element) it_automates.next();
 			System.out.println("Type du personnage : " + automate_courant.getAttributeValue("personnage"));
-			listAutomates.add(createPersonnage(automate_courant, partie, posInitiale + i));
+			personnageListe.add(createPersonnage(automate_courant, partie, posInitiale + i));
+			System.out.println("ooooo");
 			i++;
 
 		}
 
-		return new Joueur(personnages);
+		return new Joueur(personnageListe);
 
 	}
+		
+	
 
 	public Partie buildGame(String fichierJoueur1, String fichierJoueur2) {
 		int nbTotalAutomates = nbAuto(fichierJoueur1) + nbAuto(fichierJoueur2);
@@ -254,7 +279,7 @@ public class ParserXML {
 
 		// taille map : chaque perso peut prendre la taille max
 
-		Partie partieInitiale = new Partie(6 * nbTotalAutomates, 60);// peut
+		Partie partieInitiale = new Partie(6 * nbTotalAutomates, 15);// peut
 																		// etre
 																		// modif
 																		// 40

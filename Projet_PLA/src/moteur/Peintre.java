@@ -9,12 +9,12 @@ public class Peintre extends Personnage{
 	
 	// TODO
 	//1 = bleu
-	// 2 = rouge*
+	// 2 = rouge
 	
 	public void peindre(int direction,int couleur){
 		int x = this.position().getX();	//verif au niveau de l'ordonanceur.
 		int y = this.position().getY();
-		if (couleur==1||couleur==2){
+		if (couleur==codes.rouge||couleur==codes.bleu){
 			switch (direction){
 			case 0 :	//Nord
 				this.partie.decor()[x][y-1].peindre(couleur);
