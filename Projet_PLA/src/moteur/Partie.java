@@ -49,7 +49,7 @@ public class Partie {
 		}
 		
 		for(int j=1;j < decor.length-1; j++) {
-			decor[j][0].setValeur(codes.mur);;
+			decor[j][0].setValeur(codes.mur);
 			decor[j][decor[0].length-1].setValeur(codes.mur);
 		}
 		
