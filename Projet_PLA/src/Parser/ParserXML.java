@@ -300,6 +300,8 @@ public class ParserXML {
 		// taille map : chaque perso peut prendre la taille max
 		int longueurAutoMax=40;
 		
+		
+		System.out.println("nbauto1 : "+nbAuto(fichierJoueur1)+"nbauto2 "+nbAuto(fichierJoueur2));
 		Partie partieInitiale = new Partie(longueurAutoMax,6 * nbTotalAutomates);// peut
 																		// etre
 																		// modif
