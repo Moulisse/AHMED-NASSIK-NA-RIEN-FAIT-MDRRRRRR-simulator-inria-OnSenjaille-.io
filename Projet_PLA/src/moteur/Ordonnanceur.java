@@ -177,7 +177,7 @@ public class Ordonnanceur {
 		if(p.position().getX()-1<=X-1)
 		{
 			//Personnage a l'est
-			if (p.partie().occupe(p.position().getX()-1, p.position().getY())!=null){
+			if (p.partie().occupe(p.position().getX()+1, p.position().getY())!=null){
 				
 				//Allie
 				if(p.partie().occupe(p.position().getX()+1, p.position().getY()).equipe()==p.equipe()){
@@ -259,7 +259,7 @@ public class Ordonnanceur {
 		if(p.position().getX()-1>=0)
 		{
 			//Personnage a l'ouest
-			if (p.partie().occupe(p.position().getX()+1, p.position().getY())!=null){
+			if (p.partie().occupe(p.position().getX()-1, p.position().getY())!=null){
 			
 				//Allie
 				if(p.partie().occupe(p.position().getX()-1, p.position().getY()).equipe()==p.equipe()){

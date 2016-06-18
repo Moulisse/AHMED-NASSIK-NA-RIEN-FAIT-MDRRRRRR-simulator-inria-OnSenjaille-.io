@@ -34,15 +34,13 @@ public class Partie {
 	}*/		
 	public Partie(int nbLigne,int nbColonne) {
 		
-		int xMin = 50;
-		int yMin = 50;
+		int xMin = 10;
+		int yMin = 10;
 		
 		if(xMin>nbColonne){
 			nbColonne=xMin;
 		}
-		if(yMin>nbLigne){
-			nbLigne=yMin;
-		}
+
 		
 		this.decor = new Cellule[nbLigne+4][nbColonne+4];
 		for(int i = 0; i < decor.length; i++){
@@ -219,9 +217,13 @@ public class Partie {
 			System.out.print("|");
 			for(j=0;j<this.decor()[i].length;j++){
 				if(this.occupe(j, i)!=null){
-					System.out.print(i+" "+j+" *dddd ");
+					System.out.print(i+" "+j+" *dddd "+this.occupe(j, i).getClass().toString());
 				}else{
 					System.out.print(" "+this.decor[i][j].valeur()+" ");
+				}
+				if(this.decor()[i][j].couleur() != 0)
+				{
+					System.out.print("c");
 				}
 				System.out.print("|");
 			}
@@ -273,7 +275,7 @@ public class Partie {
 		for(int i=0;i<this.decor().length;i++){
 			for(int j=0;j<this.decor()[i].length;j++){
 				rand=((int)(Math.random()*100));
-				if((rand<=10)&&(!(((this.blocke(j,i)==true) || (this.occupe(i,j)!=null) )))){this.decor[i][j].setValeur(codes.mur);
+				if((rand<=5)&&(!(((this.blocke(j,i)==true) || (this.occupe(i,j)!=null) )))){this.decor[i][j].setValeur(codes.mur);
 				}
 			}
 		}

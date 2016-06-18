@@ -228,7 +228,9 @@ public class ParserXML {
 		
 
 	//	persoCourant = new Guerrier(0, auto, automatePosition);
-		if(element.getAttributeValue("personnage") == "guerrier"){	
+		System.out.println("Le perso est de tyyype : "+element.getAttributeValue("personnage"));
+		
+		if((element.getAttributeValue("personnage")).equals("guerrier")){	
 			//persoCourant = new Guerrier(0, auto, new Position(automatePosition.getX(),automatePosition.getY()));}
 
 			persoCourant=new Guerrier(0, auto, newPos);
