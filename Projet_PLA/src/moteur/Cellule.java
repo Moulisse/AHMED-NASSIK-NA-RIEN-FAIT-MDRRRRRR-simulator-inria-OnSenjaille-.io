@@ -26,6 +26,9 @@ public class Cellule {
 	
 	public void setValeur(int v){
 		this.valeur=v;
+		if(v==codes.mur){
+			couleur=codes.couleurMur;
+		}
 	}
 	
 	public int couleur(){
