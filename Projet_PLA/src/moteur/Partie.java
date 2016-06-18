@@ -217,7 +217,7 @@ public class Partie {
 			System.out.print("|");
 			for(j=0;j<this.decor()[i].length;j++){
 				if(this.occupe(j, i)!=null){
-					System.out.print(i+" "+j+" *dddd ");
+					System.out.print(i+" "+j+" *dddd "+this.occupe(j, i).getClass().toString());
 				}else{
 					System.out.print(" "+this.decor[i][j].valeur()+" ");
 				}
