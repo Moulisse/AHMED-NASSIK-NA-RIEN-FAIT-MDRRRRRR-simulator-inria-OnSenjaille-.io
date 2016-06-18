@@ -169,10 +169,10 @@ let write_nb_aut (fichier:out_channel) (nb:string)=
   Printf.fprintf fichier "\n\t<nb_aut>%s</nb_aut>\n" nb;;
 
 let write_act_entete (fichier:out_channel) (a:(int*int*int*int) list) ((l,c):(int*int))=
-  Printf.fprintf fichier "\t\t<action nb_l=\"%d\" nb_c=\"%d\">\n" l c;;
+  Printf.fprintf fichier "\t\t<action nb_l=\"%d\" nb_c=\"%d\">\n" l (c+1);;
 
 let write_tr_entete (fichier:out_channel) (a:(int*int*int*int) list) ((l,c):(int*int))=
-  Printf.fprintf fichier "\t\t<transition nb_l=\"%d\" nb_c=\"%d\">\n" l c;;
+  Printf.fprintf fichier "\t\t<transition nb_l=\"%d\" nb_c=\"%d\">\n" l (c+1);;
   
 let rec write_act (f:out_channel) (a:(int*int*int*int) list) (l:int) (debut:bool)=
   match a with

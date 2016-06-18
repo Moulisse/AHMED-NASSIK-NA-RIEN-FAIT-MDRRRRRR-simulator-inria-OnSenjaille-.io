@@ -5,7 +5,7 @@
 	<nb_aut>1</nb_aut>
 	<au personnage="guerrier">
 
-		<action nb_l="16" nb_c="4">
+		<action nb_l="16" nb_c="5">
 			<l>
 				<c>24</c>
 				<c>0</c>
@@ -119,7 +119,7 @@
 				<c>45</c>
 			</l>
 		</action>
-		<transition nb_l="16" nb_c="4">
+		<transition nb_l="16" nb_c="5">
 			<l>
 				<c>24</c>
 				<c>0</c>

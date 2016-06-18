@@ -170,7 +170,8 @@ public class ParserXML {
 
 			System.out.println("");
 		}
-		Position automatePosition = partie.placerActions(actions, indicePlacement,Integer.parseInt(action.getAttributeValue("nb_c")),tailleMap);
+		Position automatePosition = partie.placerActions(actions, indicePlacement,Integer.parseInt(action.getAttributeValue("nb_l")),tailleMap);
+		System.out.println("automate position : X = "+automatePosition.getX()+" Y = "+automatePosition.getY());
 		System.out.println("placement max : "+(tailleMap-Integer.parseInt(action.getAttributeValue("nb_c"))));
 		System.out.println("Positionnement en "+i);
 		Element transition = element.getChild("transition");
@@ -237,10 +238,13 @@ public class ParserXML {
 			
 		}
 			
-		System.out.println("X: "+persoCourant.position().getX()+" Y : "+persoCourant.position().getY());
+		
+		System.out.println("POSITION PERSONNAGE X: "+persoCourant.position().getX()+" Y : "+persoCourant.position().getY());
 
 		//persoCourant = new Guerrier(0, auto, new Position(1,2));
 		partie.ajouterPersonnage(persoCourant);
+		if(partie.occupe(persoCourant.position().getX(),persoCourant.position().getY())!=null){System.out.println("occupe");}
+		else{System.out.println("non occuoe");}
 		return persoCourant;
 
 	}
@@ -281,6 +285,7 @@ public class ParserXML {
 			automate_courant = (Element) it_automates.next();
 			System.out.println("Type du personnage : " + automate_courant.getAttributeValue("personnage"));
 			personnageListe.add(createPersonnage(automate_courant, partie, posInitiale + i,tailleMap));
+
 			System.out.println("ooooo");
 			i++;
 
@@ -294,12 +299,17 @@ public class ParserXML {
 
 	public Partie buildGame(String fichierJoueur1, String fichierJoueur2) {
 		int nbTotalAutomates = nbAuto(fichierJoueur1) + nbAuto(fichierJoueur2);
+		if(nbAuto(fichierJoueur1)!=(nbAuto(fichierJoueur2))){System.out.println("LES DEUX JOUEURS N'ONT PAS LE MEME NOMBRE DE PERSONNAGE"); 
+		System.exit(0);
+		}
 		// hauteur max : 40
 		// longueur max : 5
 
 		// taille map : chaque perso peut prendre la taille max
-		int longueurAutoMax=40;
+		int longueurAutoMax=60;
 		
+		
+		System.out.println("nbauto1 : "+nbAuto(fichierJoueur1)+"nbauto2 "+nbAuto(fichierJoueur2));
 		Partie partieInitiale = new Partie(longueurAutoMax,6 * nbTotalAutomates);// peut
 																		// etre
 																		// modif
