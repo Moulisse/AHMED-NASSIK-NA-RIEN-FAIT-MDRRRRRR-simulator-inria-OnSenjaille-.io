@@ -19,6 +19,7 @@ public class Automate {
 		partie=p;
 	}
 	
+	//PREMIERE COLONNE EST LES CONDITIONS
 	//prend en entée l'état actuel et le symbole et renvoie le nouvelle état;
 	public int transition(int etat,int symbole){
 		for(int i=0;i<transitions.length;i++){
@@ -40,10 +41,19 @@ public class Automate {
 			}
 			if (actionsPossibles.isEmpty())
 				return 0;
-			else
-				//+code de l'action minimum
-				//(int)(Math.random()*(actionsPossibles.size())
-				return actionsPossibles.get(0);
+			else{
+				int roll = (int)(Math.random()*(actionsPossibles.size()));
+				return actionsPossibles.get(roll);
+			}
 		}
+		
+		
+		
+		public int[][] getTransitions(){
+			return this.transitions;
+		}
+		
+		
+		
 	
 }

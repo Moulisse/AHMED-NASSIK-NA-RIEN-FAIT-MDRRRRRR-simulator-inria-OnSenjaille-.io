@@ -1,5 +1,13 @@
 package moteur;
 
+import java.util.Iterator;
+import java.util.List;
+
+//import org.jdom2.Element;
+
+import moteur.Automate;
+import moteur.Personnage;
+
 public abstract class Personnage {
 	
 
@@ -14,6 +22,11 @@ public abstract class Personnage {
 		etat=e;
 		automate=a;
 		pos = p;
+	}
+	
+	//!
+	public void setEquipe(Joueur j){
+		this.equipe=j;
 	}
 	
 	public void beaten(){
@@ -43,6 +56,76 @@ public abstract class Personnage {
 	
 	public Joueur equipe(){
 		return equipe;
+	}
+	
+	public void suivreBalise(){
+		int diffX = this.equipe.balise().position().getX()-this.pos.getX();
+		int diffY = this.equipe.balise().position().getY()-this.pos.getY();
+		double roll;
+		
+		if (diffX==0&&diffY<0){ //Balise au Nord
+			this.avancer(0);
+		} else if(diffX>0&&diffY<0){ //Balise au Nord-Est
+			if(diffX>(-diffY)){
+				this.avancer(1);
+			}else if(diffX<((-diffY))){
+				this.avancer(0);
+			}else{
+				roll=Math.random();
+				if(roll>0.5){
+					this.avancer(1);
+				}else{
+					this.avancer(0);
+				}
+			}
+		} else if(diffX>0&&diffY==0){ //Balise a l'Est
+			this.avancer(1);
+		} else if(diffX>0&&diffY>0){ //Balise au Sud-Est
+			if(diffX>(diffY)){
+				this.avancer(1);
+			}else if(diffX<(diffY)){
+				this.avancer(2);
+			}else{
+				roll=Math.random();
+				if(roll>0.5){
+					this.avancer(1);
+				}else{
+					this.avancer(2);
+				}
+			}
+		} else if(diffX==0&&diffY>0){ //Balise au Sud
+			this.avancer(2);
+		} else if(diffX<0&&diffY>0){ //Balise au Sud-Ouest
+			if((-diffX)>diffY){
+				this.avancer(1);
+			}else if((-diffX)<diffY){
+				this.avancer(0);
+			}else{
+				roll=Math.random();
+				if(roll>0.5){
+					this.avancer(3);
+				}else{
+					this.avancer(2);
+				}
+			}
+		} else if(diffX<0&&diffY==0){ //Balise a l'Ouest
+			this.avancer(3);
+		} else if(diffX<0&&diffY<0){ //Balise au Nord-Ouest
+			if((-diffX)>(-diffY)){
+				this.avancer(3);
+			}else if((-diffX)<(-diffY)){
+				this.avancer(0);
+			}else{
+				roll=Math.random();
+				if(roll>0.5){
+					this.avancer(3);
+				}else{
+					this.avancer(0);
+				}
+			}
+		} else if(diffX==0&&diffY==0){
+			avancer(4);
+		}
 	}
 	
 	public void avancer(int code){
@@ -84,6 +167,43 @@ public abstract class Personnage {
 		this.automate.transitions=t;
 	}
 	}*/
-	
 
+	//renvoie true s'il le personnage possède une action interdites
+	public boolean actionIntedite(List<Integer> actionsInterdites){
+		int code;
+		
+		int hauteurTransi=this.automate().getTransitions().length;
+
+		/*List<Integer> actionsPersonnage=null;
+
+		//on récupère la premiere colonne(conditions)
+		for(int i=0;i<hauteurTransi;i++)
+		{
+			actionsPersonnage.add(this.automate().getTransitions()[i][0]);
+		}*/
+		
+		
+		
+		Iterator<Integer> it=actionsInterdites.iterator();
+		while(it.hasNext())
+		{
+		code= (int)it.next();
+		
+		for(int i=0;i<hauteurTransi;i++)
+		{
+			if(this.automate().getTransitions()[i][0]==code){
+				System.out.println("AUTOMATE ERRONE ACTION DE VOTRE PERSONNAGE DE TYPE "+this.getClass()+" CONTIENT UNE ACTION NON AUTORISEE");
+				System.exit(0);
+				return true;
+				}
+		}
+		
+
+		
+		}	
+	return false;
+	
+	}
+	
+	
 }

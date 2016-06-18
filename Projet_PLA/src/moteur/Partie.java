@@ -157,10 +157,10 @@ public class Partie {
 				System.out.print((6*indicePlacement)+i+" ");
 				System.out.print((randomPlacement+j)+" ");
 				System.out.println("i="+i+" j="+j+" "+a[i][j]);
-				this.decor[(6*indicePlacement)+i+1][randomPlacement+j+1].setValeur(a[i][j]);
+				this.decor[randomPlacement+i+1][(6*indicePlacement)+j+1].setValeur(a[i][j]);
 			}
 		}
-		return new Position((randomPlacement)+1,6*indicePlacement+1);
+		return new Position(6*indicePlacement+1,(randomPlacement)+1);
 	}
 	
 	
@@ -207,6 +207,60 @@ public class Partie {
 			System.out.print("\n");
 		}
 		System.out.print("\n");
+	}
+	
+	//renvoie une position aléatoire de la classe, non occupée (pas de joueur ni de mur sur la cellule)
+	//utilisée pour le placement des personnages
+	public Position placementAleatoire(){
+		Position pos=new Position(0,0);
+		int coordX;
+		int coordY;
+		do{
+		coordX=(int)(Math.random()*(this.decor[0].length));
+		coordY=(int)(Math.random()*(this.decor.length));
+				
+		pos.setY(coordX);		
+		pos.setX(coordY);
+		}while((this.blocke(coordX,coordY)==true) || (this.occupe(coordX,coordY)!=null) );
+		
+		
+		return pos;
+		
+	}
+	
+	public void ajoutMurRandom(){
+		Position posRand=this.placementAleatoire();
+		System.out.println("posRand : "+posRand.getX()+" " +posRand.getY() );
+		this.decor[posRand.getX()][posRand.getY()].setValeur(codes.mur);
+	}
+	
+	public void ajoutMurs(int nbMur){
+		for(int i=0;i<nbMur;i++)
+		{
+			this.ajoutMurRandom();
+		}
+	}
+	
+	//ajoute un mur avec une proba 0.1
+	public void ajoutMursMap(){
+		int rand;
+		for(int i=0;i<this.decor().length;i++){
+			for(int j=0;j<this.decor()[i].length;j++){
+				rand=((int)(Math.random()*100));
+				if(rand<=10){this.decor[i][j].setValeur(codes.mur);
+				}
+			}
+		}
+		
+		
+	}
+	
+	public int hauteur(){
+		return this.decor.length;
+	}
+	
+	public int longueur(){
+		return this.decor[0].length;
 	}
 	
 	
