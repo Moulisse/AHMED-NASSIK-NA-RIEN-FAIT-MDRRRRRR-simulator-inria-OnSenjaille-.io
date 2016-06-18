@@ -9,7 +9,7 @@ public class Main {
 	public static Partie p;
 	public static void main(String[] args) {
 		
-		p = new Partie(300,300);
+		p = new Partie(150,150);
 		int[][] t = new int[1][2];
 		t[0][0]=1;
 		t[0][1]=1;
