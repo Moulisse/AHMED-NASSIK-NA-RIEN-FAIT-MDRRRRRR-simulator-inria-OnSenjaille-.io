@@ -74,7 +74,8 @@ public class codes {
 	
 	public final static int blanc=0;
 	public final static int bleu=1;
-	public final static int rouge=2;
-	public final static int murC=3;
+	public final static int rouge=2;	
+	
+	public final static int couleurMur=10;
 	
 }

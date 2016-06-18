@@ -1,8 +1,14 @@
 package moteur;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Guerrier extends Personnage {
+	
+	
 
+	
 	public Guerrier(int e,Automate a, Position p){
 		super(e,a, p);
 	}
@@ -30,4 +36,20 @@ public class Guerrier extends Personnage {
 		if (cible != null)
 			cible.beaten();
 	}
+	
+	
+	
+	public boolean actionIntedite(){
+		List<Integer> actionsInterdites=new ArrayList<Integer>();
+		actionsInterdites.add(codes.peindreB);
+		actionsInterdites.add(codes.peindreR);
+
+			return super.actionIntedite(actionsInterdites);
+		
+	}
+	
+		
+		
+		
+	
 }
