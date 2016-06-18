@@ -238,27 +238,27 @@ public class Grande extends Application {
 					return;
 				}
 				
+				
+				
+				
+				
 				if (timertour==0){
 					Main.Main.p.tour();
-					timertour=4;
+					timertour=15;
 				}
 				if (timertour > 0)
 					timertour--;
-				
-				
-				System.out.println(tab.length+"   "+i+","+j);
-				
-				
+
 				
 				// JOUEUR 1
 				if (avance1[0] != 0 & timer1 == 0) {
-					if (avance1[0] == 1 & tab[x - 2][y-1].valeur() != codes.mur)
+					if (avance1[0] == 1 & tab[y-1][x - 2].valeur() != codes.mur)
 						x--;
-					if (avance1[0] == 2 & tab[x][y-1].valeur() != codes.mur)
+					if (avance1[0] == 2 & tab[y-1][x].valeur() != codes.mur)
 						x++;
-					if (avance1[0] == 3 & tab[x-1][y - 2].valeur() != codes.mur)
+					if (avance1[0] == 3 & tab[y - 2][x-1].valeur() != codes.mur)
 						y--;
-					if (avance1[0] == 4 & tab[x-1][y].valeur() != codes.mur)
+					if (avance1[0] == 4 & tab[y][x-1].valeur() != codes.mur)
 						y++;
 					timer1 = 4;
 				}
@@ -267,13 +267,13 @@ public class Grande extends Application {
 
 				// JOUEUR 2
 				if (avance2[0] != 0 & timer2 == 0) {
-					if (avance2[0] == 1 & tab[x2 - 1][y2].valeur() != codes.mur)
+					if (avance2[0] == 1 & tab[y2-1][x2 - 2].valeur() != codes.mur)
 						x2--;
-					if (avance2[0] == 2 & tab[x2 + 1][y2].valeur() != codes.mur)
+					if (avance2[0] == 2 & tab[y2-1][x2].valeur() != codes.mur)
 						x2++;
-					if (avance2[0] == 3 & tab[x2][y2 - 1].valeur() != codes.mur)
+					if (avance2[0] == 3 & tab[y2 - 2][x2-1].valeur() != codes.mur)
 						y2--;
-					if (avance2[0] == 4 & tab[x2][y2 + 1].valeur() != codes.mur)
+					if (avance2[0] == 4 & tab[y2][x2-1].valeur() != codes.mur)
 						y2++;
 					timer2 = 4;
 				}
@@ -291,25 +291,34 @@ public class Grande extends Application {
 						rekt.setWidth(31);
 						rekt.setHeight(31);
 						rekt.setFill(Color.WHITE);
-						if (tab[j-1][i-1].valeur() == codes.bleu)
+						if (tab[i-1][j-1].couleur() == codes.bleu)
 							rekt.setFill(couleur1);
-						if (tab[j-1][i-1].valeur() == codes.rouge)
+						if (tab[i-1][j-1].couleur() == codes.rouge)
 							rekt.setFill(couleur2);
 						
-						if (tab[j-1][i-1].valeur() == codes.mur) {
+						if (tab[i-1][j-1].valeur() == codes.mur) {
 							rekt.setFill(Color.DARKGRAY);
 							rekt.setStroke(Color.BLACK);
 							rekt.setWidth(30);
 							rekt.setHeight(30);
 						}
 						
-						pers = Main.Main.p.occupe(j-1,i-1);
+						pers = Main.Main.p.occupe(i-1,j-1);
 						if (pers!=null) {
-							image = new Image("file:images/balise.png");
-							guerrier = new ImageView(image);
-							guerrier.setFitWidth(31);
-							guerrier.setFitHeight(31);
-							pane.getChildren().add(guerrier);
+							System.out.println(pers.equipe());
+							if(pers.getClass().equals(Guerrier.class)){
+								image = new Image("file:images/epee.png");
+								guerrier = new ImageView(image);
+								guerrier.setFitWidth(31);
+								guerrier.setFitHeight(31);
+								pane.getChildren().add(guerrier);
+							}else if(pers.getClass().equals(Peintre.class)){
+								image = new Image("file:images/peintre.png");
+								peintre = new ImageView(image);
+								peintre.setFitWidth(31);
+								peintre.setFitHeight(31);
+								pane.getChildren().add(peintre);
+							}
 						} 
 						
 						
@@ -326,44 +335,62 @@ public class Grande extends Application {
 				}
 
 				box1.relocate(40, 200);
-				root.getChildren().add(box1);/*
+				root.getChildren().add(box1);
 
 				root.getChildren().remove(box2);
 				box2 = new VBox();
 				for (i = Math.max(Math.min(y2, N - 12), 13) - 12; i <= Math.max(Math.min(y2, N - 12), 13) + 12; i++) {
 					hbox2 = new HBox(0);
-					for (j = Math.max(Math.min(x2, M - 14), 15) - 14; j <= Math.max(Math.min(x2, M - 14), 15)
-							+ 14; j++) {
+					for (j = Math.max(Math.min(x2, M - 14), 15) - 14; j <= Math.max(Math.min(x2, M - 14), 15) + 14; j++) {
+						pane = new Pane();
 						rekt = new Rectangle();
+						pane.getChildren().add(rekt);
 						rekt.setWidth(31);
 						rekt.setHeight(31);
 						rekt.setFill(Color.WHITE);
-						if (tab[j][i].valeur() == 1)
+						if (tab[i-1][j-1].couleur() == codes.bleu)
 							rekt.setFill(couleur1);
-						if (tab[j][i].valeur() == 2)
+						if (tab[i-1][j-1].couleur() == codes.rouge)
 							rekt.setFill(couleur2);
-						if (tab[j][i].valeur() == 63) {
+						
+						if (tab[i-1][j-1].valeur() == codes.mur) {
 							rekt.setFill(Color.DARKGRAY);
 							rekt.setStroke(Color.BLACK);
 							rekt.setWidth(30);
 							rekt.setHeight(30);
 						}
+						
+						pers = Main.Main.p.occupe(i-1,j-1);
+						if (pers!=null) {
+							if(pers.getClass().equals(Guerrier.class)){
+								image = new Image("file:images/balise.png");
+								guerrier = new ImageView(image);
+								guerrier.setFitWidth(31);
+								guerrier.setFitHeight(31);
+								pane.getChildren().add(guerrier);
+							}else if(pers.getClass().equals(Peintre.class)){
+								image = new Image("file:images/peintre.png");
+								peintre = new ImageView(image);
+								peintre.setFitWidth(31);
+								peintre.setFitHeight(31);
+								pane.getChildren().add(peintre);
+							}
+						} 
+						
+						
 						if ((i == y & j == x) | (i == y2) & (j == x2)) {
 							image = new Image("file:images/balise.png");
 							balise = new ImageView(image);
 							balise.setFitWidth(31);
 							balise.setFitHeight(31);
-							pane = new Pane();
-							pane.getChildren().add(rekt);
 							pane.getChildren().add(balise);
-							hbox2.getChildren().add(pane);
-						} else
-							hbox2.getChildren().add(rekt);
+						} 
+						hbox2.getChildren().add(pane);
 					}
 					box2.getChildren().add(hbox2);
 				}
 				box2.relocate(981, 200);
-				root.getChildren().add(box2);*/
+				root.getChildren().add(box2);
 				
 				map.toFront();
 				map2.toFront();
@@ -904,7 +931,7 @@ public class Grande extends Application {
 			
 			x = 8;
 			y = (N + 1) / 2;
-			x2 = M - 7;
+			x2 = M-7;
 			y2 = (N + 1) / 2;
 
 			mapj1 = new Rectangle();
@@ -920,7 +947,8 @@ public class Grande extends Application {
 			mapj2.setFill(null);
 			root.getChildren().add(mapj2);
 
-			
+			tab[y-1][x-1].setValeur(0);
+			tab[y2-1][x2-1].setValeur(0);
 			// EFFACE L'ECRAN
 			for (int i = 0; i < l_menu.size(); i++) {
 				if (l_menu.get(i).getClass().getName() == "javafx.scene.image.ImageView")
