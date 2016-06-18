@@ -240,6 +240,24 @@ let write_xml (fichier:out_channel) (list: (automate * personnage) list) (act:in
 
 (* AUTOMATES *)
 
+let peintre_simple =
+  ([(0,CaseBlanche(S),Peindre_B(S),0);
+    (0,CaseRouge(S),Peindre_B(S),0);
+    (0,CaseBleu(S),Avancer(S),0);
+    (0,Mur(S),Avancer(E),0);
+    (0,CaseBlanche(E),Peindre_B(E),0);
+    (0,CaseRouge(E),Peindre_B(E),0);
+    (0,CaseBleu(E),Avancer(E),0);
+    (0,Mur(E),Avancer(N),0);
+    (0,CaseBlanche(N),Peindre_B(N),0);
+    (0,CaseRouge(N),Peindre_B(N),0);
+    (0,CaseBleu(N),Avancer(N),0);
+    (0,Mur(N),Avancer(O),0)
+    (0,CaseBlanche(O),Peindre_B(O),0);
+    (0,CaseRouge(O),Peindre_B(O),0);
+    (0,CaseBleu(O),Avancer(O),0);
+    (0,Mur(O),Avancer(S),0)]
+  ,Peindre);;
   
 let tour_de_map =
   ([(0,CaseBlanche(S),Avancer(S),0);
@@ -259,6 +277,8 @@ let tour_de_map =
     (3,CaseRouge(O),Avancer(O),3);
     (3,Mur(O),Avancer(S),0)]
   ,Guerrier);;
+
+
 (*
 let a = traduction_automate tour_de_map;;
 let (b1,b2) = tri_aut a;;
