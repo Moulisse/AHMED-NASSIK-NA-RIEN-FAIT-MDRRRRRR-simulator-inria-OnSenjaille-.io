@@ -150,8 +150,11 @@ public class Partie {
 	public Position placerActions(int[][] a, int indicePlacement, int tailleAutomate, int tailleMax){
 		//TODO vérifier les positions disponibles
 		int i=0,j = 0;
-		
+		System.out.println("tailleMax= "+tailleMax);
+		System.out.println("tailleAutomate= "+tailleAutomate);
+
 		int randomPlacement=(int)(Math.random()*(tailleMax-tailleAutomate));
+		System.out.println("randomPlacement= "+randomPlacement);
 		for(i=0;i<a.length;i++){
 			for(j=0;j<a[i].length;j++){
 				System.out.print((6*indicePlacement)+i+" ");
