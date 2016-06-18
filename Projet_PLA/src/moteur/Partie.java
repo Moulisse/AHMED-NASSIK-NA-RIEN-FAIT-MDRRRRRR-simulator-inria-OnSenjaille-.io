@@ -210,7 +210,7 @@ public class Partie {
 	
 	public void affichageText(){
 		int i,j;
-			
+		int coul;
 		for(j=0;j<this.decor()[0].length;j++){
 			System.out.print("----");
 		}
@@ -220,13 +220,29 @@ public class Partie {
 			System.out.print("|");
 			for(j=0;j<this.decor()[i].length;j++){
 				if(this.occupe(j, i)!=null){
-					System.out.print(i+" "+j+" *dddd "+this.occupe(j, i).getClass().toString());
+					if((this.occupe(j, i).equals(Guerrier.class))){
+						System.out.print("G");
+					}else if((this.occupe(j, i).equals(Peintre.class))){
+						System.out.print("P");
+					}
 				}else{
-					System.out.print(" "+this.decor[i][j].valeur()+" ");
+					System.out.print(" ");
 				}
-				if(this.decor()[i][j].couleur() != 0)
-				{
-					System.out.print("c");
+				if(this.decor[i][j].valeur()!=0){
+					System.out.print("V");
+				}else{
+					System.out.print("0");
+				}
+				coul=this.decor()[i][j].couleur();
+				switch(coul){
+					case codes.blanc : System.out.print("b");
+					break;
+					case codes.rouge : System.out.print("r");
+					break;
+					case codes.bleu : System.out.print("e");
+					break;
+					case codes.couleurMur : System.out.print("m");
+					break;
 				}
 				System.out.print("|");
 			}
