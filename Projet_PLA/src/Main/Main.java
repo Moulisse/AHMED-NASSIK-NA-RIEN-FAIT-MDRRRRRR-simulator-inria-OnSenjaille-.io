@@ -1,11 +1,15 @@
+package Main;
+
 import graphique.Grande;
 import javafx.application.Application;
+import moteur.*;
 
 
 public class Main {
-
+	public static Partie p;
 	public static void main(String[] args) {
-		/*Partie p = new Partie();
+		
+		p = new Partie(300,300);
 		int[][] t = new int[1][2];
 		t[0][0]=1;
 		t[0][1]=1;
@@ -17,8 +21,8 @@ public class Main {
 		p.ajouterPersonnage(gue);
 		Joueur rouge = new Joueur();
 		rouge.ajoutPersonnage(gue);
-		p.affichageText();/*
-		try {
+		p.affichageText();
+		/*try {
 		    Thread.sleep(1000);                 //1000 milliseconds is one second.
 		} catch(InterruptedException ex) {
 		    Thread.currentThread().interrupt();

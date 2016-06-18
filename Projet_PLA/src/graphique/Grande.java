@@ -17,14 +17,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.*;
-
 import java.util.*;
 
 import javafx.animation.*;
 
 public class Grande extends Application {
-
-	Partie p;
 	
 	public int x, y; // coordonn�es joueur 1
 	public int x2, y2; // coordonn�es joueur 2
@@ -43,6 +40,12 @@ public class Grande extends Application {
 	public int nb_g1 = 3;
 	public int nb_g2 = 3;
 
+	
+	int M = Main.Main.p.decor()[0].length; // nombre de colonnes
+	int N = Main.Main.p.decor().length; // nombre de lignes
+	
+	Cellule tab[][] = new Cellule[M + 1][N + 1]; // tableau de cases
+	
 	int avance1[] = { 0, 0 }; // joueur 1 n'avance pas
 	int avance2[] = { 0, 0 }; // joueur 2 n'avance pas
 
@@ -75,36 +78,9 @@ public class Grande extends Application {
 	Rectangle mapj2;
 	
 	
-	public void creePartie() {
-		
-		p = new Partie(70,70);
-		int[][] t = new int[1][2];
-		t[0][0]=1;
-		t[0][1]=1;
-		int[][] t2 = new int[1][2];
-		t2[0][0]=codes.caseBlancheEloigneeSud;
-		t2[0][1]=codes.avancer+2;
-		Automate aut = new Automate(t, p.placerActions(t2), p);
-		Guerrier gue = new Guerrier(0,aut,new Position(5,2));
-		p.ajouterPersonnage(gue);
-		Joueur rouge = new Joueur();
-		rouge.ajoutPersonnage(gue);
-		
-
-	}
-	
 	
 	@Override
 	public void start(Stage primaryStage) {
-		
-		creePartie();
-
-		int M = p.decor()[0].length; // nombre de colonnes
-		int N = p.decor().length; // nombre de lignes
-		
-		
-		
-		Cellule tab[][] = new Cellule[M + 1][N + 1]; // tableau de cases
 		
 		primaryStage.setTitle("Splatane, un jeu qu'il est bien pour jouer");
 		primaryStage.setResizable(false);
