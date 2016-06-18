@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
-import moteur.Cellule;
+import moteur.*;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -22,19 +22,20 @@ import java.util.*;
 
 import javafx.animation.*;
 
-
 public class Grande extends Application {
 
-	public int x, y; // coordonnées joueur 1
-	public int x2, y2; // coordonnées joueur 2
+	Partie p;
+	
+	public int x, y; // coordonnï¿½es joueur 1
+	public int x2, y2; // coordonnï¿½es joueur 2
 	int sum1 = 0; // score joueur 1
 	int sum2 = 0; // score joueur 2
 	int sum = 0; // somme totale
 	int timer1 = 0;
 	int timer2 = 0;
 
-	public String nom1 = "équipe 1";
-	public String nom2 = "équipe 2";
+	public String nom1 = "ï¿½quipe 1";
+	public String nom2 = "ï¿½quipe 2";
 	public Color couleur1 = Color.web("#7CFC00");
 	public Color couleur2 = Color.web("#1E90FF");
 	public int nb_p1 = 2;
@@ -52,27 +53,17 @@ public class Grande extends Application {
 	Text fin = new Text();
 	Text temps = new Text();
 
-	int T = 21; // taille d'une case
-	int M = 40; // nombre de colonnes
-	int N = 70; // nombre de lignes
-	Cellule tab[][] = new Cellule[M + 1][N + 1]; // tableau de cases
-
 	int i, j, k;
 	long duree = 60;
 	long t0 = duree;
 
 	Image image;
-	public int zlatan = 0;
 	public float buttX = 1070;
 	public float buttX2 = 830;
-/*
-	public static void main(String[] args) {
-		Application.launch(Grande.class, args);
-	}*/
 
 	LinkedList<Node> l_menu = new LinkedList<Node>();
 	LinkedList<Node> l_option = new LinkedList<Node>();
-	
+
 	VBox box1 = new VBox(0);
 	VBox box2 = new VBox(0);
 	HBox hbox1 = new HBox(0);
@@ -82,13 +73,43 @@ public class Grande extends Application {
 	Pane pane;
 	Rectangle mapj1;
 	Rectangle mapj2;
+	
+	
+	public void creePartie() {
+		
+		p = new Partie(70,70);
+		int[][] t = new int[1][2];
+		t[0][0]=1;
+		t[0][1]=1;
+		int[][] t2 = new int[1][2];
+		t2[0][0]=codes.caseBlancheEloigneeSud;
+		t2[0][1]=codes.avancer+2;
+		Automate aut = new Automate(t, p.placerActions(t2), p);
+		Guerrier gue = new Guerrier(0,aut,new Position(5,2));
+		p.ajouterPersonnage(gue);
+		Joueur rouge = new Joueur();
+		rouge.ajoutPersonnage(gue);
+		
 
+	}
+	
+	
 	@Override
 	public void start(Stage primaryStage) {
+		
+		creePartie();
+
+		int M = p.decor()[0].length; // nombre de colonnes
+		int N = p.decor().length; // nombre de lignes
+		
+		
+		
+		Cellule tab[][] = new Cellule[M + 1][N + 1]; // tableau de cases
+		
 		primaryStage.setTitle("Splatane, un jeu qu'il est bien pour jouer");
 		primaryStage.setResizable(false);
 		;
-		// ----------------- CREATION DE LA FENETRE -----------------
+		// -----------------  CREATION DE LA FENETRE  -----------------
 		Group root = new Group();
 		Scene scene = new Scene(root, 1920, 1080, Color.LIGHTGRAY);
 
@@ -112,8 +133,6 @@ public class Grande extends Application {
 		temps.setFont(Font.font(null, FontWeight.BOLD, 80));
 		temps.setX(1840 - com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().computeStringWidth(temps.getText(),
 				temps.getFont()) / 2);
-
-
 
 		// ----------------- SCOREBOARD (max:1947) -------------------
 		Rectangle scorefont = new Rectangle();
@@ -181,31 +200,30 @@ public class Grande extends Application {
 		font1.setX(35);
 		font1.setY(195);
 		font1.setFill(couleur1);
-		
+
 		Rectangle font2 = new Rectangle();
 		font2.setWidth(909);
 		font2.setHeight(785);
 		font2.setX(976);
 		font2.setY(195);
 		font2.setFill(couleur2);
-		
+
 		Rectangle map = new Rectangle();
 		map.setWidth(350);
 		map.setHeight(199);
 		map.setStroke(Color.BLACK);
-		map.setX(960-map.getWidth()/2);
-		map.setY(100-map.getHeight()/2);
+		map.setX(960 - map.getWidth() / 2);
+		map.setY(100 - map.getHeight() / 2);
 		map.setFill(Color.DARKGRAY);
 
-		float coef = (float) Math.min(320.0/(float)M,180.0/(float)N);
+		float coef = (float) Math.min(320.0 / (float) M, 180.0 / (float) N);
 		Rectangle map2 = new Rectangle();
-		map2.setWidth(coef*M);
-		map2.setHeight(coef*N);
-		map2.setX(960-map2.getWidth()/2);
-		map2.setY(100-map2.getHeight()/2);
+		map2.setWidth(coef * M);
+		map2.setHeight(coef * N);
+		map2.setX(960 - map2.getWidth() / 2);
+		map2.setY(100 - map2.getHeight() / 2);
 		map2.setFill(Color.WHITE);
-		
-		
+
 		AnimationTimer jeu = new AnimationTimer() {
 			public void handle(long currentNanoTime) {
 				if (t0 == duree) {
@@ -221,13 +239,10 @@ public class Grande extends Application {
 				// TEST DE VICTOIRE
 				if (sum1 + sum2 >= sum | duree - (currentNanoTime - t0) / 1000000000 <= 0) {
 					if (sum1 > sum2) {
-						if (zlatan == 1)
-							fin.setText("MORAT JUST WON O MY GOD !!!");
-						else
-							fin.setText(nom1 + " remporte la partie");
+						fin.setText(nom1 + " remporte la partie");
 					}
 					if (sum1 == sum2)
-						fin.setText("Egalité");
+						fin.setText("Egalitï¿½");
 					fin.setX(960 - com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader()
 							.computeStringWidth(fin.getText(), fin.getFont()) / 2);
 					fin.setOpacity(1);
@@ -238,10 +253,14 @@ public class Grande extends Application {
 
 				// JOUEUR 1
 				if (avance1[0] != 0 & timer1 == 0) {
-					if (avance1[0] == 1 & tab[x - 1][y].valeur() != 63) x--;
-					if (avance1[0] == 2 & tab[x + 1][y].valeur() != 63) x++;
-					if (avance1[0] == 3 & tab[x][y - 1].valeur() != 63) y--;	
-					if (avance1[0] == 4 & tab[x][y + 1].valeur() != 63) y++;
+					if (avance1[0] == 1 & tab[x - 1][y].valeur() != 63)
+						x--;
+					if (avance1[0] == 2 & tab[x + 1][y].valeur() != 63)
+						x++;
+					if (avance1[0] == 3 & tab[x][y - 1].valeur() != 63)
+						y--;
+					if (avance1[0] == 4 & tab[x][y + 1].valeur() != 63)
+						y++;
 					timer1 = 4;
 				}
 				if (timer1 > 0)
@@ -249,86 +268,99 @@ public class Grande extends Application {
 
 				// JOUEUR 2
 				if (avance2[0] != 0 & timer2 == 0) {
-					if (avance2[0] == 1 & tab[x2 - 1][y2].valeur() != 63) x2--;
-					if (avance2[0] == 2 & tab[x2 + 1][y2].valeur() != 63) x2++;
-					if (avance2[0] == 3 & tab[x2][y2 - 1].valeur() != 63) y2--;	
-					if (avance2[0] == 4 & tab[x2][y2 + 1].valeur() != 63) y2++;
+					if (avance2[0] == 1 & tab[x2 - 1][y2].valeur() != 63)
+						x2--;
+					if (avance2[0] == 2 & tab[x2 + 1][y2].valeur() != 63)
+						x2++;
+					if (avance2[0] == 3 & tab[x2][y2 - 1].valeur() != 63)
+						y2--;
+					if (avance2[0] == 4 & tab[x2][y2 + 1].valeur() != 63)
+						y2++;
 					timer2 = 4;
 				}
 				if (timer2 > 0)
 					timer2--;
-				if ((avance2[0] != 0 & timer2 == 3) | (avance1[0] != 0 & timer1 == 3)){
-					root.getChildren().remove(box1);
-					box1 = new VBox();
-					for(i=Math.max(Math.min(y, N-12),13)-12;i<=Math.max(Math.min(y, N-12),13)+12;i++){
-						hbox1 = new HBox(0);
-						for(j=Math.max(Math.min(x, M-14),15)-14;j<=Math.max(Math.min(x, M-14),15)+14;j++){
-							rekt = new Rectangle();
-							rekt.setWidth(31);
-							rekt.setHeight(31);
-							rekt.setFill(Color.WHITE);
-							if (tab[j][i].valeur()==63){
-								rekt.setFill(Color.DARKGRAY);
-								rekt.setStroke(Color.BLACK);
-								rekt.setWidth(30);
-								rekt.setHeight(30);
-							}
-							if ((i==y & j==x)|(i==y2) & (j==x2)){
-								image = new Image("file:images/balise.png");
-								balise = new ImageView(image);
-								balise.setFitWidth(31);
-								balise.setFitHeight(31);
-								pane = new Pane();
-								pane.getChildren().add(rekt);
-								pane.getChildren().add(balise);
-								hbox1.getChildren().add(pane);
-							}else
+
+				root.getChildren().remove(box1);
+				box1 = new VBox();
+				for (i = Math.max(Math.min(y, N - 12), 13) - 12; i <= Math.max(Math.min(y, N - 12), 13) + 12; i++) {
+					hbox1 = new HBox(0);
+					for (j = Math.max(Math.min(x, M - 14), 15) - 14; j <= Math.max(Math.min(x, M - 14), 15) + 14; j++) {
+						rekt = new Rectangle();
+						rekt.setWidth(31);
+						rekt.setHeight(31);
+						rekt.setFill(Color.WHITE);
+						if (tab[j][i].valeur() == codes.bleu)
+							rekt.setFill(couleur1);
+						if (tab[j][i].valeur() == codes.rouge)
+							rekt.setFill(couleur2);
+
+						if (tab[j][i].valeur() == codes.mur) {
+							rekt.setFill(Color.DARKGRAY);
+							rekt.setStroke(Color.BLACK);
+							rekt.setWidth(30);
+							rekt.setHeight(30);
+						}
+						if ((i == y & j == x) | (i == y2) & (j == x2)) {
+							image = new Image("file:images/balise.png");
+							balise = new ImageView(image);
+							balise.setFitWidth(31);
+							balise.setFitHeight(31);
+							pane = new Pane();
+							pane.getChildren().add(rekt);
+							pane.getChildren().add(balise);
+							hbox1.getChildren().add(pane);
+						} else
 							hbox1.getChildren().add(rekt);
-						}
-						box1.getChildren().add(hbox1);
 					}
-					box1.relocate(40, 200);
-					root.getChildren().add(box1);
-					
-					root.getChildren().remove(box2);
-					box2 = new VBox();
-					for(i=Math.max(Math.min(y2, N-12),13)-12;i<=Math.max(Math.min(y2, N-12),13)+12;i++){
-						hbox2 = new HBox(0);
-						for(j=Math.max(Math.min(x2, M-14),15)-14;j<=Math.max(Math.min(x2, M-14),15)+14;j++){
-							rekt = new Rectangle();
-							rekt.setWidth(31);
-							rekt.setHeight(31);
-							rekt.setFill(Color.WHITE);
-							if (tab[j][i].valeur()==63){
-								rekt.setFill(Color.DARKGRAY);
-								rekt.setStroke(Color.BLACK);
-								rekt.setWidth(30);
-								rekt.setHeight(30);
-							}
-							if ((i==y & j==x)|(i==y2) & (j==x2)){
-								image = new Image("file:images/balise.png");
-								balise = new ImageView(image);
-								balise.setFitWidth(31);
-								balise.setFitHeight(31);
-								pane = new Pane();
-								pane.getChildren().add(rekt);
-								pane.getChildren().add(balise);
-								hbox2.getChildren().add(pane);
-							}else
-							hbox2.getChildren().add(rekt);
-						}
-						box2.getChildren().add(hbox2);
-					}
-					box2.relocate(981, 200);
-					root.getChildren().add(box2);
+					box1.getChildren().add(hbox1);
 				}
+				box1.relocate(40, 200);
+				root.getChildren().add(box1);
+
+				root.getChildren().remove(box2);
+				box2 = new VBox();
+				for (i = Math.max(Math.min(y2, N - 12), 13) - 12; i <= Math.max(Math.min(y2, N - 12), 13) + 12; i++) {
+					hbox2 = new HBox(0);
+					for (j = Math.max(Math.min(x2, M - 14), 15) - 14; j <= Math.max(Math.min(x2, M - 14), 15)
+							+ 14; j++) {
+						rekt = new Rectangle();
+						rekt.setWidth(31);
+						rekt.setHeight(31);
+						rekt.setFill(Color.WHITE);
+						if (tab[j][i].valeur() == 1)
+							rekt.setFill(couleur1);
+						if (tab[j][i].valeur() == 2)
+							rekt.setFill(couleur2);
+						if (tab[j][i].valeur() == 63) {
+							rekt.setFill(Color.DARKGRAY);
+							rekt.setStroke(Color.BLACK);
+							rekt.setWidth(30);
+							rekt.setHeight(30);
+						}
+						if ((i == y & j == x) | (i == y2) & (j == x2)) {
+							image = new Image("file:images/balise.png");
+							balise = new ImageView(image);
+							balise.setFitWidth(31);
+							balise.setFitHeight(31);
+							pane = new Pane();
+							pane.getChildren().add(rekt);
+							pane.getChildren().add(balise);
+							hbox2.getChildren().add(pane);
+						} else
+							hbox2.getChildren().add(rekt);
+					}
+					box2.getChildren().add(hbox2);
+				}
+				box2.relocate(981, 200);
+				root.getChildren().add(box2);
 				map.toFront();
 				map2.toFront();
-				mapj1.setX(960+coef*(Math.max(Math.min(x, M-14),15)-(M+1.5)/2)  -  mapj1.getWidth()/2);
-				mapj1.setY(100+coef*(Math.max(Math.min(y, N-12),13)-(N+1.5)/2)  -  mapj1.getHeight()/2);
+				mapj1.setX(960 + coef * (Math.max(Math.min(x, M - 14), 15) - (M + 1.5) / 2) - mapj1.getWidth() / 2);
+				mapj1.setY(100 + coef * (Math.max(Math.min(y, N - 12), 13) - (N + 1.5) / 2) - mapj1.getHeight() / 2);
 				mapj1.toFront();
-				mapj2.setX(960+coef*(Math.max(Math.min(x2, M-14),15)-(M+1.5)/2)  -  mapj2.getWidth()/2);
-				mapj2.setY(100+coef*(Math.max(Math.min(y2, N-12),13)-(N+1.5)/2)  -  mapj2.getHeight()/2);
+				mapj2.setX(960 + coef * (Math.max(Math.min(x2, M - 14), 15) - (M + 1.5) / 2) - mapj2.getWidth() / 2);
+				mapj2.setY(100 + coef * (Math.max(Math.min(y2, N - 12), 13) - (N + 1.5) / 2) - mapj2.getHeight() / 2);
 				mapj2.toFront();
 				// SCOREBOARD
 				score1.setWidth((float) sum1 / (float) sum * 1860);
@@ -619,8 +651,7 @@ public class Grande extends Application {
 		o_nbp1_textfield.setText(Integer.toString(nb_p1));
 		o_nbp1_textfield.setAlignment(Pos.CENTER);
 		o_nbp1_textfield.setPrefColumnCount(2);
-		o_nbp1_textfield.setStyle(
-				"-fx-background-color:#D5D5D5;     -fx-font-size: 28px;     -fx-padding: 0");
+		o_nbp1_textfield.setStyle("-fx-background-color:#D5D5D5;     -fx-font-size: 28px;     -fx-padding: 0");
 		o_nbp1_textfield.setFocusTraversable(false);
 		HBox o_nbp1_box = new HBox();
 		o_nbp1_box.getChildren().add(o_nbp1_textfield);
@@ -632,8 +663,7 @@ public class Grande extends Application {
 		o_nbp2_textfield.setText(Integer.toString(nb_p2));
 		o_nbp2_textfield.setAlignment(Pos.CENTER);
 		o_nbp2_textfield.setPrefColumnCount(2);
-		o_nbp2_textfield.setStyle(
-				"-fx-background-color:#D5D5D5;     -fx-font-size: 28px;     -fx-padding: 0");
+		o_nbp2_textfield.setStyle("-fx-background-color:#D5D5D5;     -fx-font-size: 28px;     -fx-padding: 0");
 		o_nbp2_textfield.setFocusTraversable(false);
 		HBox o_nbp2_box = new HBox();
 		o_nbp2_box.getChildren().add(o_nbp2_textfield);
@@ -660,8 +690,7 @@ public class Grande extends Application {
 		o_nbg1_textfield.setText(Integer.toString(nb_g1));
 		o_nbg1_textfield.setAlignment(Pos.CENTER);
 		o_nbg1_textfield.setPrefColumnCount(2);
-		o_nbg1_textfield.setStyle(
-				"-fx-background-color:#D5D5D5;     -fx-font-size: 28px;     -fx-padding: 0");
+		o_nbg1_textfield.setStyle("-fx-background-color:#D5D5D5;     -fx-font-size: 28px;     -fx-padding: 0");
 		o_nbg1_textfield.setFocusTraversable(false);
 		HBox o_nbg1_box = new HBox();
 		o_nbg1_box.getChildren().add(o_nbg1_textfield);
@@ -673,8 +702,7 @@ public class Grande extends Application {
 		o_nbg2_textfield.setText(Integer.toString(nb_g2));
 		o_nbg2_textfield.setAlignment(Pos.CENTER);
 		o_nbg2_textfield.setPrefColumnCount(2);
-		o_nbg2_textfield.setStyle(
-				"-fx-background-color:#D5D5D5;     -fx-font-size: 28px;     -fx-padding: 0");
+		o_nbg2_textfield.setStyle("-fx-background-color:#D5D5D5;     -fx-font-size: 28px;     -fx-padding: 0");
 		o_nbg2_textfield.setFocusTraversable(false);
 		HBox o_nbg2_box = new HBox();
 		o_nbg2_box.getChildren().add(o_nbg2_textfield);
@@ -708,9 +736,6 @@ public class Grande extends Application {
 		platane.setFitWidth(400);
 		root.getChildren().add(platane);
 		l_menu.add(platane);
-
-
-
 
 		Button o_exit = new Button("retour");
 		o_exit.setOnAction(actionEvent -> {
@@ -776,14 +801,20 @@ public class Grande extends Application {
 
 		AnimationTimer options_anim = new AnimationTimer() {
 			public void handle(long currentNanoTime) {
-				if (o_nom1_textfield.getText()!="")	nom1 = o_nom1_textfield.getText();
-				if (o_nom2_textfield.getText()!="") nom2 = o_nom2_textfield.getText();
+				if (o_nom1_textfield.getText() != "")
+					nom1 = o_nom1_textfield.getText();
+				if (o_nom2_textfield.getText() != "")
+					nom2 = o_nom2_textfield.getText();
 				couleur1 = o_colorPicker1.getValue();
 				couleur2 = o_colorPicker2.getValue();
-				if (o_nbp1_textfield.getAnchor()!=0) nb_p1 = Integer.parseInt(o_nbp1_textfield.getText());
-				if (o_nbp2_textfield.getAnchor()!=0) nb_p2 = Integer.parseInt(o_nbp2_textfield.getText());
-				if (o_nbg1_textfield.getAnchor()!=0) nb_g1 = Integer.parseInt(o_nbg1_textfield.getText());
-				if (o_nbg2_textfield.getAnchor()!=0) nb_g2 = Integer.parseInt(o_nbg2_textfield.getText());
+				if (o_nbp1_textfield.getAnchor() != 0)
+					nb_p1 = Integer.parseInt(o_nbp1_textfield.getText());
+				if (o_nbp2_textfield.getAnchor() != 0)
+					nb_p2 = Integer.parseInt(o_nbp2_textfield.getText());
+				if (o_nbg1_textfield.getAnchor() != 0)
+					nb_g1 = Integer.parseInt(o_nbg1_textfield.getText());
+				if (o_nbg2_textfield.getAnchor() != 0)
+					nb_g2 = Integer.parseInt(o_nbg2_textfield.getText());
 			}
 		};
 
@@ -853,47 +884,60 @@ public class Grande extends Application {
 			// ---------------- INITIALISATION DU TABLEAU ----------------
 			for (int i = 1; i < M + 1; i++) {
 				for (int j = 1; j < N + 1; j++) {
-					tab[i][j] = new Cellule(0, 0);sum++;
-					if (i == 1 | i == M | j == 1 | j == N){
-						tab[i][j].setValeur(63);sum--;}
+					tab[i][j] = new Cellule(0, 0);
+					sum++;
+					if (i == 1 | i == M | j == 1 | j == N) {
+						tab[i][j].setValeur(63);
+						sum--;
+					}
 
-					if ((j == 5 | j == 6 | j == N - 5 | j == N - 4) & i >= 10 & i <= M - 9){
-						tab[i][j].setValeur(63);sum--;}
+					if ((j == 5 | j == 6 | j == N - 5 | j == N - 4) & i >= 10 & i <= M - 9) {
+						tab[i][j].setValeur(63);
+						sum--;
+					}
 				}
 			}
 			x = 8;
 			y = (N + 1) / 2;
 			x2 = M - 7;
 			y2 = (N + 1) / 2;
-			
+
 			mapj1 = new Rectangle();
-			mapj1.setWidth(coef*29);
-			mapj1.setHeight(coef*25);
+			mapj1.setWidth(coef * 29);
+			mapj1.setHeight(coef * 25);
 			mapj1.setStroke(couleur1);
 			mapj1.setFill(null);
 			root.getChildren().add(mapj1);
 			mapj2 = new Rectangle();
-			mapj2.setWidth(coef*29);
-			mapj2.setHeight(coef*25);
+			mapj2.setWidth(coef * 29);
+			mapj2.setHeight(coef * 25);
 			mapj2.setStroke(couleur2);
 			mapj2.setFill(null);
-			root.getChildren().add(mapj2);
-			
+			root.getChildren().add(mapj2);/*
+
 			// ---------------- AFFICHAGE DE LA GRILLE ----------------
-			for(i=Math.max(Math.min(y, N-12),13)-12;i<=Math.max(Math.min(y, N-12),13)+12;i++){
+			for (i = Math.max(Math.min(y, N - 12), 13) - 12; i <= Math.max(Math.min(y, N - 12), 13) + 12; i++) {
 				hbox1 = new HBox(0);
-				for(j=Math.max(Math.min(x, M-14),15)-14;j<=Math.max(Math.min(x, M-14),15)+14;j++){
+				for (j = Math.max(Math.min(x, M - 14), 15) - 14; j <= Math.max(Math.min(x, M - 14), 15) + 14; j++) {
 					rekt = new Rectangle();
 					rekt.setWidth(31);
 					rekt.setHeight(31);
 					rekt.setFill(Color.WHITE);
-					if (tab[j][i].valeur()==63){
+					if (tab[j][i].valeur() == 1) {
+						rekt.setFill(couleur1);
+						sum1++;
+					}
+					if (tab[j][i].valeur() == 2) {
+						rekt.setFill(couleur2);
+						sum2++;
+					}
+					if (tab[j][i].valeur() == 63) {
 						rekt.setFill(Color.DARKGRAY);
 						rekt.setStroke(Color.BLACK);
 						rekt.setWidth(30);
 						rekt.setHeight(30);
 					}
-					if ((i==y & j==x)|(i==y2) & (j==x2)){
+					if ((i == y & j == x) | (i == y2) & (j == x2)) {
 						image = new Image("file:images/balise.png");
 						balise = new ImageView(image);
 						balise.setFitWidth(31);
@@ -902,28 +946,32 @@ public class Grande extends Application {
 						pane.getChildren().add(rekt);
 						pane.getChildren().add(balise);
 						hbox1.getChildren().add(pane);
-					}else
-					hbox1.getChildren().add(rekt);
+					} else
+						hbox1.getChildren().add(rekt);
 				}
 				box1.getChildren().add(hbox1);
 			}
 			box1.relocate(40, 200);
 			root.getChildren().add(box1);
-			
-			for(i=Math.max(Math.min(y2, N-12),13)-12;i<=Math.max(Math.min(y2, N-12),13)+12;i++){
+
+			for (i = Math.max(Math.min(y2, N - 12), 13) - 12; i <= Math.max(Math.min(y2, N - 12), 13) + 12; i++) {
 				hbox2 = new HBox(0);
-				for(j=Math.max(Math.min(x2, M-14),15)-14;j<=Math.max(Math.min(x2, M-14),15)+14;j++){
+				for (j = Math.max(Math.min(x2, M - 14), 15) - 14; j <= Math.max(Math.min(x2, M - 14), 15) + 14; j++) {
 					rekt = new Rectangle();
 					rekt.setWidth(31);
 					rekt.setHeight(31);
 					rekt.setFill(Color.WHITE);
-					if (tab[j][i].valeur()==63){
+					if (tab[j][i].valeur() == 1)
+						rekt.setFill(couleur1);
+					if (tab[j][i].valeur() == 2)
+						rekt.setFill(couleur2);
+					if (tab[j][i].valeur() == 63) {
 						rekt.setFill(Color.DARKGRAY);
 						rekt.setStroke(Color.BLACK);
 						rekt.setWidth(30);
 						rekt.setHeight(30);
 					}
-					if ((i==y & j==x)|(i==y2) & (j==x2)){
+					if ((i == y & j == x) | (i == y2) & (j == x2)) {
 						image = new Image("file:images/balise.png");
 						balise = new ImageView(image);
 						balise.setFitWidth(31);
@@ -932,17 +980,14 @@ public class Grande extends Application {
 						pane.getChildren().add(rekt);
 						pane.getChildren().add(balise);
 						hbox2.getChildren().add(pane);
-					}else
-					hbox2.getChildren().add(rekt);
+					} else
+						hbox2.getChildren().add(rekt);
 				}
 				box2.getChildren().add(hbox2);
 			}
 			box2.relocate(981, 200);
 			root.getChildren().add(box2);
-			
-
-			
-
+*/
 			// EFFACE L'ECRAN
 			for (int i = 0; i < l_menu.size(); i++) {
 				if (l_menu.get(i).getClass().getName() == "javafx.scene.image.ImageView")
@@ -956,7 +1001,6 @@ public class Grande extends Application {
 					((Button) l_menu.get(i)).setDisable(true);
 				}
 			}
-
 			jeu.start();
 		});
 		jouer.setStyle(
