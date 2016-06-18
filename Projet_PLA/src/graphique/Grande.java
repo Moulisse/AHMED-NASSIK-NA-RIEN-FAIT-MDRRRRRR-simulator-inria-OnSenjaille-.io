@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
-import moteur.Cellule;
+import moteur.*;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -24,6 +24,8 @@ import javafx.animation.*;
 
 public class Grande extends Application {
 
+	Partie p;
+	
 	public int x, y; // coordonnées joueur 1
 	public int x2, y2; // coordonnées joueur 2
 	int sum1 = 0; // score joueur 1
@@ -51,11 +53,6 @@ public class Grande extends Application {
 	Text fin = new Text();
 	Text temps = new Text();
 
-	int T = 21; // taille d'une case
-	int M = 40; // nombre de colonnes
-	int N = 70; // nombre de lignes
-	Cellule tab[][] = new Cellule[M + 1][N + 1]; // tableau de cases
-
 	int i, j, k;
 	long duree = 60;
 	long t0 = duree;
@@ -63,10 +60,6 @@ public class Grande extends Application {
 	Image image;
 	public float buttX = 1070;
 	public float buttX2 = 830;
-
-	public static void main(String[] args) {
-		Application.launch(Grande.class, args);
-	}
 
 	LinkedList<Node> l_menu = new LinkedList<Node>();
 	LinkedList<Node> l_option = new LinkedList<Node>();
@@ -80,13 +73,43 @@ public class Grande extends Application {
 	Pane pane;
 	Rectangle mapj1;
 	Rectangle mapj2;
+	
+	
+	public void creePartie() {
+		
+		p = new Partie(70,70);
+		int[][] t = new int[1][2];
+		t[0][0]=1;
+		t[0][1]=1;
+		int[][] t2 = new int[1][2];
+		t2[0][0]=codes.caseBlancheEloigneeSud;
+		t2[0][1]=codes.avancer+2;
+		Automate aut = new Automate(t, p.placerActions(t2), p);
+		Guerrier gue = new Guerrier(0,aut,new Position(5,2));
+		p.ajouterPersonnage(gue);
+		Joueur rouge = new Joueur();
+		rouge.ajoutPersonnage(gue);
+		
 
+	}
+	
+	
 	@Override
 	public void start(Stage primaryStage) {
+		
+		creePartie();
+
+		int M = p.decor()[0].length; // nombre de colonnes
+		int N = p.decor().length; // nombre de lignes
+		
+		
+		
+		Cellule tab[][] = new Cellule[M + 1][N + 1]; // tableau de cases
+		
 		primaryStage.setTitle("Splatane, un jeu qu'il est bien pour jouer");
 		primaryStage.setResizable(false);
 		;
-		// ----------------- CREATION DE LA FENETRE -----------------
+		// -----------------  CREATION DE LA FENETRE  -----------------
 		Group root = new Group();
 		Scene scene = new Scene(root, 1920, 1080, Color.LIGHTGRAY);
 
@@ -267,12 +290,12 @@ public class Grande extends Application {
 						rekt.setWidth(31);
 						rekt.setHeight(31);
 						rekt.setFill(Color.WHITE);
-						if (tab[j][i].valeur() == 1)
+						if (tab[j][i].valeur() == codes.bleu)
 							rekt.setFill(couleur1);
-						if (tab[j][i].valeur() == 2)
+						if (tab[j][i].valeur() == codes.rouge)
 							rekt.setFill(couleur2);
 
-						if (tab[j][i].valeur() == 63) {
+						if (tab[j][i].valeur() == codes.mur) {
 							rekt.setFill(Color.DARKGRAY);
 							rekt.setStroke(Color.BLACK);
 							rekt.setWidth(30);
@@ -890,7 +913,7 @@ public class Grande extends Application {
 			mapj2.setHeight(coef * 25);
 			mapj2.setStroke(couleur2);
 			mapj2.setFill(null);
-			root.getChildren().add(mapj2);
+			root.getChildren().add(mapj2);/*
 
 			// ---------------- AFFICHAGE DE LA GRILLE ----------------
 			for (i = Math.max(Math.min(y, N - 12), 13) - 12; i <= Math.max(Math.min(y, N - 12), 13) + 12; i++) {
@@ -964,7 +987,7 @@ public class Grande extends Application {
 			}
 			box2.relocate(981, 200);
 			root.getChildren().add(box2);
-
+*/
 			// EFFACE L'ECRAN
 			for (int i = 0; i < l_menu.size(); i++) {
 				if (l_menu.get(i).getClass().getName() == "javafx.scene.image.ImageView")
@@ -978,7 +1001,6 @@ public class Grande extends Application {
 					((Button) l_menu.get(i)).setDisable(true);
 				}
 			}
-
 			jeu.start();
 		});
 		jouer.setStyle(
