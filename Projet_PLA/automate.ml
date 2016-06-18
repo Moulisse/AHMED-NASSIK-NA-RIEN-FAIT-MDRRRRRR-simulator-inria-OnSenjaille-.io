@@ -257,7 +257,7 @@ let peintre_simple =
     (0,CaseRouge(O),Peindre_B(O),0);
     (0,CaseBleu(O),Avancer(O),0);
     (0,Mur(O),Avancer(S),0)]
-  ,Peindre);;
+  ,Peintre);;
   
 let tour_de_map =
   ([(0,CaseBlanche(S),Avancer(S),0);
@@ -292,7 +292,7 @@ let aut2 =
     (1,Peinte,Avancer,0)],
    Peintre);;
  *)
-let test=[tour_de_map];;
+let test=[tour_de_map,peintre_simple];;
 
 (* TEST *)
 
