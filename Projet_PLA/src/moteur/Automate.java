@@ -36,10 +36,10 @@ public class Automate {
 			//i<position.getY()+ hauteur de l'automate d'action (nombre de conditions). 
 			for(i=position.getY();i<position.getY()+this.transitions.length;i++){
 			//System.out.println("position.getY()+i "+(position.getY()+i)+"position.getX()+etat+1 "+(position.getX()+etat+1));
-				System.out.println("[position.getY()+i] "+(position.getY()+i)+"[position.getX()] "+ (position.getX()));
+				//System.out.println("[position.getY()+i] "+(position.getY()+i)+"[position.getX()] "+ (position.getX()));
 				if (symboles.contains(partie.decor()[i][position.getX()].valeur()))
 				
-				actionsPossibles.add(partie.decor()[i][position.getX()+etat].valeur());
+				actionsPossibles.add(partie.decor()[i][position.getX()+etat+1].valeur());
 			}
 			if (actionsPossibles.isEmpty())
 				return 0;
