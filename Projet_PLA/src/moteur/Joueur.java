@@ -21,6 +21,9 @@ public class Joueur {
 	{
 		this.personnages=p;
 		balise = new Balise();
+		for(Personnage pers : this.personnages){
+			pers.setEquipe(this);
+		}
 	}
 	
 	public void ajoutPersonnage(Personnage perso)
