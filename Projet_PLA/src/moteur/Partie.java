@@ -277,7 +277,7 @@ public class Partie {
 		for(int i=0;i<this.decor().length;i++){
 			for(int j=0;j<this.decor()[i].length;j++){
 				rand=((int)(Math.random()*100));
-				if((rand<=10)&&(!(((this.blocke(j,i)==true) || (this.occupe(i,j)!=null) )))){this.decor[i][j].setValeur(codes.mur);
+				if((rand<=5)&&(!(((this.blocke(j,i)==true) || (this.occupe(i,j)!=null) )))){this.decor[i][j].setValeur(codes.mur);
 				}
 			}
 		}
