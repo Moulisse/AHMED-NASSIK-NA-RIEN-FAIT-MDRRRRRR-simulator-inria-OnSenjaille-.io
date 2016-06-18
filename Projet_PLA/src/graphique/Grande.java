@@ -42,10 +42,10 @@ public class Grande extends Application {
 	public int nb_g2 = 3;
 
 	
-	int M = Main.Main.p.decor()[0].length; // nombre de colonnes
-	int N = Main.Main.p.decor().length; // nombre de lignes
+	int M; // nombre de colonnes
+	int N; // nombre de lignes
 	
-	Cellule tab[][] = Main.Main.p.decor();// Cellule[M + 1][N + 1]; // tableau de cases
+	Cellule tab[][];// Cellule[M + 1][N + 1]; // tableau de cases
 	
 	int avance1[] = { 0, 0 }; // joueur 1 n'avance pas
 	int avance2[] = { 0, 0 }; // joueur 2 n'avance pas
@@ -85,7 +85,13 @@ public class Grande extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		
-		System.out.print(tab.length+" "+tab[0].length);
+		tab= Main.Main.p.decor();// Cellule[M + 1][N + 1]; // tableau de cases
+		
+		//System.out.print(tab.length+" "+tab[0].length);
+		
+		N = Main.Main.p.decor().length; // nombre de lignes
+		M = Main.Main.p.decor()[25].length; // nombre de colonnes
+		
 		
 		primaryStage.setTitle("Splatane, un jeu qu'il est bien pour jouer");
 		primaryStage.setResizable(false);
@@ -239,6 +245,11 @@ public class Grande extends Application {
 				if (timertour > 0)
 					timertour--;
 				
+				
+				System.out.println(tab.length+"   "+i+","+j);
+				
+				
+				
 				// JOUEUR 1
 				if (avance1[0] != 0 & timer1 == 0) {
 					if (avance1[0] == 1 & tab[x - 2][y-1].valeur() != codes.mur)
@@ -292,7 +303,7 @@ public class Grande extends Application {
 							rekt.setHeight(30);
 						}
 						
-						pers = Main.Main.p.occupe(j,i);
+						pers = Main.Main.p.occupe(j-1,i-1);
 						if (pers!=null) {
 							image = new Image("file:images/balise.png");
 							guerrier = new ImageView(image);

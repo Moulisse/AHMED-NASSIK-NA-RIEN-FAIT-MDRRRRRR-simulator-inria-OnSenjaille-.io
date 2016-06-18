@@ -33,6 +33,17 @@ public class Partie {
 		this.personnages=new ArrayList<Personnage>();
 	}*/		
 	public Partie(int nbLigne,int nbColonne) {
+		
+		int xMin = 50;
+		int yMin = 50;
+		
+		if(xMin>nbColonne){
+			nbColonne=xMin;
+		}
+		if(yMin>nbLigne){
+			nbLigne=yMin;
+		}
+		
 		this.decor = new Cellule[nbLigne+4][nbColonne+4];
 		for(int i = 0; i < decor.length; i++){
 			for (int j = 0; j < decor[i].length; j++) {

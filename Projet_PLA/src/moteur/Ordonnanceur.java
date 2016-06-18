@@ -18,7 +18,7 @@ public class Ordonnanceur {
 		int act;
 		List<ActionFutur> actions = new ArrayList<ActionFutur>();
 		for(Personnage p : part.personnages()){
-			System.out.println("LE PERSONNAGE EST EN POS : X= "+p.position().getX()+" Y="+p.position().getY());
+			//System.out.println("LE PERSONNAGE EST EN POS : X= "+p.position().getX()+" Y="+p.position().getY());
 			conds = this.calculConditions(p);
 			act = p.automate().action(p.etat(), conds);
 			actions.add(new ActionFutur(p,act));
@@ -147,7 +147,7 @@ public class Ordonnanceur {
 			}
 			
 			//CaseBlanche(N)
-			System.out.println("acces decor["+(p.position().getX())+"]["+(p.position().getY()-1)+"]");
+			//System.out.println("acces decor["+(p.position().getX())+"]["+(p.position().getY()-1)+"]");
 			if(p.partie().decor()[p.position().getY()-1][p.position().getX()].couleur()==codes.blanc)
 			{
 				conditions.add(codes.caseBlancheNord);
