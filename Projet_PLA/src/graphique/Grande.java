@@ -30,6 +30,7 @@ public class Grande extends Application {
 	int sum = 0; // somme totale
 	int timer1 = 0;
 	int timer2 = 0;
+	int timertour = 0;
 
 	public String nom1 = "�quipe 1";
 	public String nom2 = "�quipe 2";
@@ -44,7 +45,7 @@ public class Grande extends Application {
 	int M = Main.Main.p.decor()[0].length; // nombre de colonnes
 	int N = Main.Main.p.decor().length; // nombre de lignes
 	
-	Cellule tab[][] = Main.Main.p.decor();//new Cellule[M + 1][N + 1]; // tableau de cases
+	Cellule tab[][] = Main.Main.p.decor();// Cellule[M + 1][N + 1]; // tableau de cases
 	
 	int avance1[] = { 0, 0 }; // joueur 1 n'avance pas
 	int avance2[] = { 0, 0 }; // joueur 2 n'avance pas
@@ -83,6 +84,8 @@ public class Grande extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
+		
+		System.out.print(tab.length+" "+tab[0].length);
 		
 		primaryStage.setTitle("Splatane, un jeu qu'il est bien pour jouer");
 		primaryStage.setResizable(false);
@@ -228,18 +231,23 @@ public class Grande extends Application {
 					temps.setText("");
 					return;
 				}
-
-				Main.Main.p.tour();
+				
+				if (timertour==0){
+					Main.Main.p.tour();
+					timertour=4;
+				}
+				if (timertour > 0)
+					timertour--;
 				
 				// JOUEUR 1
 				if (avance1[0] != 0 & timer1 == 0) {
-					if (avance1[0] == 1 & tab[x - 1][y].valeur() != codes.mur)
+					if (avance1[0] == 1 & tab[x - 2][y-1].valeur() != codes.mur)
 						x--;
-					if (avance1[0] == 2 & tab[x + 1][y].valeur() != codes.mur)
+					if (avance1[0] == 2 & tab[x][y-1].valeur() != codes.mur)
 						x++;
-					if (avance1[0] == 3 & tab[x][y - 1].valeur() != codes.mur)
+					if (avance1[0] == 3 & tab[x-1][y - 2].valeur() != codes.mur)
 						y--;
-					if (avance1[0] == 4 & tab[x][y + 1].valeur() != codes.mur)
+					if (avance1[0] == 4 & tab[x-1][y].valeur() != codes.mur)
 						y++;
 					timer1 = 4;
 				}
@@ -272,12 +280,12 @@ public class Grande extends Application {
 						rekt.setWidth(31);
 						rekt.setHeight(31);
 						rekt.setFill(Color.WHITE);
-						if (tab[j][i].valeur() == codes.bleu)
+						if (tab[j-1][i-1].valeur() == codes.bleu)
 							rekt.setFill(couleur1);
-						if (tab[j][i].valeur() == codes.rouge)
+						if (tab[j-1][i-1].valeur() == codes.rouge)
 							rekt.setFill(couleur2);
-
-						if (tab[j][i].valeur() == codes.mur) {
+						
+						if (tab[j-1][i-1].valeur() == codes.mur) {
 							rekt.setFill(Color.DARKGRAY);
 							rekt.setStroke(Color.BLACK);
 							rekt.setWidth(30);
@@ -305,8 +313,9 @@ public class Grande extends Application {
 					}
 					box1.getChildren().add(hbox1);
 				}
+
 				box1.relocate(40, 200);
-				root.getChildren().add(box1);
+				root.getChildren().add(box1);/*
 
 				root.getChildren().remove(box2);
 				box2 = new VBox();
@@ -343,7 +352,8 @@ public class Grande extends Application {
 					box2.getChildren().add(hbox2);
 				}
 				box2.relocate(981, 200);
-				root.getChildren().add(box2);
+				root.getChildren().add(box2);*/
+				
 				map.toFront();
 				map2.toFront();
 				mapj1.setX(960 + coef * (Math.max(Math.min(x, M - 14), 15) - (M + 1.5) / 2) - mapj1.getWidth() / 2);
@@ -872,23 +882,15 @@ public class Grande extends Application {
 			root.getChildren().add(map2);
 
 			// ---------------- INITIALISATION DU TABLEAU ----------------
-			/*
-			for (int i = 1; i < M + 1; i++) {
-				for (int j = 1; j < N + 1; j++) {
-					tab[i][j] = new Cellule(0, 0);
-					sum++;
-					if (i == 1 | i == M | j == 1 | j == N) {
-						tab[i][j].setValeur(63);
-						sum--;
-					}
-
-					if ((j == 5 | j == 6 | j == N - 5 | j == N - 4) & i >= 10 & i <= M - 9) {
-						tab[i][j].setValeur(63);
-						sum--;
+			
+			for (int i = 1; i < M; i++) {
+				for (int j = 1; j < N; j++) {
+					if(tab[j][i].valeur()!=codes.mur){
+						sum++;
 					}
 				}
 			}
-			*/
+			
 			x = 8;
 			y = (N + 1) / 2;
 			x2 = M - 7;

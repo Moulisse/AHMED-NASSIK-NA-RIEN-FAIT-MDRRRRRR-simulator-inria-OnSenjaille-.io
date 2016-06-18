@@ -107,8 +107,8 @@ public class Partie {
 	//Place l'automate d'action et renvoie ses coordonnées
 	public Position placerActions(int[][] a){
 		//TODO vérifier les positions disponibles
-		int posX=0;
-		int posY=0;
+		int posX=2;
+		int posY=2;
 		int i,j;
 		for(i=0;i<a.length;i++){
 			for(j=0;j<a[i].length;j++){
