@@ -33,7 +33,7 @@ public class Partie {
 		this.personnages=new ArrayList<Personnage>();
 	}*/		
 	public Partie(int nbLigne,int nbColonne) {
-		this.decor = new Cellule[nbLigne+2][nbColonne+2];
+		this.decor = new Cellule[nbLigne+4][nbColonne+4];
 		for(int i = 0; i < decor.length; i++){
 			for (int j = 0; j < decor[i].length; j++) {
 				decor[i][j]=new Cellule();
@@ -45,12 +45,17 @@ public class Partie {
 
 		for(int j=0;j < decor[0].length; j++) {
 			decor[0][j].setValeur(codes.mur);;
+			decor[1][j].setValeur(codes.mur);;
+			
 			decor[decor.length-1][j].setValeur(codes.mur);
+			decor[decor.length-2][j].setValeur(codes.mur);
 		}
 		
 		for(int j=1;j < decor.length-1; j++) {
 			decor[j][0].setValeur(codes.mur);
+			decor[j][1].setValeur(codes.mur);
 			decor[j][decor[0].length-1].setValeur(codes.mur);
+			decor[j][decor[0].length-2].setValeur(codes.mur);
 		}
 		
 		
@@ -142,7 +147,7 @@ public class Partie {
 				System.out.print((6*indicePlacement)+i+" ");
 				System.out.print((randomPlacement+j)+" ");
 				System.out.println("i="+i+" j="+j+" "+a[i][j]);
-				this.decor[(6*indicePlacement)+i+1][randomPlacement+j+1].setValeur(a[i][j]);
+				this.decor[(6*indicePlacement)+i+2][randomPlacement+j+2].setValeur(a[i][j]);
 			}
 		}
 		return new Position(6*indicePlacement,(randomPlacement));
@@ -162,10 +167,10 @@ public class Partie {
 				System.out.print((6*indicePlacement)+i+" ");
 				System.out.print((randomPlacement+j)+" ");
 				System.out.println("i="+i+" j="+j+" "+a[i][j]);
-				this.decor[randomPlacement+i+1][(6*indicePlacement)+j+1].setValeur(a[i][j]);
+				this.decor[randomPlacement+i+2][(6*indicePlacement)+j+2].setValeur(a[i][j]);
 			}
 		}
-		return new Position(6*indicePlacement+1,(randomPlacement)+1);
+		return new Position(6*indicePlacement+2,(randomPlacement)+2);
 	}
 	
 	
@@ -174,6 +179,8 @@ public class Partie {
 		return decor;
 	}
 	
+	
+	//X : colonne Y : ligne
 	public Personnage occupe(int x, int y){
 		for(Personnage p : personnages){
 			if (p.position().getX()==x&&p.position().getY()==y){
@@ -183,6 +190,8 @@ public class Partie {
 		return null;
 	}
 	
+	
+	//X : colonne Y : ligne
 	public boolean blocke(int x,int y){
 		return (this.decor[y][x].valeur()==codes.mur);
 	}
