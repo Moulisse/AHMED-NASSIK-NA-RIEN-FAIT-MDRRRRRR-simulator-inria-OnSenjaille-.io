@@ -34,13 +34,16 @@ public class Partie {
 	}*/		
 	public Partie(int nbLigne,int nbColonne) {
 		
-		int xMin = 10;
-		int yMin = 10;
+		int xMin = 25;//limite pour affichage
+		int yMin = 29;
 		
 		if(xMin>nbColonne){
 			nbColonne=xMin;
 		}
 
+		if(yMin>nbLigne){
+			nbLigne=yMin;
+		}
 		
 		this.decor = new Cellule[nbLigne+4][nbColonne+4];
 		for(int i = 0; i < decor.length; i++){

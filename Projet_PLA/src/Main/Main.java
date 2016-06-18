@@ -1,7 +1,7 @@
 package Main;
 
 import Parser.ParserXML;
-import graphique.Grande;
+//import graphique.Grande;
 //import javafx.application.Application;
 import moteur.*;
 
@@ -22,17 +22,18 @@ public class Main {
 		p.ajouterPersonnage(pei);
 		Joueur rouge = new Joueur();
 		rouge.ajoutPersonnage(pei);*/
-
+		
 		ParserXML parser=new ParserXML();
 		//verifier codes pour chaque type de personnage codes.attaquer à codes.attaquer + 3
 		
 		//Partie jeu;
-		p=parser.buildGame("test1.xml","test1.xml");
+		p=parser.buildGame("peintre.xml","peintre.xml");
 		//jeu.ajoutMurs(500);
 		
 		p.ajoutMursMap();
 		
 		p.affichageText();
+		
 		try {
 		    Thread.sleep(1000);                 //1000 milliseconds is one second.
 		} catch(InterruptedException ex) {

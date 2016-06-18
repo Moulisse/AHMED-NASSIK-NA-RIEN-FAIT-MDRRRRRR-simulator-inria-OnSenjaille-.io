@@ -23,6 +23,7 @@ public class ActionFutur implements Comparable<ActionFutur>{
 			codeAction = i-codes.peindreR;
 			setCible((codeAction)%5); //%5 dans le cas codeAction>=54
 		}else {
+			System.out.print(codeAction+"\n");
 			type = TypeAction.RATE; //bug code inconnue.
 		}
 	}
@@ -40,6 +41,9 @@ public class ActionFutur implements Comparable<ActionFutur>{
 		if (this.perso.equipe().balise().active()){
 			this.perso.suivreBalise();
 		}else{
+			
+			System.out.print(this.type.toString());
+			
 			switch (type){
 			case MOUVEMENT :
 				if (!this.perso.partie().blocke(this.cible().getX(), this.cible().getY())){

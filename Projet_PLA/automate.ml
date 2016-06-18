@@ -57,11 +57,11 @@ let (condition_to_int: condition -> int) =  function
 
 let (action_to_int: action -> int) = function
  | Na -> 0
- | Avancer (cellule) -> 43 + (cellule_to_int cellule)
- | Frapper (cellule) -> 47 + (cellule_to_int cellule)
- | Peindre_R (cellule) -> 51 + (cellule_to_int cellule)
- | Peindre_B (cellule) -> 56 + (cellule_to_int cellule)
- | Attendre -> 61
+ | Avancer (cellule) -> 44 + (cellule_to_int cellule)
+ | Frapper (cellule) -> 48 + (cellule_to_int cellule)
+ | Peindre_R (cellule) -> 52 + (cellule_to_int cellule)
+ | Peindre_B (cellule) -> 57 + (cellule_to_int cellule)
+ | Attendre -> 62
 ;;
   
 let (traduction_transition: transition -> int*int*int*int) = fun
@@ -243,20 +243,12 @@ let write_xml (fichier:out_channel) (list: (automate * personnage) list) (act:in
 let peintre_simple =
   ([(0,CaseBlanche(S),Peindre_B(S),0);
     (0,CaseRouge(S),Peindre_B(S),0);
-    (0,CaseBleu(S),Avancer(S),0);
-    (0,Mur(S),Avancer(E),0);
     (0,CaseBlanche(E),Peindre_B(E),0);
     (0,CaseRouge(E),Peindre_B(E),0);
-    (0,CaseBleu(E),Avancer(E),0);
-    (0,Mur(E),Avancer(N),0);
     (0,CaseBlanche(N),Peindre_B(N),0);
     (0,CaseRouge(N),Peindre_B(N),0);
-    (0,CaseBleu(N),Avancer(N),0);
-    (0,Mur(N),Avancer(O),0)
     (0,CaseBlanche(O),Peindre_B(O),0);
-    (0,CaseRouge(O),Peindre_B(O),0);
-    (0,CaseBleu(O),Avancer(O),0);
-    (0,Mur(O),Avancer(S),0)]
+    (0,CaseRouge(O),Peindre_B(O),0);]
   ,Peintre);;
   
 let tour_de_map =
@@ -292,7 +284,7 @@ let aut2 =
     (1,Peinte,Avancer,0)],
    Peintre);;
  *)
-let test=[tour_de_map,peintre_simple];;
+let test=[tour_de_map;peintre_simple];;
 
 (* TEST *)
 
