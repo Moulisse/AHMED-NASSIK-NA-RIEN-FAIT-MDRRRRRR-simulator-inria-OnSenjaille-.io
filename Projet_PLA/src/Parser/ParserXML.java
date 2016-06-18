@@ -244,7 +244,6 @@ public class ParserXML {
 		System.out.println("POSITION PERSONNAGE X: "+persoCourant.position().getX()+" Y : "+persoCourant.position().getY());
 
 		//persoCourant = new Guerrier(0, auto, new Position(1,2));
-		partie.ajouterPersonnage(persoCourant);
 		if(partie.occupe(persoCourant.position().getX()+1,persoCourant.position().getY())!=null){System.out.println("occupe");}
 		else{System.out.println("non occuoe");}
 		return persoCourant;
