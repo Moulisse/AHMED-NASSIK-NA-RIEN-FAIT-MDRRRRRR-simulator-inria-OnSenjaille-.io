@@ -38,8 +38,9 @@ public class Automate {
 			//System.out.println("position.getY()+i "+(position.getY()+i)+"position.getX()+etat+1 "+(position.getX()+etat+1));
 				//System.out.println("[position.getY()+i] "+(position.getY()+i)+"[position.getX()] "+ (position.getX()));
 				if (symboles.contains(partie.decor()[i][position.getX()].valeur()))
-				
-				actionsPossibles.add(partie.decor()[i][position.getX()+etat+1].valeur());
+					if (partie.decor()[i][position.getX()+etat+1].valeur()!=0){
+						actionsPossibles.add(partie.decor()[i][position.getX()+etat+1].valeur());
+					}
 			}
 			if (actionsPossibles.isEmpty())
 				return 0;
