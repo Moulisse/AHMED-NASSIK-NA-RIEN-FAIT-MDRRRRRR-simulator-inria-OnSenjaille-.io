@@ -223,6 +223,10 @@ public class Partie {
 				}else{
 					System.out.print(" "+this.decor[i][j].valeur()+" ");
 				}
+				if(this.decor()[i][j].couleur() != 0)
+				{
+					System.out.print("c");
+				}
 				System.out.print("|");
 			}
 			System.out.print("\n");
