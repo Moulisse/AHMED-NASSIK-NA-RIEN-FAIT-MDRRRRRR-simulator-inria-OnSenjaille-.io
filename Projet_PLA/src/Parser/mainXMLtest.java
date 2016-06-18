@@ -13,7 +13,6 @@ public class mainXMLtest {
 		Partie jeu=parser.buildGame("test1.xml","test1.xml");
 		//jeu.ajoutMurs(500);
 		
-		
 		jeu.ajoutMursMap();
 		
 		
@@ -22,8 +21,12 @@ public class mainXMLtest {
 		jeu.affichageText();
 		
 		jeu.tour();
-		//jeu.affichageText();
-	//	jeu.tour();
+		jeu.affichageText();
+		jeu.tour();
+		jeu.affichageText();
+		jeu.tour();
+		jeu.affichageText();
+		//jeu.tour();
 	//	jeu.affichageText();
 	}
 

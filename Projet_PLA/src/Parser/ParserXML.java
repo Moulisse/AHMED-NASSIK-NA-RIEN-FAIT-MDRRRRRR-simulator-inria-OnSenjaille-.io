@@ -171,6 +171,7 @@ public class ParserXML {
 			System.out.println("");
 		}
 		Position automatePosition = partie.placerActions(actions, indicePlacement,Integer.parseInt(action.getAttributeValue("nb_l")),tailleMap);
+		System.out.println("automate position : X = "+automatePosition.getX()+" Y = "+automatePosition.getY());
 		System.out.println("placement max : "+(tailleMap-Integer.parseInt(action.getAttributeValue("nb_c"))));
 		System.out.println("Positionnement en "+i);
 		Element transition = element.getChild("transition");
@@ -242,6 +243,8 @@ public class ParserXML {
 
 		//persoCourant = new Guerrier(0, auto, new Position(1,2));
 		partie.ajouterPersonnage(persoCourant);
+		if(partie.occupe(persoCourant.position().getX(),persoCourant.position().getY())!=null){System.out.println("occupe");}
+		else{System.out.println("non occuoe");}
 		return persoCourant;
 
 	}

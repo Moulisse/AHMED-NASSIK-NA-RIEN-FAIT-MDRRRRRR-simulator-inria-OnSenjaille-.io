@@ -89,6 +89,8 @@ public class Partie {
 	
 	public void ajouterPersonnage(Personnage p){
 		personnages.add(p);
+		System.out.println("POOOOOOOOOOOOOOS X"+p.position().getX()+"POOOOOOOOOOOOOOS Y"+p.position().getY());
+
 		p.setPartie(this);
 		
 	}
@@ -193,10 +195,11 @@ public class Partie {
 		}
 		System.out.print("-\n");
 		for(i=0;i<this.decor().length;i++){
+			System.out.print(i);
 			System.out.print("|");
 			for(j=0;j<this.decor()[i].length;j++){
 				if(this.occupe(j, i)!=null){
-					System.out.print(" * ");
+					System.out.print(i+" "+j+" *dddd ");
 				}else{
 					System.out.print(" "+this.decor[i][j].valeur()+" ");
 				}
@@ -222,10 +225,10 @@ public class Partie {
 		coordX=(int)(Math.random()*(this.decor[0].length));
 		coordY=(int)(Math.random()*(this.decor.length));
 				
-		pos.setY(coordX);		
-		pos.setX(coordY);
+		pos.setY(coordY);		
+		pos.setX(coordX);
 		}while((this.blocke(coordX,coordY)==true) || (this.occupe(coordX,coordY)!=null) );
-		
+		System.out.println("coordX "+coordX+" coordY "+coordY);
 		
 		return pos;
 		
@@ -250,7 +253,7 @@ public class Partie {
 		for(int i=0;i<this.decor().length;i++){
 			for(int j=0;j<this.decor()[i].length;j++){
 				rand=((int)(Math.random()*100));
-				if(rand<=10){this.decor[i][j].setValeur(codes.mur);
+				if((rand<=10)&&(!(((this.blocke(j,i)==true) || (this.occupe(i,j)!=null) )))){this.decor[i][j].setValeur(codes.mur);
 				}
 			}
 		}
