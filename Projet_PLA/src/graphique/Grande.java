@@ -44,7 +44,7 @@ public class Grande extends Application {
 	int M = Main.Main.p.decor()[0].length; // nombre de colonnes
 	int N = Main.Main.p.decor().length; // nombre de lignes
 	
-	Cellule tab[][] = new Cellule[M + 1][N + 1]; // tableau de cases
+	Cellule tab[][] = Main.Main.p.decor();//new Cellule[M + 1][N + 1]; // tableau de cases
 	
 	int avance1[] = { 0, 0 }; // joueur 1 n'avance pas
 	int avance2[] = { 0, 0 }; // joueur 2 n'avance pas
@@ -73,11 +73,13 @@ public class Grande extends Application {
 	HBox hbox2 = new HBox(0);
 	Rectangle rekt;
 	ImageView balise;
+	ImageView guerrier;
+	ImageView peintre;
 	Pane pane;
 	Rectangle mapj1;
 	Rectangle mapj2;
 	
-	
+	Personnage pers;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -218,7 +220,7 @@ public class Grande extends Application {
 						fin.setText(nom1 + " remporte la partie");
 					}
 					if (sum1 == sum2)
-						fin.setText("Egalit�");
+						fin.setText("Egalite");
 					fin.setX(960 - com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader()
 							.computeStringWidth(fin.getText(), fin.getFont()) / 2);
 					fin.setOpacity(1);
@@ -227,15 +229,17 @@ public class Grande extends Application {
 					return;
 				}
 
+				Main.Main.p.tour();
+				
 				// JOUEUR 1
 				if (avance1[0] != 0 & timer1 == 0) {
-					if (avance1[0] == 1 & tab[x - 1][y].valeur() != 63)
+					if (avance1[0] == 1 & tab[x - 1][y].valeur() != codes.mur)
 						x--;
-					if (avance1[0] == 2 & tab[x + 1][y].valeur() != 63)
+					if (avance1[0] == 2 & tab[x + 1][y].valeur() != codes.mur)
 						x++;
-					if (avance1[0] == 3 & tab[x][y - 1].valeur() != 63)
+					if (avance1[0] == 3 & tab[x][y - 1].valeur() != codes.mur)
 						y--;
-					if (avance1[0] == 4 & tab[x][y + 1].valeur() != 63)
+					if (avance1[0] == 4 & tab[x][y + 1].valeur() != codes.mur)
 						y++;
 					timer1 = 4;
 				}
@@ -244,13 +248,13 @@ public class Grande extends Application {
 
 				// JOUEUR 2
 				if (avance2[0] != 0 & timer2 == 0) {
-					if (avance2[0] == 1 & tab[x2 - 1][y2].valeur() != 63)
+					if (avance2[0] == 1 & tab[x2 - 1][y2].valeur() != codes.mur)
 						x2--;
-					if (avance2[0] == 2 & tab[x2 + 1][y2].valeur() != 63)
+					if (avance2[0] == 2 & tab[x2 + 1][y2].valeur() != codes.mur)
 						x2++;
-					if (avance2[0] == 3 & tab[x2][y2 - 1].valeur() != 63)
+					if (avance2[0] == 3 & tab[x2][y2 - 1].valeur() != codes.mur)
 						y2--;
-					if (avance2[0] == 4 & tab[x2][y2 + 1].valeur() != 63)
+					if (avance2[0] == 4 & tab[x2][y2 + 1].valeur() != codes.mur)
 						y2++;
 					timer2 = 4;
 				}
@@ -262,7 +266,9 @@ public class Grande extends Application {
 				for (i = Math.max(Math.min(y, N - 12), 13) - 12; i <= Math.max(Math.min(y, N - 12), 13) + 12; i++) {
 					hbox1 = new HBox(0);
 					for (j = Math.max(Math.min(x, M - 14), 15) - 14; j <= Math.max(Math.min(x, M - 14), 15) + 14; j++) {
+						pane = new Pane();
 						rekt = new Rectangle();
+						pane.getChildren().add(rekt);
 						rekt.setWidth(31);
 						rekt.setHeight(31);
 						rekt.setFill(Color.WHITE);
@@ -277,17 +283,25 @@ public class Grande extends Application {
 							rekt.setWidth(30);
 							rekt.setHeight(30);
 						}
+						
+						pers = Main.Main.p.occupe(j,i);
+						if (pers!=null) {
+							image = new Image("file:images/balise.png");
+							guerrier = new ImageView(image);
+							guerrier.setFitWidth(31);
+							guerrier.setFitHeight(31);
+							pane.getChildren().add(guerrier);
+						} 
+						
+						
 						if ((i == y & j == x) | (i == y2) & (j == x2)) {
 							image = new Image("file:images/balise.png");
 							balise = new ImageView(image);
 							balise.setFitWidth(31);
 							balise.setFitHeight(31);
-							pane = new Pane();
-							pane.getChildren().add(rekt);
 							pane.getChildren().add(balise);
-							hbox1.getChildren().add(pane);
-						} else
-							hbox1.getChildren().add(rekt);
+						} 
+						hbox1.getChildren().add(pane);
 					}
 					box1.getChildren().add(hbox1);
 				}
@@ -858,6 +872,7 @@ public class Grande extends Application {
 			root.getChildren().add(map2);
 
 			// ---------------- INITIALISATION DU TABLEAU ----------------
+			/*
 			for (int i = 1; i < M + 1; i++) {
 				for (int j = 1; j < N + 1; j++) {
 					tab[i][j] = new Cellule(0, 0);
@@ -873,6 +888,7 @@ public class Grande extends Application {
 					}
 				}
 			}
+			*/
 			x = 8;
 			y = (N + 1) / 2;
 			x2 = M - 7;
@@ -889,81 +905,9 @@ public class Grande extends Application {
 			mapj2.setHeight(coef * 25);
 			mapj2.setStroke(couleur2);
 			mapj2.setFill(null);
-			root.getChildren().add(mapj2);/*
+			root.getChildren().add(mapj2);
 
-			// ---------------- AFFICHAGE DE LA GRILLE ----------------
-			for (i = Math.max(Math.min(y, N - 12), 13) - 12; i <= Math.max(Math.min(y, N - 12), 13) + 12; i++) {
-				hbox1 = new HBox(0);
-				for (j = Math.max(Math.min(x, M - 14), 15) - 14; j <= Math.max(Math.min(x, M - 14), 15) + 14; j++) {
-					rekt = new Rectangle();
-					rekt.setWidth(31);
-					rekt.setHeight(31);
-					rekt.setFill(Color.WHITE);
-					if (tab[j][i].valeur() == 1) {
-						rekt.setFill(couleur1);
-						sum1++;
-					}
-					if (tab[j][i].valeur() == 2) {
-						rekt.setFill(couleur2);
-						sum2++;
-					}
-					if (tab[j][i].valeur() == 63) {
-						rekt.setFill(Color.DARKGRAY);
-						rekt.setStroke(Color.BLACK);
-						rekt.setWidth(30);
-						rekt.setHeight(30);
-					}
-					if ((i == y & j == x) | (i == y2) & (j == x2)) {
-						image = new Image("file:images/balise.png");
-						balise = new ImageView(image);
-						balise.setFitWidth(31);
-						balise.setFitHeight(31);
-						pane = new Pane();
-						pane.getChildren().add(rekt);
-						pane.getChildren().add(balise);
-						hbox1.getChildren().add(pane);
-					} else
-						hbox1.getChildren().add(rekt);
-				}
-				box1.getChildren().add(hbox1);
-			}
-			box1.relocate(40, 200);
-			root.getChildren().add(box1);
-
-			for (i = Math.max(Math.min(y2, N - 12), 13) - 12; i <= Math.max(Math.min(y2, N - 12), 13) + 12; i++) {
-				hbox2 = new HBox(0);
-				for (j = Math.max(Math.min(x2, M - 14), 15) - 14; j <= Math.max(Math.min(x2, M - 14), 15) + 14; j++) {
-					rekt = new Rectangle();
-					rekt.setWidth(31);
-					rekt.setHeight(31);
-					rekt.setFill(Color.WHITE);
-					if (tab[j][i].valeur() == 1)
-						rekt.setFill(couleur1);
-					if (tab[j][i].valeur() == 2)
-						rekt.setFill(couleur2);
-					if (tab[j][i].valeur() == 63) {
-						rekt.setFill(Color.DARKGRAY);
-						rekt.setStroke(Color.BLACK);
-						rekt.setWidth(30);
-						rekt.setHeight(30);
-					}
-					if ((i == y & j == x) | (i == y2) & (j == x2)) {
-						image = new Image("file:images/balise.png");
-						balise = new ImageView(image);
-						balise.setFitWidth(31);
-						balise.setFitHeight(31);
-						pane = new Pane();
-						pane.getChildren().add(rekt);
-						pane.getChildren().add(balise);
-						hbox2.getChildren().add(pane);
-					} else
-						hbox2.getChildren().add(rekt);
-				}
-				box2.getChildren().add(hbox2);
-			}
-			box2.relocate(981, 200);
-			root.getChildren().add(box2);
-*/
+			
 			// EFFACE L'ECRAN
 			for (int i = 0; i < l_menu.size(); i++) {
 				if (l_menu.get(i).getClass().getName() == "javafx.scene.image.ImageView")
