@@ -10,7 +10,6 @@ public class Partie {
 	private Cellule decor[][];
 	private Ordonnanceur ordonnanceur;
 	private List<Personnage> personnages;//penser a distinguer la team des personnages
-	
 	public Partie() {
 		this.decor = new Cellule[10][10];
 		for(int i = 0; i < decor.length; i++){

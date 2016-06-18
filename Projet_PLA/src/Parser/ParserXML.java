@@ -246,6 +246,7 @@ public class ParserXML {
 		//persoCourant = new Guerrier(0, auto, new Position(1,2));
 		if(partie.occupe(persoCourant.position().getX()+1,persoCourant.position().getY())!=null){System.out.println("occupe");}
 		else{System.out.println("non occuoe");}
+		if(persoCourant==null){System.out.println("YOOKROZEKROEZKROZKEROZKEROZKR");}
 		return persoCourant;
 
 	}
@@ -286,8 +287,8 @@ public class ParserXML {
 			automate_courant = (Element) it_automates.next();
 			System.out.println("Type du personnage : " + automate_courant.getAttributeValue("personnage"));
 			personnageListe.add(createPersonnage(automate_courant, partie, posInitiale + i,tailleMap));
-
-			System.out.println("ooooo");
+			
+			System.out.println(i+ " ooooo");
 			i++;
 
 		}
@@ -336,6 +337,7 @@ public class ParserXML {
 		// initialisation JOUEUR 1
 
 		partieInitiale.ajouterListe(joueur1.getPersonnages());
+		System.out.println("Il ya : "+ joueur1.getPersonnages().size()+" pour le joueur 1");
 		partieInitiale.ajouterListe(joueur2.getPersonnages());
 
 		return partieInitiale;
