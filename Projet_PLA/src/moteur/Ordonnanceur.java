@@ -157,13 +157,13 @@ public class Ordonnanceur {
 			{
 				conditions.add(codes.caseBleuNord);
 			}
-			else if(p.partie().decor()[p.position().getX()][p.position().getY()-1].couleur()==codes.rouge)
+			else if(p.partie().decor()[p.position().getY()-1][p.position().getX()].couleur()==codes.rouge)
 			//CaseRouge(N)
 			{
 				conditions.add(codes.caseRougeNord);
 			}
 			//Mur(N)
-			if(p.partie().decor()[p.position().getX()][p.position().getY()-1].valeur()==codes.mur)
+			if(p.partie().decor()[p.position().getY()-1][p.position().getX()].valeur()==codes.mur)
 			{
 				conditions.add(codes.murNord);
 			}
@@ -189,22 +189,22 @@ public class Ordonnanceur {
 				}
 			}
 			//CaseBlanche(E)
-			if(p.partie().decor()[p.position().getX()+1][p.position().getY()].couleur()==codes.blanc)
+			if(p.partie().decor()[p.position().getY()][p.position().getX()+1].couleur()==codes.blanc)
 			{
 				conditions.add(codes.caseBlancheEst);
 			}
-			else if(p.partie().decor()[p.position().getX()+1][p.position().getY()].couleur()==codes.bleu)
+			else if(p.partie().decor()[p.position().getY()][p.position().getX()+1].couleur()==codes.bleu)
 			//CaseBleu(E)	
 			{
 				conditions.add(codes.caseBleuEst);
 			}
-			else if (p.partie().decor()[p.position().getX()+1][p.position().getY()].couleur()==codes.rouge)
+			else if (p.partie().decor()[p.position().getY()][p.position().getX()+1].couleur()==codes.rouge)
 			//CaseRouge(E)
 			{
 				conditions.add(codes.caseRougeEst);
 			}
 			//Mur(E)
-			if(p.partie().decor()[p.position().getX()+1][p.position().getY()].valeur()==codes.mur)
+			if(p.partie().decor()[p.position().getY()][p.position().getX()+1].valeur()==codes.mur)
 			{
 				conditions.add(codes.murEst);
 			}
@@ -271,22 +271,22 @@ public class Ordonnanceur {
 				}
 			}
 			//CaseBlanche(O)
-			if(p.partie().decor()[p.position().getX()-1][p.position().getY()].couleur()==codes.blanc)
+			if(p.partie().decor()[p.position().getY()][p.position().getX()-1].couleur()==codes.blanc)
 			{
 				conditions.add(codes.caseBlancheOuest);
 			}
-			else if(p.partie().decor()[p.position().getX()-1][p.position().getY()].couleur()==codes.bleu)
+			else if(p.partie().decor()[p.position().getY()][p.position().getX()-1].couleur()==codes.bleu)
 			//CaseBleu(O)
 			{
 				conditions.add(codes.caseBleuOuest);
 			}
-			else if(p.partie().decor()[p.position().getX()-1][p.position().getY()].couleur()==codes.rouge)
+			else if(p.partie().decor()[p.position().getY()][p.position().getX()-1].couleur()==codes.rouge)
 			//CaseRouge(O)
 			{
 				conditions.add(codes.caseRougeOuest);
 			}
 			//Mur(O)
-			if(p.partie().decor()[p.position().getX()-1][p.position().getY()].valeur()==codes.mur)
+			if(p.partie().decor()[p.position().getY()][p.position().getX()-1].valeur()==codes.mur)
 			{
 				conditions.add(codes.murOuest);
 			}
@@ -297,11 +297,11 @@ public class Ordonnanceur {
 			}
 		}
 		//CaseBlanche(cellule actuelle)
-		if(p.partie().decor()[p.position().getX()][p.position().getY()].couleur()==0)
+		if(p.partie().decor()[p.position().getY()][p.position().getX()].couleur()==0)
 		{
 			conditions.add(codes.caseBlancheCentre);
 		}
-		else if(p.partie().decor()[p.position().getX()][p.position().getY()].couleur()==1)
+		else if(p.partie().decor()[p.position().getY()][p.position().getX()].couleur()==1)
 		//CaseBleu(Cellule actuelle)	
 		{
 			conditions.add(codes.caseBleuCentre);
@@ -316,19 +316,19 @@ public class Ordonnanceur {
 			if(ouest_accessible)
 			{
 				p_NO=p.partie().occupe(p.position().getX()-1,p.position().getY()-1);
-				c_NO=p.partie().decor()[p.position().getX()-1][p.position().getY()-1];
+				c_NO=p.partie().decor()[p.position().getY()-1][p.position().getX()-1];
 			}
 			
 			if(est_accessible)
 			{
 				p_NE=p.partie().occupe(p.position().getX()+1,p.position().getY()-1);
-				c_NE=p.partie().decor()[p.position().getX()+1][p.position().getY()-1];
+				c_NE=p.partie().decor()[p.position().getY()-1][p.position().getX()+1];
 			}
 			
 			if(nord2_accessible)
 			{
 				p_N=p.partie().occupe(p.position().getX(),p.position().getY()-2);
-				c_N =p.partie().decor()[p.position().getX()][p.position().getY()-2];
+				c_N =p.partie().decor()[p.position().getY()-2][p.position().getX()];
 			}
 		}
 		
@@ -337,31 +337,31 @@ public class Ordonnanceur {
 			if(est_accessible)
 			{
 				p_SE=p.partie().occupe(p.position().getX()+1,p.position().getY()+1);
-				c_SE=p.partie().decor()[p.position().getX()+1][p.position().getY()+1];
+				c_SE=p.partie().decor()[p.position().getY()+1][p.position().getX()+1];
 			}
 			
 			if(ouest_accessible)
 			{
 				p_SO=p.partie().occupe(p.position().getX()-1,p.position().getY()+1);
-				c_SO =p.partie().decor()[p.position().getX()-1][p.position().getY()+1];
+				c_SO =p.partie().decor()[p.position().getY()+1][p.position().getX()-1];
 			}
 			if(sud2_accessible)
 			{
 				p_S=p.partie().occupe(p.position().getX(),p.position().getY()-2);
-				c_S =p.partie().decor()[p.position().getX()][p.position().getY()+2];
+				c_S =p.partie().decor()[p.position().getY()+2][p.position().getX()];
 			}
 		}
 		
 		if(est2_accessible)
 		{
 			p_E=p.partie().occupe(p.position().getX()+2,p.position().getY());
-			c_E =p.partie().decor()[p.position().getX()+2][p.position().getY()];
+			c_E =p.partie().decor()[p.position().getY()][p.position().getX()+2];
 		}
 		
 		if(ouest2_accessible)
 		{
 			p_O=p.partie().occupe(p.position().getX()-2,p.position().getY());
-			c_O =p.partie().decor()[p.position().getX()-2][p.position().getY()];
+			c_O =p.partie().decor()[p.position().getY()][p.position().getX()-2];
 		}
 		
 		

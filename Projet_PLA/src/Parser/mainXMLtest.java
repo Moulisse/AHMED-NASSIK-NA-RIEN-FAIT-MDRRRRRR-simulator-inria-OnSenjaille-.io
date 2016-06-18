@@ -26,6 +26,13 @@ public class mainXMLtest {
 		jeu.affichageText();
 		jeu.tour();
 		jeu.affichageText();
+		jeu.tour();
+		jeu.affichageText();
+		jeu.tour();
+		jeu.affichageText();
+		jeu.tour();
+		jeu.affichageText();
+
 		//jeu.tour();
 	//	jeu.affichageText();
 	}
