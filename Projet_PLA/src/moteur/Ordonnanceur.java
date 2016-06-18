@@ -146,16 +146,16 @@ public class Ordonnanceur {
 			}
 			
 			//CaseBlanche(N)
-			if(p.partie().decor()[p.position().getX()][p.position().getY()-1].couleur()==0)
+			if(p.partie().decor()[p.position().getX()][p.position().getY()-1].couleur()==codes.blanc)
 			{
 				conditions.add(codes.caseBlancheNord);
 			}
-			else if(p.partie().decor()[p.position().getX()][p.position().getY()-1].couleur()==1)
+			else if(p.partie().decor()[p.position().getX()][p.position().getY()-1].couleur()==codes.bleu)
 			//CaseBleu(N)
 			{
 				conditions.add(codes.caseBleuNord);
 			}
-			else
+			else if(p.partie().decor()[p.position().getX()][p.position().getY()-1].couleur()==codes.rouge)
 			//CaseRouge(N)
 			{
 				conditions.add(codes.caseRougeNord);
@@ -187,16 +187,16 @@ public class Ordonnanceur {
 				}
 			}
 			//CaseBlanche(E)
-			if(p.partie().decor()[p.position().getX()+1][p.position().getY()].couleur()==0)
+			if(p.partie().decor()[p.position().getX()+1][p.position().getY()].couleur()==codes.blanc)
 			{
 				conditions.add(codes.caseBlancheEst);
 			}
-			else if(p.partie().decor()[p.position().getX()+1][p.position().getY()].couleur()==1)
+			else if(p.partie().decor()[p.position().getX()+1][p.position().getY()].couleur()==codes.bleu)
 			//CaseBleu(E)	
 			{
 				conditions.add(codes.caseBleuEst);
 			}
-			else
+			else if (p.partie().decor()[p.position().getX()+1][p.position().getY()].couleur()==codes.rouge)
 			//CaseRouge(E)
 			{
 				conditions.add(codes.caseRougeEst);
@@ -228,16 +228,16 @@ public class Ordonnanceur {
 				}
 			}
 			//CaseBlanche(S)
-			if(p.partie().decor()[p.position().getX()][p.position().getY()+1].couleur()==0)
+			if(p.partie().decor()[p.position().getX()][p.position().getY()+1].couleur()==codes.blanc)
 			{
 				conditions.add(codes.caseBlancheSud);
 			}
-			else if(p.partie().decor()[p.position().getX()][p.position().getY()+1].couleur()==1)
+			else if(p.partie().decor()[p.position().getX()][p.position().getY()+1].couleur()==codes.bleu)
 			//CaseBleu(S)
 			{
 				conditions.add(codes.caseBleuSud);
 			}
-			else
+			else if(p.partie().decor()[p.position().getX()][p.position().getY()+1].couleur()==codes.rouge)
 			//CaseRouge(S)
 			{
 				conditions.add(codes.caseRougeSud);
@@ -269,16 +269,16 @@ public class Ordonnanceur {
 				}
 			}
 			//CaseBlanche(O)
-			if(p.partie().decor()[p.position().getX()-1][p.position().getY()].couleur()==0)
+			if(p.partie().decor()[p.position().getX()-1][p.position().getY()].couleur()==codes.blanc)
 			{
 				conditions.add(codes.caseBlancheOuest);
 			}
-			else if(p.partie().decor()[p.position().getX()-1][p.position().getY()].couleur()==1)
+			else if(p.partie().decor()[p.position().getX()-1][p.position().getY()].couleur()==codes.bleu)
 			//CaseBleu(O)
 			{
 				conditions.add(codes.caseBleuOuest);
 			}
-			else
+			else if(p.partie().decor()[p.position().getX()-1][p.position().getY()].couleur()==codes.rouge)
 			//CaseRouge(O)
 			{
 				conditions.add(codes.caseRougeOuest);
@@ -458,7 +458,7 @@ public class Ordonnanceur {
 				BleueEl_N=true;
 				BleueEl_O=true;
 			}
-			else
+			else if (c_NO.couleur()==codes.rouge)
 			{
 				conditions.add(codes.caseRougeEloigneeNord);
 				conditions.add(codes.caseRougeEloigneeOuest);
@@ -470,21 +470,21 @@ public class Ordonnanceur {
 		if(c_SE!=null)
 		{
 			//ennemi au NW
-			if (c_NO.couleur()==codes.blanc)
+			if (c_SE.couleur()==codes.blanc)
 			{
 				conditions.add(codes.caseBlancheEloigneeSud);
 				conditions.add(codes.caseBlancheEloigneeEst);
 				BlancEl_S=true;
 				BlancEl_E=true;
 			}
-			else if(c_NO.couleur()==codes.bleu)
+			else if(c_SE.couleur()==codes.bleu)
 			{
 				conditions.add(codes.caseBleuEloigneeSud);
 				conditions.add(codes.caseBleuEloigneeEst);
 				BleueEl_S=true;
 				BleueEl_E=true;
 			}
-			else
+			else if (c_SE.couleur()==codes.rouge)
 			{
 				conditions.add(codes.caseRougeEloigneeSud);
 				conditions.add(codes.caseRougeEloigneeEst);
@@ -515,7 +515,7 @@ public class Ordonnanceur {
 					conditions.add(codes.caseBleuEloigneeEst);
 					BleueEl_E=true;}
 			}
-			else
+			else if (c_NE.couleur()==codes.rouge)
 			{
 				if (!RougeEl_N){
 					conditions.add(codes.caseRougeEloigneeNord);

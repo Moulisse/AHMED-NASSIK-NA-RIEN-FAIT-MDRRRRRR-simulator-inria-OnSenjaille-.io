@@ -299,6 +299,7 @@ public class ParserXML {
 
 		// taille map : chaque perso peut prendre la taille max
 		int longueurAutoMax=40;
+		
 		Partie partieInitiale = new Partie(longueurAutoMax,6 * nbTotalAutomates);// peut
 																		// etre
 																		// modif
@@ -315,6 +316,8 @@ public class ParserXML {
 																		// sur
 																		// la
 																		// hauteur
+
+		
 		Joueur joueur1 = createPlayer(partieInitiale, fichierJoueur1, 0,longueurAutoMax);
 		//les deux joueurs doivent avoir le meme nombre d'automate
 		Joueur joueur2 = createPlayer(partieInitiale, fichierJoueur2, nbAuto(fichierJoueur1),longueurAutoMax);

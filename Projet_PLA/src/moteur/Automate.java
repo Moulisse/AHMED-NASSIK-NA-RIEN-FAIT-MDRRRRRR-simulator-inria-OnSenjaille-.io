@@ -19,6 +19,7 @@ public class Automate {
 		partie=p;
 	}
 	
+	//PREMIERE COLONNE EST LES CONDITIONS
 	//prend en entée l'état actuel et le symbole et renvoie le nouvelle état;
 	public int transition(int etat,int symbole){
 		for(int i=0;i<transitions.length;i++){
@@ -45,5 +46,14 @@ public class Automate {
 				return actionsPossibles.get(roll);
 			}
 		}
+		
+		
+		
+		public int[][] getTransitions(){
+			return this.transitions;
+		}
+		
+		
+		
 	
 }

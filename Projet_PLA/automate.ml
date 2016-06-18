@@ -88,31 +88,57 @@ let rec add_int (i:int)(l:int list)=
 let rec compte_lc_aux (a:(int*int*int*int) list) ((conds,etats):int list*int list):(int*int)= match a with
   |(e1,cond,act,e2)::fin-> compte_lc_aux fin ((add_int cond conds),(let etats=add_int e1 etats in add_int e2 etats)) 
   |[]->(List.length conds,List.length etats);;
-
 let compte_lc (a:(int*int*int*int) list)= compte_lc_aux a ([],[]);;
   
 let associe (a:'a list) (p: personnage)=(a,p);;
-  
-let rec completer_aux (act:int) (l:(int*int*int*int) list) ((nb_c,nb_l):(int*int)) ((col,lig):(int*int))=
+
+let condition (a:(int*int*int*int) list)= match a with
+  |(e1,cond,act,e2)::fin->cond
+  |[]->0;;
+
+let rec ajoute_trie ((e1,cond,act,e2):(int*int*int*int)) (l:(int*int*int*int)list)=
   match l with
-  |(e1,cond,act1,e2)::fin->if col=(nb_c-1)&& lig<nb_l
-			   then
-			     if (e1=nb_c && (lig)=cond)
-			     then (e1,cond,act1,e2)::(completer_aux act fin (nb_c,nb_l) (0,lig+1))
-			     else (e1,cond,act1,e2)::(nb_c-1,cond,act,nb_c-1)::(completer_aux act fin (nb_c,nb_l) (0,lig+1))
-			   else if lig=nb_l
-			   then failwith "probleme dans le nb_l"
-			   else
-			     if (e1=nb_c && (lig)=cond)
-			     then (e1,cond,act1,e2)::(completer_aux act fin (nb_c,nb_l) (col+1,lig))
-			     else (e1,cond,act1,e2)::(col,lig,act,col)::(completer_aux act fin (nb_c,nb_l) (col+1,lig))
-  |[]->[];;
+  |[]->[(e1,cond,act,e2)]
+  |(e3,cond2,act2,e4)::fin->if e3<e1
+			    then (e3,cond2,act2,e4)::ajoute_trie (e1,cond,act,e2) fin
+			    else (e3,cond2,act2,e4)::(e1,cond,act,e2)::fin;;
+    
+let rec ajoute_transition (l:(int*int*int*int) list list) ((e1,cond,act,e2):(int*int*int*int))=
+  match l with
+  |[]->[[(e1,cond,act,e2)]]
+  |a::fin -> if condition a = cond
+	     then let ()= Printf.printf "ajoute trie (%d,%d,%d,%d)\n" e1 cond act e2  in ajoute_trie (e1,cond,act,e2) a :: fin
+	     else if condition a < cond
+	     then a::ajoute_transition fin (e1,cond,act,e2)
+	     else [(e1,cond,act,e2)]::l;;
+
+let rec regroupe_par_cond_aux (l:(int*int*int*int) list) (table:(int*int*int*int) list list)= match l with
+  |[]->table
+  |a::fin->let r=ajoute_transition table a in regroupe_par_cond_aux fin r;;
+
+let regroupe_par_cond (l:(int*int*int*int) list)=regroupe_par_cond_aux l [];;
+
+let rec parcourir_aux (act:int) (l:(int*int*int*int) list) (nb_etat:int) (etat_actuel:int) (cond:int):((int*int*int*int) list)=
+  match l with
+  |[]-> if etat_actuel=nb_etat
+	then []
+	else (etat_actuel,cond,act,etat_actuel)::(parcourir_aux act [] nb_etat (etat_actuel+1) cond)
+  |(e1,cond1,act1,e2)::fin->if etat_actuel=e1
+			   then (e1,cond1,act1,e2)::parcourir_aux act fin nb_etat (etat_actuel+1) cond
+			    else (etat_actuel,cond,act,etat_actuel)::(parcourir_aux act l nb_etat (etat_actuel+1) cond);;
+
+let rec parcourir (act:int) (l:(int*int*int*int)list list) (nb_etat:int)=
+  match l with
+  |a::fin->(parcourir_aux act a nb_etat 0 (condition a))::parcourir act fin nb_etat
+  |[]->[]
+    
+let completer (act:int) (l:(int*int*int*int) list) (nb_etats:int)=
+  let r=regroupe_par_cond l
+  in let y=parcourir act r nb_etats
+     in List.concat y;;
   
-let completer (act:int) ((l,p):(int*int*int*int) list*personnage) ((nb_c,nb_l):(int*int)):((int*int*int*int) list*personnage)=
-  (completer_aux act l (nb_c,nb_l) (0,0),p)
-;;
   
-(* TRI *)
+  (* TRI *)
 
 let rec decoupe ((e1,cond,act1,e2) : (int*int*int*int))(l:(int*int*int*int) list):((int*int*int*int) list*(int*int*int*int) list)=
   match l with
@@ -153,7 +179,8 @@ let rec write_act (f:out_channel) (a:(int*int*int*int) list) (l:int) (debut:bool
   |(e1,cond,act1,e2)::fin-> if debut
 			    then
 			      let ()=Printf.fprintf f "\t\t\t<l>\n"
-			      and ()= Printf.fprintf f "\t\t\t\t<c>%s</c>\n" (string_of_int act1)
+			      and ()=Printf.fprintf f "\t\t\t\t<c>%s</c>\n" (string_of_int cond)
+			      and ()=Printf.fprintf f "\t\t\t\t<c>%s</c>\n" (string_of_int act1)
 			      in write_act f fin cond false
 			    else if l=cond
 			    then
@@ -161,8 +188,9 @@ let rec write_act (f:out_channel) (a:(int*int*int*int) list) (l:int) (debut:bool
 			      in write_act f fin cond false
 			    else 
 			      let ()=Printf.fprintf f "\t\t\t</l>\n" 
-			      and ()=Printf.fprintf f "\t\t\t<l>\n" 
-			      and  ()= Printf.fprintf f "\t\t\t\t<c>%s</c>\n" (string_of_int act1)
+			      and ()=Printf.fprintf f "\t\t\t<l>\n"
+			      and ()=Printf.fprintf f "\t\t\t\t<c>%s</c>\n" (string_of_int cond)
+			      and ()= Printf.fprintf f "\t\t\t\t<c>%s</c>\n" (string_of_int act1)
 			      in write_act f fin cond false
   |[]-> let ()=Printf.fprintf f "\t\t\t</l>\n" 
 	in Printf.fprintf f "\t\t</action>\n" ;;
@@ -172,6 +200,7 @@ let rec write_tr (f:out_channel) (a:(int*int*int*int) list) (l:int) (debut:bool)
   |(e1,cond,act1,e2)::fin-> if debut
 			    then
 			      let ()=Printf.fprintf f "\t\t\t<l>\n"
+			      and ()=Printf.fprintf f "\t\t\t\t<c>%s</c>\n" (string_of_int cond)
 			      and ()= Printf.fprintf f "\t\t\t\t<c>%s</c>\n" (string_of_int e2)
 			      in write_tr f fin cond false
 			    else if l=cond
@@ -180,7 +209,8 @@ let rec write_tr (f:out_channel) (a:(int*int*int*int) list) (l:int) (debut:bool)
 			      in write_tr f fin cond false
 			    else 
 			      let ()=Printf.fprintf f "\t\t\t</l>\n" 
-			      and ()=Printf.fprintf f "\t\t\t<l>\n" 
+			      and ()=Printf.fprintf f "\t\t\t<l>\n"
+			      and ()=Printf.fprintf f "\t\t\t\t<c>%s</c>\n" (string_of_int cond)
 			      and ()= Printf.fprintf f "\t\t\t\t<c>%s</c>\n" (string_of_int e2)
 			      in write_tr f fin cond false
   |[]-> let ()=Printf.fprintf f "\t\t\t</l>\n" 
@@ -190,7 +220,7 @@ let rec write_aut (fichier:out_channel) (list: ((int * int * int * int) list * p
   match list with
   |(a,p)::fin->let ()=Printf.fprintf fichier "\t<au personnage=\"%s\">\n\n" (convert p)
 	       and (l,c)=compte_lc a
-	       in let (a,p)= completer act (a,p) (l,c)
+	       in let a= completer act a c
 		  in let()=write_act_entete fichier a (l,c)
 		     and ()=write_act fichier a 0 true
 		     and ()=write_tr_entete fichier a (l,c)
@@ -210,10 +240,30 @@ let write_xml (fichier:out_channel) (list: (automate * personnage) list) (act:in
 
 (* AUTOMATES *)
 
-(*  
-let aut1 =
-  ([(1, Ennemi,Frapper, 1)]
+  
+let tour_de_map =
+  ([(0,CaseBlanche(S),Avancer(S),0);
+    (0,CaseBleu(S),Avancer(S),0);
+    (0,CaseRouge(S),Avancer(S),0);
+    (0,Mur(S),Avancer(E), 1);
+    (1,CaseBlanche(E),Avancer(E),1);
+    (1,CaseBleu(E),Avancer(E),1);
+    (1,CaseRouge(E),Avancer(E),1);
+    (1,Mur(E),Avancer(N),2);
+    (2,CaseBlanche(N),Avancer(N),2);
+    (2,CaseBleu(N),Avancer(N),2);
+    (2,CaseRouge(N),Avancer(N),2);
+    (2,Mur(N),Avancer(O),3);
+    (3,CaseBlanche(O),Avancer(O),3);
+    (3,CaseBleu(O),Avancer(O),3);
+    (3,CaseRouge(O),Avancer(O),3);
+    (3,Mur(O),Avancer(S),0)]
   ,Guerrier);;
+(*
+let a = traduction_automate tour_de_map;;
+let (b1,b2) = tri_aut a;;
+
+let c = completer 0 b1 4;;*)
 
 
 (*
@@ -222,10 +272,11 @@ let aut2 =
     (1,Peinte,Avancer,0)],
    Peintre);;
  *)
-let test=[aut1];;
- *)  
+let test=[tour_de_map];;
+
 (* TEST *)
 
 let fichier = open_out "test1.xml";;
-let () = write_xml fichier test 1;;
+let () = write_xml fichier test 0;;
   close_out fichier;;
+ 

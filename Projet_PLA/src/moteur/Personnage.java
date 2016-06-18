@@ -1,5 +1,13 @@
 package moteur;
 
+import java.util.Iterator;
+import java.util.List;
+
+//import org.jdom2.Element;
+
+import moteur.Automate;
+import moteur.Personnage;
+
 public abstract class Personnage {
 	
 
@@ -16,6 +24,7 @@ public abstract class Personnage {
 		pos = p;
 	}
 	
+	//!
 	public void setEquipe(Joueur j){
 		this.equipe=j;
 	}
@@ -159,7 +168,42 @@ public abstract class Personnage {
 	}
 	}*/
 
+	//renvoie true s'il le personnage possède une action interdites
+	public boolean actionIntedite(List<Integer> actionsInterdites){
+		int code;
+		
+		int hauteurTransi=this.automate().getTransitions().length;
 
+		/*List<Integer> actionsPersonnage=null;
+
+		//on récupère la premiere colonne(conditions)
+		for(int i=0;i<hauteurTransi;i++)
+		{
+			actionsPersonnage.add(this.automate().getTransitions()[i][0]);
+		}*/
+		
+		
+		
+		Iterator<Integer> it=actionsInterdites.iterator();
+		while(it.hasNext())
+		{
+		code= (int)it.next();
+		
+		for(int i=0;i<hauteurTransi;i++)
+		{
+			if(this.automate().getTransitions()[i][0]==code){
+				System.out.println("AUTOMATE ERRONE ACTION DE VOTRE PERSONNAGE DE TYPE "+this.getClass()+" CONTIENT UNE ACTION NON AUTORISEE");
+				System.exit(0);
+				return true;
+				}
+		}
+		
+
+		
+		}	
+	return false;
 	
-
+	}
+	
+	
 }

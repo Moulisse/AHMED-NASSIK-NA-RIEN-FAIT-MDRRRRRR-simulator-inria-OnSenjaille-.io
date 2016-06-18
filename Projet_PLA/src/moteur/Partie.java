@@ -219,9 +219,9 @@ public class Partie {
 		coordX=(int)(Math.random()*(this.decor[0].length));
 		coordY=(int)(Math.random()*(this.decor.length));
 				
-		pos.setY(coordY);		
-		pos.setX(coordX);
-		}while((this.blocke(coordX,coordY)==true) && (this.occupe(coordX,coordY)==null) );
+		pos.setY(coordX);		
+		pos.setX(coordY);
+		}while((this.blocke(coordX,coordY)==true) || (this.occupe(coordX,coordY)!=null) );
 		
 		
 		return pos;
@@ -229,10 +229,39 @@ public class Partie {
 	}
 	
 	public void ajoutMurRandom(){
-		Position posRand=placementAleatoire();
+		Position posRand=this.placementAleatoire();
+		System.out.println("posRand : "+posRand.getX()+" " +posRand.getY() );
 		this.decor[posRand.getX()][posRand.getY()].setValeur(codes.mur);
 	}
 	
+	public void ajoutMurs(int nbMur){
+		for(int i=0;i<nbMur;i++)
+		{
+			this.ajoutMurRandom();
+		}
+	}
+	
+	//ajoute un mur avec une proba 0.1
+	public void ajoutMursMap(){
+		int rand;
+		for(int i=0;i<this.decor().length;i++){
+			for(int j=0;j<this.decor()[i].length;j++){
+				rand=((int)(Math.random()*100));
+				if(rand<=10){this.decor[i][j].setValeur(codes.mur);
+				}
+			}
+		}
+		
+		
+	}
+	
+	public int hauteur(){
+		return this.decor.length;
+	}
+	
+	public int longueur(){
+		return this.decor[0].length;
+	}
 	
 	
 }
