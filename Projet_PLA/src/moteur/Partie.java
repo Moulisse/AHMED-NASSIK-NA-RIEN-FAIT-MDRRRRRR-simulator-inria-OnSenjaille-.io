@@ -33,8 +33,11 @@ public class Partie {
 	}*/		
 	public Partie(int nbLigne,int nbColonne) {
 		
-		int xMin = 25;//limite pour affichage
+		/*int xMin = 25;//limite pour affichage
 		int yMin = 29;
+		*/
+		int xMin = 50;//limite pour affichage
+		int yMin = 50;
 		
 		if(xMin>nbColonne){
 			nbColonne=xMin;
