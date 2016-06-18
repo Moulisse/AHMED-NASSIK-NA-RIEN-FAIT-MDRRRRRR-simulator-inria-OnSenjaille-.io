@@ -244,9 +244,10 @@ public class ParserXML {
 		System.out.println("POSITION PERSONNAGE X: "+persoCourant.position().getX()+" Y : "+persoCourant.position().getY());
 
 		//persoCourant = new Guerrier(0, auto, new Position(1,2));
-		partie.ajouterPersonnage(persoCourant);
 		if(partie.occupe(persoCourant.position().getX()+1,persoCourant.position().getY())!=null){System.out.println("occupe");}
 		else{System.out.println("non occuoe");}
+		if(persoCourant==null){System.out.println("YOOKROZEKROEZKROZKEROZKEROZKR");}
+		persoCourant.setPartie(partie);
 		return persoCourant;
 
 	}
@@ -287,8 +288,8 @@ public class ParserXML {
 			automate_courant = (Element) it_automates.next();
 			System.out.println("Type du personnage : " + automate_courant.getAttributeValue("personnage"));
 			personnageListe.add(createPersonnage(automate_courant, partie, posInitiale + i,tailleMap));
-
-			System.out.println("ooooo");
+			
+			System.out.println(i+ " ooooo");
 			i++;
 
 		}
@@ -329,7 +330,7 @@ public class ParserXML {
 																		// la
 																		// hauteur
 
-		
+	//	System.out.println("taille map : "+partieInitiale.decor().length);
 		Joueur joueur1 = createPlayer(partieInitiale, fichierJoueur1, 0,longueurAutoMax);
 		//les deux joueurs doivent avoir le meme nombre d'automate
 		Joueur joueur2 = createPlayer(partieInitiale, fichierJoueur2, nbAuto(fichierJoueur1),longueurAutoMax);
@@ -337,7 +338,9 @@ public class ParserXML {
 		// initialisation JOUEUR 1
 
 		partieInitiale.ajouterListe(joueur1.getPersonnages());
+		System.out.println("Il ya : "+ joueur1.getPersonnages().size()+" pour le joueur 1");
 		partieInitiale.ajouterListe(joueur2.getPersonnages());
+		System.out.println("Il ya : "+ joueur2.getPersonnages().size()+" pour le joueur 2");
 
 		return partieInitiale;
 	}

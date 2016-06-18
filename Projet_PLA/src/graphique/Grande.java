@@ -79,7 +79,7 @@ public class Grande extends Application {
 	Pane pane;
 	Rectangle mapj1;
 	Rectangle mapj2;
-	
+	Circle cercle;
 	Personnage pers;
 	
 	@Override
@@ -305,7 +305,14 @@ public class Grande extends Application {
 						
 						pers = Main.Main.p.occupe(i-1,j-1);
 						if (pers!=null) {
-							System.out.println(pers.equipe());
+							cercle = new Circle();
+							cercle.setRadius(14);
+							cercle.setCenterX(15);
+							cercle.setCenterY(15);
+							cercle.setStroke(Color.BLACK);
+							cercle.setFill(couleur1);
+							//if(pers.equipe().getLEquipeSTP()==2) cercle.setFill(couleur2);
+							pane.getChildren().add(cercle);
 							if(pers.getClass().equals(Guerrier.class)){
 								image = new Image("file:images/epee.png");
 								guerrier = new ImageView(image);

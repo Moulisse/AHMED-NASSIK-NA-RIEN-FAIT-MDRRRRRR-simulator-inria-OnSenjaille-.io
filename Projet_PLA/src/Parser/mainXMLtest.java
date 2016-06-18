@@ -10,7 +10,7 @@ public class mainXMLtest {
 		//verifier codes pour chaque type de personnage codes.attaquer à codes.attaquer + 3
 		
 		//Partie jeu;
-		Partie jeu=parser.buildGame("test1.xml","test1.xml");
+		Partie jeu=parser.buildGame("test3.xml","test3.xml");
 		//jeu.ajoutMurs(500);
 		
 		jeu.ajoutMursMap();
@@ -22,7 +22,7 @@ public class mainXMLtest {
 		
 		jeu.tour();
 		jeu.affichageText();
-		jeu.tour();
+	/*	jeu.tour();
 		jeu.affichageText();
 		jeu.tour();
 		jeu.affichageText();
@@ -32,7 +32,7 @@ public class mainXMLtest {
 		jeu.affichageText();
 		jeu.tour();
 		jeu.affichageText();
-
+*/
 		//jeu.tour();
 	//	jeu.affichageText();
 	}
