@@ -25,16 +25,16 @@ import javafx.animation.*;
 
 public class Grande extends Application {
 
-	public int x, y; // coordonnées joueur 1
-	public int x2, y2; // coordonnées joueur 2
+	public int x, y; // coordonnï¿½es joueur 1
+	public int x2, y2; // coordonnï¿½es joueur 2
 	int sum1 = 0; // score joueur 1
 	int sum2 = 0; // score joueur 2
 	int sum = 0; // somme totale
 	int timer1 = 0;
 	int timer2 = 0;
 
-	public String nom1 = "équipe 1";
-	public String nom2 = "équipe 2";
+	public String nom1 = "ï¿½quipe 1";
+	public String nom2 = "ï¿½quipe 2";
 	public Color couleur1 = Color.web("#7CFC00");
 	public Color couleur2 = Color.web("#1E90FF");
 	public int nb_p1 = 2;
@@ -227,7 +227,7 @@ public class Grande extends Application {
 							fin.setText(nom1 + " remporte la partie");
 					}
 					if (sum1 == sum2)
-						fin.setText("Egalité");
+						fin.setText("Egalitï¿½");
 					fin.setX(960 - com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader()
 							.computeStringWidth(fin.getText(), fin.getFont()) / 2);
 					fin.setOpacity(1);
