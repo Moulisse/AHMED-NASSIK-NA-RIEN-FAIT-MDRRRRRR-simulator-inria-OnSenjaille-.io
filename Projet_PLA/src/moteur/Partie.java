@@ -222,9 +222,9 @@ public class Partie {
 			System.out.print("|");
 			for(j=0;j<this.decor()[i].length;j++){
 				if(this.occupe(j, i)!=null){
-					if((this.occupe(j, i).equals(Guerrier.class))){
+					if((this.occupe(j, i).getClass().equals(Guerrier.class))){
 						System.out.print("G");
-					}else if((this.occupe(j, i).equals(Peintre.class))){
+					}else if((this.occupe(j, i).getClass().equals(Peintre.class))){
 						System.out.print("P");
 					}
 				}else{
@@ -233,7 +233,7 @@ public class Partie {
 				if(this.decor[i][j].valeur()!=0){
 					System.out.print("V");
 				}else{
-					System.out.print("0");
+					System.out.print(".");
 				}
 				coul=this.decor()[i][j].couleur();
 				switch(coul){

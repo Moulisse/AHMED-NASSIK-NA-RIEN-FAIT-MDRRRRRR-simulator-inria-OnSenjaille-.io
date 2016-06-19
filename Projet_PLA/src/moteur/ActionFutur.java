@@ -10,22 +10,31 @@ public class ActionFutur implements Comparable<ActionFutur>{
 	ActionFutur(Personnage p,int i){
 		perso = p;
 		cible = new Position(0,0);
+		
 		if(i>=codes.avancer&&i<=codes.avancer+3){
+
 			type = TypeAction.MOUVEMENT;
+			System.out.print(type.toString());
 			codeAction = i-codes.avancer;
 			setCible(codeAction); //Code de l'action - premier code = direction cf.codes.odt
-		}else if(codeAction>=codes.frapper&&codeAction<=codes.frapper+3){
+		}else if(i>=codes.frapper&&i<=codes.frapper+3){
+			
 			type = TypeAction.FRAPPE;
+			System.out.print(type.toString());
 			codeAction = i-codes.frapper;
 			setCible(codeAction); 
-		}else if(codeAction>=codes.peindreR&&codeAction<=codes.peindreB+4){
+		}else if(i>=codes.peindreR&&i<=codes.peindreB+4){
+
 			type = TypeAction.PEINT;
+			System.out.print(type.toString());
 			codeAction = i-codes.peindreR;
 			setCible((codeAction)%5); //%5 dans le cas codeAction>=54
 		}else {
-			System.out.print(codeAction+"\n");
 			type = TypeAction.RATE; //bug code inconnue.
+			System.out.print(type.toString());
 		}
+		System.out.println("\n");
+		
 	}
 	
 	public Position cible(){
@@ -51,18 +60,21 @@ public class ActionFutur implements Comparable<ActionFutur>{
 				}else{
 					this.perso.avancer(4);
 				}
+				break;
 			case RATE :
 				this.perso().rate();
+				break;
 			case FRAPPE :
-				if(this.getClass().isInstance(Guerrier.class)){
+				if(this.perso().getClass().equals(Guerrier.class)){
 					((Guerrier)this.perso).frapper(codeAction);
 				}
+				break;
 			case PEINT:
-				if(this.getClass().isInstance(Peintre.class)){
-					if(codeAction<5){
-						((Peintre)this.perso).peindre(codeAction, codes.bleu );
+				if(this.perso().getClass().equals(Peintre.class)){
+					if(codeAction>5){
+						((Peintre)this.perso).peindre(codeAction-5, codes.bleu );
 					}else{
-						((Peintre)this.perso).peindre(codeAction-5, codes.rouge );
+						((Peintre)this.perso).peindre(codeAction, codes.rouge );
 					}
 				}
 				break;

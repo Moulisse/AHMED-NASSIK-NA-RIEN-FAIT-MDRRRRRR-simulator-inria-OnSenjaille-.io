@@ -27,7 +27,9 @@ public class Main {
 		//verifier codes pour chaque type de personnage codes.attaquer à codes.attaquer + 3
 		
 		//Partie jeu;
+
 		p=parser.buildGame("peintre.xml","peintre.xml");
+
 		//jeu.ajoutMurs(500);
 		
 		p.ajoutMursMap();
