@@ -318,4 +318,32 @@ public class Partie {
 		}
 	}
 	
+	
+	public int nbCasesPeinte(int couleur)
+	{
+		int nbCase=0;
+		
+		for(int i=0;i<this.decor.length;i++)
+		{
+			
+			for(int j=0;j<this.decor[0].length;j++){
+				if(decor[i][j].valeur()==couleur){nbCase++;}
+		}
+			
+	}
+	
+		return nbCase;
+	}
+	
+	public int nbCasesPeinteR()
+	{
+		return nbCasesPeinte(2);
+	}
+	
+	public int nbCasesPeinteB()
+	{
+		return nbCasesPeinte(1);
+	}
+	
+	
 }
