@@ -20,6 +20,7 @@ public class Ordonnanceur {
 		for(Personnage p : part.personnages()){
 			//System.out.println("LE PERSONNAGE EST EN POS : X= "+p.position().getX()+" Y="+p.position().getY());
 			conds = this.calculConditions(p);
+			System.out.print(conds.toString());
 			act = p.automate().action(p.etat(), conds);
 			System.out.print(act+" : ");
 			actions.add(new ActionFutur(p,act));
