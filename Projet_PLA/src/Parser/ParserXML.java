@@ -134,7 +134,7 @@ public class ParserXML {
 
 	}
 
-	public Personnage createPersonnage(Element element, Partie partie, int indicePlacement, int tailleMap) {
+	public Personnage createPersonnage(Element element, Partie partie, int indicePlacement, int tailleMap,int numeroTest) {
 		int i = 0, j = 0;
 
 		System.out.println("1Type du personnage : " + element.getAttributeValue("personnage"));
@@ -225,10 +225,30 @@ public class ParserXML {
 			}
 		}*/
 		System.out.println("X: "+automatePosition.getX()+" Y : "+automatePosition.getY());
-		
-		
-		Position newPos;
-		newPos=partie.placementAleatoire();
+			Position newPos = new Position();
+		switch (numeroTest){
+		case 0 :	//Nord
+			
+			newPos=partie.placementAleatoire();
+			break;
+		case 1 : 	//Est
+			
+			if(partie.occupe(3,20)!=null)
+			{
+				newPos.setX(15);
+				newPos.setY(20);
+			}
+			else
+			{
+				newPos.setX(3);
+				newPos.setY(20);
+			}
+			
+			
+			break;
+		case 2 : 
+			break;
+		}
 		
 
 	//	persoCourant = new Guerrier(0, auto, automatePosition);
@@ -257,7 +277,7 @@ public class ParserXML {
 	}
 
 	
-	public Joueur createPlayer(Partie partie, String nomFichier, int posInitiale,int tailleMap) {
+	public Joueur createPlayer(Partie partie, String nomFichier, int posInitiale,int tailleMap,int numeroTest) {
 		// Joueur joueur=new Joueur();
 		// Personnage persoCourant=null;
 		
@@ -291,7 +311,9 @@ public class ParserXML {
 		{
 			automate_courant = (Element) it_automates.next();
 			System.out.println("Type du personnage : " + automate_courant.getAttributeValue("personnage"));
-			personnageListe.add(createPersonnage(automate_courant, partie, posInitiale + i,tailleMap));
+			
+			
+			personnageListe.add(createPersonnage(automate_courant, partie, posInitiale + i,tailleMap,numeroTest));
 			
 			System.out.println(i+ " ooooo");
 			i++;
@@ -302,10 +324,20 @@ public class ParserXML {
 
 	}
 		
-	//Spawn aleatoire
-	//1 spawn proche
+	//0:Partie buildGame(X.xml,Y.xml,0)
+	//1: spawn proche sur meme ligne
+	//Partie buildGame(guerrierLigneR.xml,guerrierLigneB.xml,1)
+	//2: un peintre qui repeint directement automate ennemi
+	//Partie buildGame(guerrierLigneR.xml,guerrierLigneB.xml,2)
+	//3: deux peintres qui essaye de peindre la meme case
+	//Partie buildGame(peintreCaseR.xml,peindreCaseB.xml,3)
+	//4: reagissent qu'à la balise
+	//Partie buildGame(teamBaliseR.xml,teamBaliseB.xml,4)
+	//5: game normale
+	//Partie buildGame(teamNormaleR.xml,teamNormaleB.xml,5)
 
-	public Partie buildGame(String fichierJoueur1, String fichierJoueur2) {
+
+	public Partie buildGame(String fichierJoueur1, String fichierJoueur2,int numeroTest) {
 		int nbTotalAutomates = nbAuto(fichierJoueur1) + nbAuto(fichierJoueur2);
 		if(nbAuto(fichierJoueur1)!=(nbAuto(fichierJoueur2))){System.err.println("LES DEUX JOUEURS N'ONT PAS LE MEME NOMBRE DE PERSONNAGE"); 
 		System.exit(0);
@@ -336,9 +368,9 @@ public class ParserXML {
 																		// hauteur
 
 	//	System.out.println("taille map : "+partieInitiale.decor().length);
-		Joueur joueur1 = createPlayer(partieInitiale, fichierJoueur1, 0,longueurAutoMax);
+		Joueur joueur1 = createPlayer(partieInitiale, fichierJoueur1, 0,longueurAutoMax,numeroTest);
 		//les deux joueurs doivent avoir le meme nombre d'automate
-		Joueur joueur2 = createPlayer(partieInitiale, fichierJoueur2, nbAuto(fichierJoueur1),longueurAutoMax);
+		Joueur joueur2 = createPlayer(partieInitiale, fichierJoueur2, nbAuto(fichierJoueur1),longueurAutoMax,numeroTest);
 
 		// initialisation JOUEUR 1
 
