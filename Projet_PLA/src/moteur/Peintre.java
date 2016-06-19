@@ -20,18 +20,18 @@ public class Peintre extends Personnage{
 		if (couleur==codes.rouge||couleur==codes.bleu){
 			switch (direction){
 			case 0 :	//Nord
-				this.partie.decor()[x][y-1].peindre(couleur);
+				this.partie.decor()[y-1][x].peindre(couleur);
 				break;
 			case 1 : 	//Est
-				this.partie.decor()[x+1][y].peindre(couleur);
+				this.partie.decor()[y][x+1].peindre(couleur);
 				break;
 			case 2 : 	//Sud
-				this.partie.decor()[x][y+1].peindre(couleur);
+				this.partie.decor()[y+1][x].peindre(couleur);
 				break;
 			case 3 : 	//Ouest
-				this.partie.decor()[x-1][y].peindre(couleur);
+				this.partie.decor()[y][x-1].peindre(couleur);
 				break;
-			default : this.partie.decor()[x][y].peindre(couleur); break;	//Sur Place
+			default : this.partie.decor()[y][x].peindre(couleur); break;	//Sur Place
 			}
 		}
 	}
