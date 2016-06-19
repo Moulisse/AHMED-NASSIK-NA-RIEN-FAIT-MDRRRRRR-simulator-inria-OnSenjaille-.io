@@ -302,7 +302,8 @@ public class ParserXML {
 
 	}
 		
-	
+	//Spawn aleatoire
+	//1 spawn proche
 
 	public Partie buildGame(String fichierJoueur1, String fichierJoueur2) {
 		int nbTotalAutomates = nbAuto(fichierJoueur1) + nbAuto(fichierJoueur2);
