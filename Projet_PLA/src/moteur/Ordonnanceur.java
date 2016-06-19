@@ -22,7 +22,6 @@ public class Ordonnanceur {
 			act = p.automate().action(p.etat(), conds);
 			actions.add(new ActionFutur(p, act));
 			System.out.print(act+" : ");
-			actions.add(new ActionFutur(p,act));
 		}
 		Collections.sort(actions);
 		double roll;

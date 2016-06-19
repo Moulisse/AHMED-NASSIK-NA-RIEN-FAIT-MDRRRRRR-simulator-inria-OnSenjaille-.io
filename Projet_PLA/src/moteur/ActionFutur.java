@@ -14,24 +14,20 @@ public class ActionFutur implements Comparable<ActionFutur>{
 		if(i>=codes.avancer&&i<=codes.avancer+3){
 
 			type = TypeAction.MOUVEMENT;
-			System.out.print(type.toString());
 			codeAction = i-codes.avancer;
 			setCible(codeAction); //Code de l'action - premier code = direction cf.codes.odt
 		}else if(i>=codes.frapper&&i<=codes.frapper+3){
 			
 			type = TypeAction.FRAPPE;
-			System.out.print(type.toString());
 			codeAction = i-codes.frapper;
 			setCible(codeAction); 
 		}else if(i>=codes.peindreR&&i<=codes.peindreB+4){
 
 			type = TypeAction.PEINT;
-			System.out.print(type.toString());
 			codeAction = i-codes.peindreR;
 			setCible((codeAction)%5); //%5 dans le cas codeAction>=54
 		}else {
 			type = TypeAction.RATE; //bug code inconnue.
-			System.out.print(type.toString());
 		}
 		System.out.println("\n");
 		
@@ -71,7 +67,7 @@ public class ActionFutur implements Comparable<ActionFutur>{
 				break;
 			case PEINT:
 				if(this.perso().getClass().equals(Peintre.class)){
-					if(codeAction>5){
+					if(codeAction>=5){
 						((Peintre)this.perso).peindre(codeAction-5, codes.bleu );
 					}else{
 						((Peintre)this.perso).peindre(codeAction, codes.rouge );
