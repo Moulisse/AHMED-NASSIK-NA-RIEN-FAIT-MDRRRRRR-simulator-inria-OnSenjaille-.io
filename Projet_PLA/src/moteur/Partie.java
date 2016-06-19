@@ -327,7 +327,7 @@ public class Partie {
 		{
 			
 			for(int j=0;j<this.decor[0].length;j++){
-				if(decor[i][j].valeur()==couleur){nbCase++;}
+				if(decor[i][j].couleur()==couleur){nbCase++;}
 		}
 			
 	}
