@@ -391,9 +391,7 @@ public class Ordonnanceur {
 				RougeEl_O=true;
 			}
 		}
-		
-		if(c_SE!=null)
-		{
+
 			//ennemi au NW
 			if (c_SE.couleur()==codes.blanc)
 			{
@@ -416,10 +414,9 @@ public class Ordonnanceur {
 				RougeEl_S=true;
 				RougeEl_E=true;
 			}
-		}
+		
 
-		if(c_NE!=null)
-		{
+
 			if (c_NE.couleur()==codes.blanc)
 			{
 				if (!BlancEl_N){
@@ -450,10 +447,8 @@ public class Ordonnanceur {
 					conditions.add(codes.caseRougeEloigneeEst);
 					RougeEl_E=true;}
 			}
-		}
 		
-		if(c_SO!=null)
-		{
+
 			if (c_SO.couleur()==codes.blanc)
 			{
 				if (!BlancEl_S){
@@ -484,10 +479,8 @@ public class Ordonnanceur {
 					conditions.add(codes.caseRougeEloigneeOuest);
 					RougeEl_O=true;}
 			}
-		}
 		
-		if(c_N!=null)
-		{
+
 			if(c_N.couleur()==codes.blanc && !BlancEl_N){
 				conditions.add(codes.caseBlancheEloigneeNord);}
 			else if (c_N.couleur()==codes.bleu && !BleueEl_N)
@@ -497,10 +490,7 @@ public class Ordonnanceur {
 			{
 				conditions.add(codes.caseRougeEloigneeNord);
 			}
-		}
-		
-		if(c_E!=null)
-		{
+
 			if(c_E.couleur()==codes.blanc && !BlancEl_E){
 				conditions.add(codes.caseBlancheEloigneeEst);}
 			else if (c_E.couleur()==codes.bleu && !BleueEl_E)
@@ -510,10 +500,8 @@ public class Ordonnanceur {
 			{
 				conditions.add(codes.caseRougeEloigneeEst);
 			}
-		}
 		
-		if(c_S!=null)
-		{
+	
 			if(c_S.couleur()==codes.blanc && !BlancEl_N){
 				conditions.add(codes.caseBlancheEloigneeSud);}
 			else if (c_S.couleur()==codes.bleu && !BleueEl_S)
@@ -523,10 +511,9 @@ public class Ordonnanceur {
 			{
 				conditions.add(codes.caseRougeEloigneeSud);
 			}
-		}
 		
-		if(c_O!=null)
-		{
+		
+
 			if(c_O.couleur()==codes.blanc && !BlancEl_O){
 				conditions.add(codes.caseBlancheEloigneeOuest);}
 			else if (c_O.couleur()==codes.bleu && !BleueEl_O)
@@ -536,7 +523,7 @@ public class Ordonnanceur {
 			{
 				conditions.add(codes.caseRougeEloigneeOuest);
 			}
-		}
+		
 		
 			return conditions;
 		}
