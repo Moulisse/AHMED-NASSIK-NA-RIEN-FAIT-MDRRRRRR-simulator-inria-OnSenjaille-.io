@@ -81,40 +81,32 @@ public class Ordonnanceur {
 		int X=p.partie().decor()[0].length;
 		int Y=p.partie().decor().length;
 	
-		boolean nord_accessible = false;
-		boolean est_accessible = false;
-		boolean sud_accessible = false;
-		boolean ouest_accessible = false;
-		
-		boolean nord2_accessible = false;
-		boolean est2_accessible = false;
-		boolean sud2_accessible = false;
-		boolean ouest2_accessible = false;
-		
-		Personnage p_NO=null;
-		Personnage p_NE=null;
-		Personnage p_SE=null;
-		Personnage p_SO=null;
-		
-		Personnage p_N=null;
-		Personnage p_E=null;
-		Personnage p_S=null;
-		Personnage p_O=null;
-		
+				
+		Cellule c_NO=p.partie().decor()[p.position().getY()-1][p.position().getX()-1];
+		Cellule c_NE=p.partie().decor()[p.position().getY()-1][p.position().getX()+1];
+		Cellule c_SE=p.partie().decor()[p.position().getY()+1][p.position().getX()+1];
+		Cellule c_SO =p.partie().decor()[p.position().getY()+1][p.position().getX()-1];
+
+		Personnage p_NO=p.partie().occupe(p.position().getX()-1,p.position().getY()-1);
+		Personnage p_NE=p.partie().occupe(p.position().getX()+1,p.position().getY()-1);
+		Personnage p_SE=p.partie().occupe(p.position().getX()+1,p.position().getY()+1);
+		Personnage p_SO=p.partie().occupe(p.position().getX()-1,p.position().getY()+1);
+
+		Personnage p_N=p.partie().occupe(p.position().getX(),p.position().getY()-2);
+		Personnage p_S=p.partie().occupe(p.position().getX(),p.position().getY()-2);
+		Personnage p_E=p.partie().occupe(p.position().getX()+2,p.position().getY());
+		Personnage p_O=p.partie().occupe(p.position().getX()-2,p.position().getY());
+
+		Cellule c_N =p.partie().decor()[p.position().getY()-2][p.position().getX()];
+		Cellule c_S =p.partie().decor()[p.position().getY()+2][p.position().getX()];
+		Cellule c_E =p.partie().decor()[p.position().getY()][p.position().getX()+2];
+		Cellule c_O =p.partie().decor()[p.position().getY()][p.position().getX()-2];
+
+
 		boolean EnnemiN=false;
 		boolean EnnemiE=false;
 		boolean EnnemiS=false;
 		boolean EnnemiO=false;
-		
-		Cellule c_N=null;
-		Cellule c_E=null;
-		Cellule c_S=null;
-		Cellule c_O=null;
-
-		Cellule c_NO=null;
-		Cellule c_NE=null;
-		Cellule c_SE=null;
-		Cellule c_SO=null;
 		
 		boolean BlancEl_N=false;
 		boolean BlancEl_E=false;
@@ -168,11 +160,7 @@ public class Ordonnanceur {
 			{
 				conditions.add(codes.murNord);
 			}
-			nord_accessible=true;
-			if(p.position().getY()-2>=0)
-			{
-				nord2_accessible = true;
-			}
+
 		}
 		
 		if(p.position().getX()-1<=X-1)
@@ -209,11 +197,6 @@ public class Ordonnanceur {
 			{
 				conditions.add(codes.murEst);
 			}
-			if(p.position().getX()+2<=X-1)
-			{
-				est2_accessible = true;
-			}
-			est_accessible=true;
 		}
 		
 		if(p.position().getY()+1<=Y-1)
@@ -249,11 +232,6 @@ public class Ordonnanceur {
 			if(p.partie().decor()[p.position().getY()+1][p.position().getX()].valeur()==codes.mur)
 			{
 				conditions.add(codes.murSud);
-			}
-			sud_accessible=true;
-			if(p.position().getY()+2<=Y-1)
-			{
-				sud2_accessible = true;
 			}
 		}
 		
@@ -291,11 +269,7 @@ public class Ordonnanceur {
 			{
 				conditions.add(codes.murOuest);
 			}
-			ouest_accessible=true;
-			if(p.position().getX()-2>=0)
-			{
-				ouest2_accessible = true;
-			}
+
 		}
 		//CaseBlanche(cellule actuelle)
 		if(p.partie().decor()[p.position().getY()][p.position().getX()].couleur()==0)
@@ -310,59 +284,6 @@ public class Ordonnanceur {
 		else
 		{
 			conditions.add(codes.caseRougeCentre);
-		}
-		
-		if(nord_accessible)
-		{
-			if(ouest_accessible)
-			{
-				p_NO=p.partie().occupe(p.position().getX()-1,p.position().getY()-1);
-				c_NO=p.partie().decor()[p.position().getY()-1][p.position().getX()-1];
-			}
-			
-			if(est_accessible)
-			{
-				p_NE=p.partie().occupe(p.position().getX()+1,p.position().getY()-1);
-				c_NE=p.partie().decor()[p.position().getY()-1][p.position().getX()+1];
-			}
-			
-			if(nord2_accessible)
-			{
-				p_N=p.partie().occupe(p.position().getX(),p.position().getY()-2);
-				c_N =p.partie().decor()[p.position().getY()-2][p.position().getX()];
-			}
-		}
-		
-		if(sud_accessible)
-		{
-			if(est_accessible)
-			{
-				p_SE=p.partie().occupe(p.position().getX()+1,p.position().getY()+1);
-				c_SE=p.partie().decor()[p.position().getY()+1][p.position().getX()+1];
-			}
-			
-			if(ouest_accessible)
-			{
-				p_SO=p.partie().occupe(p.position().getX()-1,p.position().getY()+1);
-				c_SO =p.partie().decor()[p.position().getY()+1][p.position().getX()-1];
-			}
-			if(sud2_accessible)
-			{
-				p_S=p.partie().occupe(p.position().getX(),p.position().getY()-2);
-				c_S =p.partie().decor()[p.position().getY()+2][p.position().getX()];
-			}
-		}
-		
-		if(est2_accessible)
-		{
-			p_E=p.partie().occupe(p.position().getX()+2,p.position().getY());
-			c_E =p.partie().decor()[p.position().getY()][p.position().getX()+2];
-		}
-		
-		if(ouest2_accessible)
-		{
-			p_O=p.partie().occupe(p.position().getX()-2,p.position().getY());
-			c_O =p.partie().decor()[p.position().getY()][p.position().getX()-2];
 		}
 		
 		
