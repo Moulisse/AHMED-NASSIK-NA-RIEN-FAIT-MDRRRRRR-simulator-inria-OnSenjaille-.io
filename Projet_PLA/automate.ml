@@ -288,7 +288,7 @@ let test=[tour_de_map;peintre_simple];;
 
 (* TEST *)
 
-let fichier = open_out "test1.xml";;
+let fichier = open_out "test22.xml";;
 let () = write_xml fichier test 0;;
   close_out fichier;;
  
