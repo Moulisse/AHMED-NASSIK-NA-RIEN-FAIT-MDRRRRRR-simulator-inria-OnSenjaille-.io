@@ -2,7 +2,7 @@ package Main;
 
 import Parser.ParserXML;
 import graphique.Grande;
-import javafx.application.Application;
+//import javafx.application.Application;
 import moteur.*;
 
 
@@ -29,15 +29,33 @@ public class Main {
 		//verifier codes pour chaque type de personnage codes.attaquer à codes.attaquer + 3
 		
 		//Partie jeu;
-		p=parser.buildGame("test1.xml","test1.xml");
+
+
+		//0:Partie buildGame(X.xml,Y.xml,0)
+		//1: spawn proche sur meme ligne
+		//Partie buildGame(guerrierLigneR.xml,guerrierLigneB.xml,1)
+		//2: un peintre qui repeint directement automate ennemi
+		//Partie buildGame(guerrierLigneR.xml,guerrierLigneB.xml,2)
+		//3: deux peintres qui essaye de peindre la meme case
+		//Partie buildGame(peintreCaseR.xml,peindreCaseB.xml,3)
+		//4: reagissent qu'à la balise
+		//Partie buildGame(teamBaliseR.xml,teamBaliseB.xml,4)
+		//5: game normale
+		//Partie buildGame(teamNormaleR.xml,teamNormaleB.xml,5)
+		
+		
+		
+		
+		//p=parser.buildGame("joueur1.xml","joueur2.xml",0);
+		p=parser.buildGame("guerrierLigneR.xml","guerrierLigneB.xml",1);
 		//jeu.ajoutMurs(500);
 		
 		//p.ajoutMursMap();
-		/*
+		
 		p.affichageText();
 		
 		try {
-		    Thread.sleep(1000);                 //1000 milliseconds is one second.
+		    Thread.sleep(2000);                 //1000 milliseconds is one second.
 		} catch(InterruptedException ex) {
 		    Thread.currentThread().interrupt();
 		}
@@ -45,13 +63,16 @@ public class Main {
 			p.tour();
 			p.affichageText();
 			p.affichePersoPos();
+			
+			System.out.println(p.nbCasesPeinteR());
+			System.out.println(p.nbCasesPeinteB());
 			try {
 			    Thread.sleep(1000);                 //1000 milliseconds is one second.
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
-		}*/
-		Application.launch(Grande.class, args);
+		}
+		//Application.launch(Grande.class, args);
 
 	}
 
