@@ -69,9 +69,10 @@ public class Automate {
 		}
 		
 		public void afficherActions(){
-			for(int i=this.position.getX();i<transitions.length;i++){
-				for(int j=this.position.getY();j<transitions[i].length;j++){
-					System.out.print(this.partie.decor()[i][j].valeur()+" | ");
+			
+			for(int i=this.position.getY();i<(this.position.getY()+transitions.length);i++){
+				for(int j=this.position.getX();j<(this.position.getX()+transitions[0].length);j++){
+					System.out.print(this.partie.decor()[i][j].valeur()+" ");
 				}
 				System.out.print("\n");
 			}

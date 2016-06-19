@@ -59,6 +59,7 @@ public class ActionFutur implements Comparable<ActionFutur>{
 				if ((!wall)&&(present)){
 					this.perso.avancer(codeAction);
 				}else{
+					System.exit(0);
 					this.perso.avancer(4);
 				}
 				break;
@@ -102,7 +103,7 @@ public class ActionFutur implements Comparable<ActionFutur>{
 		return (this.type()==a.type()&&a.type()==TypeAction.PEINT)&&(diff<5&&diff>-5);
 	}
 	
-	//TODO généraliser dans Position.Java
+	//TODO gï¿½nï¿½raliser dans Position.Java
 	public void setCible(int i){
 		switch (i){
 		case 0 :	//Nord

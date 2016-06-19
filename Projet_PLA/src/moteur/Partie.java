@@ -315,8 +315,7 @@ public class Partie {
 	{
 		for(Personnage p : personnages){
 			p.stringPosition();
-
-	}
+		}
 	}
 	
 }

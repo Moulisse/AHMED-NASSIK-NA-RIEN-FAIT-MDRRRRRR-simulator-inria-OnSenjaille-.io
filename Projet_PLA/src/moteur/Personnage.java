@@ -212,6 +212,8 @@ public abstract class Personnage {
 	public void stringPosition()
 	{
 		System.out.println("Position du perso : Y "+this.position().getY()+ "X : "+this.position().getX());
+
+
 	}
 	
 	
