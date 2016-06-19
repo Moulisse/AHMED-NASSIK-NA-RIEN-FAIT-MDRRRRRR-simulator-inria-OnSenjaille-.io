@@ -309,7 +309,7 @@ public class ParserXML {
 		// longueur max : 5
 
 		// taille map : chaque perso peut prendre la taille max
-		int longueurAutoMax=11;
+		int longueurAutoMax=50;
 		
 		
 		System.out.println("nbauto1 : "+nbAuto(fichierJoueur1)+"nbauto2 "+nbAuto(fichierJoueur2));
