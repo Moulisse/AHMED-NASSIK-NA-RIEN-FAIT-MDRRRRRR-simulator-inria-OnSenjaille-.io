@@ -5,618 +5,593 @@ import java.util.Collections;
 import java.util.List;
 
 public class Ordonnanceur {
-	
-	
+
 	private Partie part;
-	
-	Ordonnanceur(Partie p){
-		part=p;
+
+	Ordonnanceur(Partie p) {
+		part = p;
 	}
-	
-	public void tour(){
+
+	public void tour() {
 		List<Integer> conds;
 		int act;
 		List<ActionFutur> actions = new ArrayList<ActionFutur>();
-		for(Personnage p : part.personnages()){
-			//System.out.println("LE PERSONNAGE EST EN POS : X= "+p.position().getX()+" Y="+p.position().getY());
+		for (Personnage p : part.personnages()) {
+			// System.out.println("LE PERSONNAGE EST EN POS : X= "+p.position().getX()+" Y="+p.position().getY());
 			conds = this.calculConditions(p);
 			act = p.automate().action(p.etat(), conds);
+			actions.add(new ActionFutur(p, act));
 			System.out.print(act+" : ");
 			actions.add(new ActionFutur(p,act));
 		}
 		Collections.sort(actions);
 		double roll;
-		for(ActionFutur a : actions){
-			for(ActionFutur b : actions){
-				if(a.type()==TypeAction.FRAPPE&&b.type()==TypeAction.FRAPPE){
-					if(a.cible()==b.perso().position()&&b.cible()==a.perso().position()){ //Si les guerriers s'attaque tout les deux
+		for (ActionFutur a : actions) {
+			for (ActionFutur b : actions) {
+				if (a.type() == TypeAction.FRAPPE
+						&& b.type() == TypeAction.FRAPPE) {
+					if (a.cible() == b.perso().position()
+							&& b.cible() == a.perso().position()) { // Si les
+																	// guerriers
+																	// s'attaque
+																	// tout les
+																	// deux
 						roll = Math.random();
-						if (roll<=0.33){
+						if (roll <= 0.33) {
 							a.setType(TypeAction.RATE);
-						}else if(roll>=0.66){
+						} else if (roll >= 0.66) {
 							b.setType(TypeAction.RATE);
-						} //si 0.33<roll<0.66 les guerrier s'entretue 
+						} // si 0.33<roll<0.66 les guerrier s'entretue
 					}
 				}
-				if(a.type()==TypeAction.PEINT&&b.type()==TypeAction.PEINT){
-					if(a.cible()==b.cible()){ //Si deux peintre peignent la même case
-						if (!a.sameColor(b)){
+				if (a.type() == TypeAction.PEINT
+						&& b.type() == TypeAction.PEINT) {
+					if (a.cible() == b.cible()) { // Si deux peintre peignent la
+													// même case
+						if (!a.sameColor(b)) {
 							roll = Math.random();
-							if (roll<=0.5){
+							if (roll <= 0.5) {
 								a.setType(TypeAction.RATE);
-							}else{
+							} else {
 								b.setType(TypeAction.RATE);
 							}
 						}
 					}
 				}
-				if(a.type()==TypeAction.MOUVEMENT&&b.type()==TypeAction.MOUVEMENT){	
-					if(a.cible()==b.cible()){ //Si deux personnages avance sur la même case.
+				if (a.type() == TypeAction.MOUVEMENT
+						&& b.type() == TypeAction.MOUVEMENT) {
+					if (a.cible() == b.cible()) { // Si deux personnages avance
+													// sur la même case.
 						roll = Math.random();
-						if (roll<=0.50){
-							a.setCible(4); //Avancer sur place.
-						}else{
+						if (roll <= 0.50) {
+							a.setCible(4); // Avancer sur place.
+						} else {
 							b.setCible(4);
 						}
 					}
 				}
 			}
 		}
-		for(ActionFutur a : actions){
+		for (ActionFutur a : actions) {
 			a.executer();
 		}
 	}
-	
-	//Calcul les conditions a tester pour un personnages
-	//TODO
-	
-	public List<Integer> calculConditions(Personnage p){
+
+	// Calcul les conditions a tester pour un personnages
+	// TODO
+
+	public List<Integer> calculConditions(Personnage p) {
 		List<Integer> conditions = new ArrayList<Integer>();
-		
+
 		/*
-		 * if (p.position().getY()!=0){
-		 * conditions.add(11);
-		 * }
-		*/
-		int X=p.partie().decor().length;
-		int Y=p.partie().decor()[0].length;
-	
+		 * if (p.position().getY()!=0){ conditions.add(11); }
+		 */
+		int X = p.partie().decor().length;
+		int Y = p.partie().decor()[0].length;
+
 		boolean nord_accessible = false;
 		boolean est_accessible = false;
 		boolean sud_accessible = false;
 		boolean ouest_accessible = false;
-		
+
 		boolean nord2_accessible = false;
 		boolean est2_accessible = false;
 		boolean sud2_accessible = false;
 		boolean ouest2_accessible = false;
-		
-		Personnage p_NO=null;
-		Personnage p_NE=null;
-		Personnage p_SE=null;
-		Personnage p_SO=null;
-		
-		Personnage p_N=null;
-		Personnage p_E=null;
-		Personnage p_S=null;
-		Personnage p_O=null;
-		
-		boolean EnnemiN=false;
-		boolean EnnemiE=false;
-		boolean EnnemiS=false;
-		boolean EnnemiO=false;
-		
-		Cellule c_N=null;
-		Cellule c_E=null;
-		Cellule c_S=null;
-		Cellule c_O=null;
 
-		Cellule c_NO=null;
-		Cellule c_NE=null;
-		Cellule c_SE=null;
-		Cellule c_SO=null;
-		
-		boolean BlancEl_N=false;
-		boolean BlancEl_E=false;
-		boolean BlancEl_S=false;
-		boolean BlancEl_O=false;
-		
-		boolean RougeEl_N=false;
-		boolean RougeEl_E=false;
-		boolean RougeEl_S=false;
-		boolean RougeEl_O=false;
-		
-		boolean BleueEl_N=false;
-		boolean BleueEl_E=false;
-		boolean BleueEl_S=false;
-		boolean BleueEl_O=false;
+		Personnage p_NO = null;
+		Personnage p_NE = null;
+		Personnage p_SE = null;
+		Personnage p_SO = null;
 
-		
-		if(p.position().getY()-1>=0)
-		{
-			//Personnage au nord
-			if (p.partie().occupe(p.position().getX(), p.position().getY()-1)!=null){
-				
-				//Allie
-				if(p.partie().occupe(p.position().getX(), p.position().getY()-1).equipe()==p.equipe()){
+		Personnage p_N = null;
+		Personnage p_E = null;
+		Personnage p_S = null;
+		Personnage p_O = null;
+
+		boolean EnnemiN = false;
+		boolean EnnemiE = false;
+		boolean EnnemiS = false;
+		boolean EnnemiO = false;
+
+		Cellule c_N = null;
+		Cellule c_E = null;
+		Cellule c_S = null;
+		Cellule c_O = null;
+
+		Cellule c_NO = null;
+		Cellule c_NE = null;
+		Cellule c_SE = null;
+		Cellule c_SO = null;
+
+		boolean BlancEl_N = false;
+		boolean BlancEl_E = false;
+		boolean BlancEl_S = false;
+		boolean BlancEl_O = false;
+
+		boolean RougeEl_N = false;
+		boolean RougeEl_E = false;
+		boolean RougeEl_S = false;
+		boolean RougeEl_O = false;
+
+		boolean BleueEl_N = false;
+		boolean BleueEl_E = false;
+		boolean BleueEl_S = false;
+		boolean BleueEl_O = false;
+
+		if (p.position().getY() - 1 >= 0) {
+			// Personnage au nord
+			if (p.partie().occupe(p.position().getX(), p.position().getY() - 1) != null) {
+
+				// Allie
+				if (p.partie()
+						.occupe(p.position().getX(), p.position().getY() - 1)
+						.equipe() == p.equipe()) {
 					conditions.add(codes.allieNord);
-				}
-				else //Ennemi 
+				} else // Ennemi
 				{
 					conditions.add(codes.ennemieNord);
 				}
 			}
-			
-			//CaseBlanche(N)
-			//System.out.println("acces decor["+(p.position().getX())+"]["+(p.position().getY()-1)+"]");
-			if(p.partie().decor()[p.position().getY()-1][p.position().getX()].couleur()==codes.blanc)
-			{
+
+			// CaseBlanche(N)
+			// System.out.println("acces decor["+(p.position().getX())+"]["+(p.position().getY()-1)+"]");
+			if (p.partie().decor()[p.position().getY() - 1][p.position().getX()]
+					.couleur() == codes.blanc) {
 				conditions.add(codes.caseBlancheNord);
-			}
-			else if(p.partie().decor()[p.position().getY()-1][p.position().getX()].couleur()==codes.bleu)
-			//CaseBleu(N)
+			} else if (p.partie().decor()[p.position().getY() - 1][p.position()
+					.getX()].couleur() == codes.bleu)
+			// CaseBleu(N)
 			{
 				conditions.add(codes.caseBleuNord);
-			}
-			else if(p.partie().decor()[p.position().getY()-1][p.position().getX()].couleur()==codes.rouge)
-			//CaseRouge(N)
+			} else if (p.partie().decor()[p.position().getY() - 1][p.position()
+					.getX()].couleur() == codes.rouge)
+			// CaseRouge(N)
 			{
 				conditions.add(codes.caseRougeNord);
 			}
-			//Mur(N)
-			if(p.partie().decor()[p.position().getY()-1][p.position().getX()].valeur()==codes.mur)
-			{
+			// Mur(N)
+			if (p.partie().decor()[p.position().getY() - 1][p.position().getX()]
+					.valeur() == codes.mur) {
 				conditions.add(codes.murNord);
 			}
-			nord_accessible=true;
-			if(p.position().getY()-2>=0)
-			{
+			nord_accessible = true;
+			if (p.position().getY() - 2 >= 0) {
 				nord2_accessible = true;
 			}
 		}
-		
-		if(p.position().getX()-1<=X-1)
-		{
-			//Personnage a l'est
-			if (p.partie().occupe(p.position().getX()+1, p.position().getY())!=null){
-				
-				//Allie
-				if(p.partie().occupe(p.position().getX()+1, p.position().getY()).equipe()==p.equipe()){
+
+		if (p.position().getX() - 1 <= X - 1) {
+			// Personnage a l'est
+			if (p.partie().occupe(p.position().getX() + 1, p.position().getY()) != null) {
+
+				// Allie
+				if (p.partie()
+						.occupe(p.position().getX() + 1, p.position().getY())
+						.equipe() == p.equipe()) {
 					conditions.add(codes.allieEst);
-				}
-				else //Ennemi 
+				} else // Ennemi
 				{
 					conditions.add(codes.ennemiEst);
 				}
 			}
-			//CaseBlanche(E)
-			if(p.partie().decor()[p.position().getY()][p.position().getX()+1].couleur()==codes.blanc)
-			{
+			// CaseBlanche(E)
+			if (p.partie().decor()[p.position().getY()][p.position().getX() + 1]
+					.couleur() == codes.blanc) {
 				conditions.add(codes.caseBlancheEst);
-			}
-			else if(p.partie().decor()[p.position().getY()][p.position().getX()+1].couleur()==codes.bleu)
-			//CaseBleu(E)	
+			} else if (p.partie().decor()[p.position().getY()][p.position()
+					.getX() + 1].couleur() == codes.bleu)
+			// CaseBleu(E)
 			{
 				conditions.add(codes.caseBleuEst);
-			}
-			else if (p.partie().decor()[p.position().getY()][p.position().getX()+1].couleur()==codes.rouge)
-			//CaseRouge(E)
+			} else if (p.partie().decor()[p.position().getY()][p.position()
+					.getX() + 1].couleur() == codes.rouge)
+			// CaseRouge(E)
 			{
 				conditions.add(codes.caseRougeEst);
 			}
-			//Mur(E)
-			if(p.partie().decor()[p.position().getY()][p.position().getX()+1].valeur()==codes.mur)
-			{
+			// Mur(E)
+			if (p.partie().decor()[p.position().getY()][p.position().getX() + 1]
+					.valeur() == codes.mur) {
 				conditions.add(codes.murEst);
 			}
-			if(p.position().getX()+2<=X-1)
-			{
+			if (p.position().getX() + 2 <= X - 1) {
 				est2_accessible = true;
 			}
-			est_accessible=true;
+			est_accessible = true;
 		}
-		
-		if(p.position().getY()+1<=Y-1)
-		{
-			//Personnage au sud
-			if (p.partie().occupe(p.position().getX(), p.position().getY()+1)!=null){
-				
-				//Allie
-				if(p.partie().occupe(p.position().getX(), p.position().getY()+1).equipe()==p.equipe()){
+
+		if (p.position().getY() + 1 <= Y - 1) {
+			// Personnage au sud
+			if (p.partie().occupe(p.position().getX(), p.position().getY() + 1) != null) {
+
+				// Allie
+				if (p.partie()
+						.occupe(p.position().getX(), p.position().getY() + 1)
+						.equipe() == p.equipe()) {
 					conditions.add(codes.allieSud);
-				}
-				else //Ennemi 
+				} else // Ennemi
 				{
 					conditions.add(codes.ennemiSud);
 				}
 			}
-			//CaseBlanche(S)
-			if(p.partie().decor()[p.position().getX()][p.position().getY()+1].couleur()==codes.blanc)
-			{
+			// CaseBlanche(S)
+			if (p.partie().decor()[p.position().getX()][p.position().getY() + 1]
+					.couleur() == codes.blanc) {
 				conditions.add(codes.caseBlancheSud);
-			}
-			else if(p.partie().decor()[p.position().getX()][p.position().getY()+1].couleur()==codes.bleu)
-			//CaseBleu(S)
+			} else if (p.partie().decor()[p.position().getX()][p.position()
+					.getY() + 1].couleur() == codes.bleu)
+				// CaseBleu(S)
 			{
 				conditions.add(codes.caseBleuSud);
-			}
-			else if(p.partie().decor()[p.position().getX()][p.position().getY()+1].couleur()==codes.rouge)
-			//CaseRouge(S)
+			} else if (p.partie().decor()[p.position().getX()][p.position()
+					.getY() + 1].couleur() == codes.rouge)
+			// CaseRouge(S)
 			{
 				conditions.add(codes.caseRougeSud);
 			}
-			//Mur(S)
-			if(p.partie().decor()[p.position().getX()][p.position().getY()+1].valeur()==codes.mur)
-			{
+			// Mur(S)
+			if (p.partie().decor()[p.position().getX()][p.position().getY() + 1]
+					.valeur() == codes.mur) {
 				conditions.add(codes.murSud);
 			}
-			sud_accessible=true;
-			if(p.position().getY()+2<=Y-1)
-			{
+			sud_accessible = true;
+			if (p.position().getY() + 2 <= Y - 1) {
 				sud2_accessible = true;
 			}
 		}
-		
-		if(p.position().getX()-1>=0)
-		{
-			//Personnage a l'ouest
-			if (p.partie().occupe(p.position().getX()-1, p.position().getY())!=null){
-			
-				//Allie
-				if(p.partie().occupe(p.position().getX()-1, p.position().getY()).equipe()==p.equipe()){
+
+		if (p.position().getX() - 1 >= 0) {
+			// Personnage a l'ouest
+			if (p.partie().occupe(p.position().getX() - 1, p.position().getY()) != null) {
+
+				// Allie
+				if (p.partie()
+						.occupe(p.position().getX() - 1, p.position().getY())
+						.equipe() == p.equipe()) {
 					conditions.add(codes.allieOuest);
-				}	
-				else //Ennemi 
+				} else // Ennemi
 				{
 					conditions.add(codes.ennemiOuest);
 				}
 			}
-			//CaseBlanche(O)
-			if(p.partie().decor()[p.position().getY()][p.position().getX()-1].couleur()==codes.blanc)
-			{
+			// CaseBlanche(O)
+			if (p.partie().decor()[p.position().getY()][p.position().getX() - 1]
+					.couleur() == codes.blanc) {
 				conditions.add(codes.caseBlancheOuest);
-			}
-			else if(p.partie().decor()[p.position().getY()][p.position().getX()-1].couleur()==codes.bleu)
-			//CaseBleu(O)
+			} else if (p.partie().decor()[p.position().getY()][p.position()
+					.getX() - 1].couleur() == codes.bleu)
+			// CaseBleu(O)
 			{
 				conditions.add(codes.caseBleuOuest);
-			}
-			else if(p.partie().decor()[p.position().getY()][p.position().getX()-1].couleur()==codes.rouge)
-			//CaseRouge(O)
+			} else if (p.partie().decor()[p.position().getY()][p.position()
+					.getX() - 1].couleur() == codes.rouge)
+			// CaseRouge(O)
 			{
 				conditions.add(codes.caseRougeOuest);
 			}
-			//Mur(O)
-			if(p.partie().decor()[p.position().getY()][p.position().getX()-1].valeur()==codes.mur)
-			{
+			// Mur(O)
+			if (p.partie().decor()[p.position().getY()][p.position().getX() - 1]
+					.valeur() == codes.mur) {
 				conditions.add(codes.murOuest);
 			}
-			ouest_accessible=true;
-			if(p.position().getX()-2>=0)
-			{
+			ouest_accessible = true;
+			if (p.position().getX() - 2 >= 0) {
 				ouest2_accessible = true;
 			}
 		}
-		//CaseBlanche(cellule actuelle)
-		if(p.partie().decor()[p.position().getY()][p.position().getX()].couleur()==0)
-		{
+		// CaseBlanche(cellule actuelle)
+		if (p.partie().decor()[p.position().getY()][p.position().getX()]
+				.couleur() == 0) {
 			conditions.add(codes.caseBlancheCentre);
-		}
-		else if(p.partie().decor()[p.position().getY()][p.position().getX()].couleur()==1)
-		//CaseBleu(Cellule actuelle)	
+		} else if (p.partie().decor()[p.position().getY()][p.position().getX()]
+				.couleur() == 1)
+		// CaseBleu(Cellule actuelle)
 		{
 			conditions.add(codes.caseBleuCentre);
-		}
-		else
-		{
+		} else {
 			conditions.add(codes.caseRougeCentre);
 		}
-		
-		if(nord_accessible)
-		{
-			if(ouest_accessible)
-			{
-				p_NO=p.partie().occupe(p.position().getX()-1,p.position().getY()-1);
-				c_NO=p.partie().decor()[p.position().getY()-1][p.position().getX()-1];
+
+		if (nord_accessible) {
+			if (ouest_accessible) {
+				p_NO = p.partie().occupe(p.position().getX() - 1,
+						p.position().getY() - 1);
+				c_NO = p.partie().decor()[p.position().getY() - 1][p.position()
+						.getX() - 1];
 			}
-			
-			if(est_accessible)
-			{
-				p_NE=p.partie().occupe(p.position().getX()+1,p.position().getY()-1);
-				c_NE=p.partie().decor()[p.position().getY()-1][p.position().getX()+1];
+
+			if (est_accessible) {
+				p_NE = p.partie().occupe(p.position().getX() + 1,
+						p.position().getY() - 1);
+				c_NE = p.partie().decor()[p.position().getY() - 1][p.position()
+						.getX() + 1];
 			}
-			
-			if(nord2_accessible)
-			{
-				p_N=p.partie().occupe(p.position().getX(),p.position().getY()-2);
-				c_N =p.partie().decor()[p.position().getY()-2][p.position().getX()];
-			}
-		}
-		
-		if(sud_accessible)
-		{
-			if(est_accessible)
-			{
-				p_SE=p.partie().occupe(p.position().getX()+1,p.position().getY()+1);
-				c_SE=p.partie().decor()[p.position().getY()+1][p.position().getX()+1];
-			}
-			
-			if(ouest_accessible)
-			{
-				p_SO=p.partie().occupe(p.position().getX()-1,p.position().getY()+1);
-				c_SO =p.partie().decor()[p.position().getY()+1][p.position().getX()-1];
-			}
-			if(sud2_accessible)
-			{
-				p_S=p.partie().occupe(p.position().getX(),p.position().getY()-2);
-				c_S =p.partie().decor()[p.position().getY()+2][p.position().getX()];
+
+			if (nord2_accessible) {
+				p_N = p.partie().occupe(p.position().getX(),
+						p.position().getY() - 2);
+				c_N = p.partie().decor()[p.position().getY() - 2][p.position()
+						.getX()];
 			}
 		}
-		
-		if(est2_accessible)
-		{
-			p_E=p.partie().occupe(p.position().getX()+2,p.position().getY());
-			c_E =p.partie().decor()[p.position().getY()][p.position().getX()+2];
+
+		if (sud_accessible) {
+			if (est_accessible) {
+				p_SE = p.partie().occupe(p.position().getX() + 1,
+						p.position().getY() + 1);
+				c_SE = p.partie().decor()[p.position().getY() + 1][p.position()
+						.getX() + 1];
+			}
+
+			if (ouest_accessible) {
+				p_SO = p.partie().occupe(p.position().getX() - 1,
+						p.position().getY() + 1);
+				c_SO = p.partie().decor()[p.position().getY() + 1][p.position()
+						.getX() - 1];
+			}
+			if (sud2_accessible) {
+				p_S = p.partie().occupe(p.position().getX(),
+						p.position().getY() - 2);
+				c_S = p.partie().decor()[p.position().getY() + 2][p.position()
+						.getX()];
+			}
 		}
-		
-		if(ouest2_accessible)
-		{
-			p_O=p.partie().occupe(p.position().getX()-2,p.position().getY());
-			c_O =p.partie().decor()[p.position().getY()][p.position().getX()-2];
+
+		if (est2_accessible) {
+			p_E = p.partie().occupe(p.position().getX() + 2,
+					p.position().getY());
+			c_E = p.partie().decor()[p.position().getY()][p.position().getX() + 2];
 		}
-		
-		
-		//quelqun au NW
-		if(p_NO!=null)
-		{
-			//ennemi au NW
-			if (p_NO.equipe()!=p.equipe())
-			{
+
+		if (ouest2_accessible) {
+			p_O = p.partie().occupe(p.position().getX() - 2,
+					p.position().getY());
+			c_O = p.partie().decor()[p.position().getY()][p.position().getX() - 2];
+		}
+
+		// quelqun au NW
+		if (p_NO != null) {
+			// ennemi au NW
+			if (p_NO.equipe() != p.equipe()) {
 				conditions.add(codes.ennemiEloigneNord);
 				conditions.add(codes.ennemiEloigneOuest);
-				EnnemiN=true;
-				EnnemiO=true;
+				EnnemiN = true;
+				EnnemiO = true;
 			}
-			
+
 		}
-		
-		if(p_SE!=null)
-		{
-			if (p_SE.equipe()!=p.equipe())
-			{
+
+		if (p_SE != null) {
+			if (p_SE.equipe() != p.equipe()) {
 				conditions.add(codes.ennemiEloigneSud);
 				conditions.add(codes.ennemiEloigneEst);
-				EnnemiS=true;
-				EnnemiE=true;
+				EnnemiS = true;
+				EnnemiE = true;
 			}
 		}
 
-		if(p_NE!=null)
-		{
-			if (p_NE.equipe()!=p.equipe())
-			{
-				if (!EnnemiN){
+		if (p_NE != null) {
+			if (p_NE.equipe() != p.equipe()) {
+				if (!EnnemiN) {
 					conditions.add(codes.ennemiEloigneNord);
-					EnnemiN=true;}
-				
-				if (!EnnemiE){
+					EnnemiN = true;
+				}
+
+				if (!EnnemiE) {
 					conditions.add(codes.ennemiEloigneEst);
-					EnnemiE=true;}
+					EnnemiE = true;
+				}
 			}
 		}
-		
-		if(p_SO!=null)
-		{
-			if (p_SO.equipe()!=p.equipe())
-			{
-				if (!EnnemiS){
+
+		if (p_SO != null) {
+			if (p_SO.equipe() != p.equipe()) {
+				if (!EnnemiS) {
 					conditions.add(codes.ennemiEloigneSud);
-					EnnemiS=true;}
-				
-				if (!EnnemiO){
+					EnnemiS = true;
+				}
+
+				if (!EnnemiO) {
 					conditions.add(codes.ennemiEloigneOuest);
-					EnnemiO=true;}
+					EnnemiO = true;
+				}
 			}
 		}
-		
-		if(!EnnemiN && p_N!=null)
-		{
-			if(p_N.equipe()==p.equipe()){
-				conditions.add(codes.ennemiEloigneNord);}
+
+		if (!EnnemiN && p_N != null) {
+			if (p_N.equipe() == p.equipe()) {
+				conditions.add(codes.ennemiEloigneNord);
+			}
 		}
-		
-		if(!EnnemiE && p_E!=null)
-		{
-			if(p_E.equipe()==p.equipe()){
-				conditions.add(codes.ennemiEloigneEst);}
+
+		if (!EnnemiE && p_E != null) {
+			if (p_E.equipe() == p.equipe()) {
+				conditions.add(codes.ennemiEloigneEst);
+			}
 		}
-		
-		if(!EnnemiS && p_S!=null)
-		{
-			if(p_S.equipe()==p.equipe()){
-				conditions.add(codes.ennemiEloigneSud);}
+
+		if (!EnnemiS && p_S != null) {
+			if (p_S.equipe() == p.equipe()) {
+				conditions.add(codes.ennemiEloigneSud);
+			}
 		}
-		
-		if(!EnnemiO && p_O!=null)
-		{
-			if(p_O.equipe()==p.equipe()){
-				conditions.add(codes.ennemiEloigneOuest);}
+
+		if (!EnnemiO && p_O != null) {
+			if (p_O.equipe() == p.equipe()) {
+				conditions.add(codes.ennemiEloigneOuest);
+			}
 		}
-		
-		//----------------------------------------------------
-		if(c_NO!=null)
-		{
-			//ennemi au NW
-			if (c_NO.couleur()==codes.blanc)
-			{
+
+		// ----------------------------------------------------
+		if (c_NO != null) {
+			// ennemi au NW
+			if (c_NO.couleur() == codes.blanc) {
 				conditions.add(codes.caseBlancheEloigneeNord);
 				conditions.add(codes.caseBlancheEloigneeOuest);
-				BlancEl_N=true;
-				BlancEl_O=true;
-			}
-			else if(c_NO.couleur()==codes.bleu)
-			{
+				BlancEl_N = true;
+				BlancEl_O = true;
+			} else if (c_NO.couleur() == codes.bleu) {
 				conditions.add(codes.caseBleuEloigneeNord);
 				conditions.add(codes.caseBleuEloigneeOuest);
-				BleueEl_N=true;
-				BleueEl_O=true;
-			}
-			else if (c_NO.couleur()==codes.rouge)
-			{
+				BleueEl_N = true;
+				BleueEl_O = true;
+			} else if (c_NO.couleur() == codes.rouge) {
 				conditions.add(codes.caseRougeEloigneeNord);
 				conditions.add(codes.caseRougeEloigneeOuest);
-				RougeEl_N=true;
-				RougeEl_O=true;
+				RougeEl_N = true;
+				RougeEl_O = true;
 			}
 		}
-		
-		if(c_SE!=null)
-		{
-			//ennemi au NW
-			if (c_SE.couleur()==codes.blanc)
-			{
+
+		if (c_SE != null) {
+			// ennemi au NW
+			if (c_SE.couleur() == codes.blanc) {
 				conditions.add(codes.caseBlancheEloigneeSud);
 				conditions.add(codes.caseBlancheEloigneeEst);
-				BlancEl_S=true;
-				BlancEl_E=true;
-			}
-			else if(c_SE.couleur()==codes.bleu)
-			{
+				BlancEl_S = true;
+				BlancEl_E = true;
+			} else if (c_SE.couleur() == codes.bleu) {
 				conditions.add(codes.caseBleuEloigneeSud);
 				conditions.add(codes.caseBleuEloigneeEst);
-				BleueEl_S=true;
-				BleueEl_E=true;
-			}
-			else if (c_SE.couleur()==codes.rouge)
-			{
+				BleueEl_S = true;
+				BleueEl_E = true;
+			} else if (c_SE.couleur() == codes.rouge) {
 				conditions.add(codes.caseRougeEloigneeSud);
 				conditions.add(codes.caseRougeEloigneeEst);
-				RougeEl_S=true;
-				RougeEl_E=true;
+				RougeEl_S = true;
+				RougeEl_E = true;
 			}
 		}
 
-		if(c_NE!=null)
-		{
-			if (c_NE.couleur()==codes.blanc)
-			{
-				if (!BlancEl_N){
+		if (c_NE != null) {
+			if (c_NE.couleur() == codes.blanc) {
+				if (!BlancEl_N) {
 					conditions.add(codes.caseBlancheEloigneeNord);
-					BlancEl_N=true;}
-				
-				if (!BlancEl_E){
+					BlancEl_N = true;
+				}
+
+				if (!BlancEl_E) {
 					conditions.add(codes.caseBlancheEloigneeEst);
-					BlancEl_E=true;}
-			}
-			else if(c_NE.couleur()==codes.bleu)
-			{
-				if (!BleueEl_N){
+					BlancEl_E = true;
+				}
+			} else if (c_NE.couleur() == codes.bleu) {
+				if (!BleueEl_N) {
 					conditions.add(codes.caseBleuEloigneeNord);
-					BleueEl_N=true;}
-				
-				if (!BleueEl_E){
+					BleueEl_N = true;
+				}
+
+				if (!BleueEl_E) {
 					conditions.add(codes.caseBleuEloigneeEst);
-					BleueEl_E=true;}
-			}
-			else if (c_NE.couleur()==codes.rouge)
-			{
-				if (!RougeEl_N){
+					BleueEl_E = true;
+				}
+			} else if (c_NE.couleur() == codes.rouge) {
+				if (!RougeEl_N) {
 					conditions.add(codes.caseRougeEloigneeNord);
-					RougeEl_N=true;}
-				
-				if (!BleueEl_E){
+					RougeEl_N = true;
+				}
+
+				if (!BleueEl_E) {
 					conditions.add(codes.caseRougeEloigneeEst);
-					RougeEl_E=true;}
+					RougeEl_E = true;
+				}
 			}
 		}
-		
-		if(c_SO!=null)
-		{
-			if (c_SO.couleur()==codes.blanc)
-			{
-				if (!BlancEl_S){
+
+		if (c_SO != null) {
+			if (c_SO.couleur() == codes.blanc) {
+				if (!BlancEl_S) {
 					conditions.add(codes.caseBlancheEloigneeSud);
-					BlancEl_S=true;}
-				
-				if (!BlancEl_O){
+					BlancEl_S = true;
+				}
+
+				if (!BlancEl_O) {
 					conditions.add(codes.caseBlancheEloigneeOuest);
-					BlancEl_O=true;}
-			}
-			else if(c_SO.couleur()==codes.bleu)
-			{
-				if (!BleueEl_S){
+					BlancEl_O = true;
+				}
+			} else if (c_SO.couleur() == codes.bleu) {
+				if (!BleueEl_S) {
 					conditions.add(codes.caseBleuEloigneeSud);
-					BleueEl_S=true;}
-				
-				if (!BleueEl_O){
+					BleueEl_S = true;
+				}
+
+				if (!BleueEl_O) {
 					conditions.add(codes.caseBleuEloigneeOuest);
-					BleueEl_O=true;}
-			}
-			else
-			{
-				if (!RougeEl_S){
+					BleueEl_O = true;
+				}
+			} else {
+				if (!RougeEl_S) {
 					conditions.add(codes.caseRougeEloigneeSud);
-					RougeEl_S=true;}
-				
-				if (!BleueEl_O){
+					RougeEl_S = true;
+				}
+
+				if (!BleueEl_O) {
 					conditions.add(codes.caseRougeEloigneeOuest);
-					RougeEl_O=true;}
+					RougeEl_O = true;
+				}
 			}
 		}
-		
-		if(c_N!=null)
-		{
-			if(c_N.couleur()==codes.blanc && !BlancEl_N){
-				conditions.add(codes.caseBlancheEloigneeNord);}
-			else if (c_N.couleur()==codes.bleu && !BleueEl_N)
-			{
-				conditions.add(codes.caseBleuEloigneeNord);}
-			else if(c_N.couleur()==codes.rouge && !RougeEl_N)
-			{
+
+		if (c_N != null) {
+			if (c_N.couleur() == codes.blanc && !BlancEl_N) {
+				conditions.add(codes.caseBlancheEloigneeNord);
+			} else if (c_N.couleur() == codes.bleu && !BleueEl_N) {
+				conditions.add(codes.caseBleuEloigneeNord);
+			} else if (c_N.couleur() == codes.rouge && !RougeEl_N) {
 				conditions.add(codes.caseRougeEloigneeNord);
 			}
 		}
-		
-		if(c_E!=null)
-		{
-			if(c_E.couleur()==codes.blanc && !BlancEl_E){
-				conditions.add(codes.caseBlancheEloigneeEst);}
-			else if (c_E.couleur()==codes.bleu && !BleueEl_E)
-			{
-				conditions.add(codes.caseBleuEloigneeNord);}
-			else if(c_E.couleur()==codes.rouge && !RougeEl_E)
-			{
+
+		if (c_E != null) {
+			if (c_E.couleur() == codes.blanc && !BlancEl_E) {
+				conditions.add(codes.caseBlancheEloigneeEst);
+			} else if (c_E.couleur() == codes.bleu && !BleueEl_E) {
+				conditions.add(codes.caseBleuEloigneeNord);
+			} else if (c_E.couleur() == codes.rouge && !RougeEl_E) {
 				conditions.add(codes.caseRougeEloigneeEst);
 			}
 		}
-		
-		if(c_S!=null)
-		{
-			if(c_S.couleur()==codes.blanc && !BlancEl_N){
-				conditions.add(codes.caseBlancheEloigneeSud);}
-			else if (c_S.couleur()==codes.bleu && !BleueEl_S)
-			{
-				conditions.add(codes.caseBleuEloigneeSud);}
-			else if(c_S.couleur()==codes.rouge && !RougeEl_S)
-			{
+
+		if (c_S != null) {
+			if (c_S.couleur() == codes.blanc && !BlancEl_N) {
+				conditions.add(codes.caseBlancheEloigneeSud);
+			} else if (c_S.couleur() == codes.bleu && !BleueEl_S) {
+				conditions.add(codes.caseBleuEloigneeSud);
+			} else if (c_S.couleur() == codes.rouge && !RougeEl_S) {
 				conditions.add(codes.caseRougeEloigneeSud);
 			}
 		}
-		
-		if(c_O!=null)
-		{
-			if(c_O.couleur()==codes.blanc && !BlancEl_O){
-				conditions.add(codes.caseBlancheEloigneeOuest);}
-			else if (c_O.couleur()==codes.bleu && !BleueEl_O)
-			{
-				conditions.add(codes.caseBleuEloigneeOuest);}
-			else if(c_O.couleur()==codes.rouge && !RougeEl_O)
-			{
+
+		if (c_O != null) {
+			if (c_O.couleur() == codes.blanc && !BlancEl_O) {
+				conditions.add(codes.caseBlancheEloigneeOuest);
+			} else if (c_O.couleur() == codes.bleu && !BleueEl_O) {
+				conditions.add(codes.caseBleuEloigneeOuest);
+			} else if (c_O.couleur() == codes.rouge && !RougeEl_O) {
 				conditions.add(codes.caseRougeEloigneeOuest);
 			}
 		}
-		
-			return conditions;
-		}
-}
 
+		return conditions;
+	}
+}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<automates>
+
+
+	<nb_aut>1</nb_aut>
+	<au personnage="peintre">
+
+		<action nb_l="4" nb_c="5">
+			<l>
+				<c>24</c>
+				<c>0</c>
+				<c>0</c>
+				<c>0</c>
+				<c>43</c>
+			</l>
+			<l>
+				<c>25</c>
+				<c>44</c>
+				<c>0</c>
+				<c>0</c>
+				<c>0</c>
+			</l>
+			<l>
+				<c>26</c>
+				<c>0</c>
+				<c>45</c>
+				<c>0</c>
+				<c>0</c>
+			</l>
+			<l>
+				<c>27</c>
+				<c>0</c>
+				<c>0</c>
+				<c>46</c>
+				<c>0</c>
+			</l>
+		</action>
+		<transition nb_l="4" nb_c="5">
+			<l>
+				<c>24</c>
+				<c>0</c>
+				<c>1</c>
+				<c>2</c>
+				<c>0</c>
+			</l>
+			<l>
+				<c>25</c>
+				<c>1</c>
+				<c>1</c>
+				<c>2</c>
+				<c>3</c>
+			</l>
+			<l>
+				<c>26</c>
+				<c>0</c>
+				<c>2</c>
+				<c>2</c>
+				<c>3</c>
+			</l>
+			<l>
+				<c>27</c>
+				<c>0</c>
+				<c>1</c>
+				<c>3</c>
+				<c>3</c>
+			</l>
+		</transition>
+	</au>
+
+</automates>
