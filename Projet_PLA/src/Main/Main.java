@@ -28,15 +28,15 @@ public class Main {
 		
 		//Partie jeu;
 
-		p=parser.buildGame("peintre.xml","peintre.xml");
+		p=parser.buildGame("test1.xml","test1.xml");
 
 		//jeu.ajoutMurs(500);
 		
 		p.ajoutMursMap();
 		
 		p.affichageText();
-		
-		/*try {
+		/*
+		try {
 		    Thread.sleep(1000);                 //1000 milliseconds is one second.
 		} catch(InterruptedException ex) {
 		    Thread.currentThread().interrupt();
