@@ -54,9 +54,9 @@ public class codes {
 	public final static int caseBleuCentre = 39;
 	
 	public final static int murNord = 40;
-	public final static int murOuest = 41;
+	public final static int murEst = 41;
 	public final static int murSud = 42;
-	public final static int murEst = 43;
+	public final static int murOuest = 43;
 	//codes actions (base + direction)
 	//			0
 	//		  3 4 1

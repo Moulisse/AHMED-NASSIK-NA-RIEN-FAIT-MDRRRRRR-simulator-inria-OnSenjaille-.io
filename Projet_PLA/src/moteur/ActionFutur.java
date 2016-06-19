@@ -56,7 +56,7 @@ public class ActionFutur implements Comparable<ActionFutur>{
 				boolean wall = this.perso.partie().blocke(this.cible().getX(), this.cible().getY());
 				boolean present = this.perso.partie().occupe(this.cible().getX(), this.cible().getY())!=null;
 				
-				if ((!wall)&&(present)){
+				if (!(wall&&present)){
 					this.perso.avancer(codeAction);
 				}else{
 					System.exit(0);
