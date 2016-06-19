@@ -36,7 +36,7 @@ public class Partie {
 		/*int xMin = 25;//limite pour affichage
 		int yMin = 29;
 		*/
-		int xMin = 50;//limite pour affichage
+	/*	int xMin = 50;//limite pour affichage
 		int yMin = 50;
 		
 		if(xMin>nbColonne){
@@ -46,7 +46,7 @@ public class Partie {
 		if(yMin>nbLigne){
 			nbLigne=yMin;
 		}
-		
+		*/
 		this.decor = new Cellule[nbLigne+4][nbColonne+4];
 		for(int i = 0; i < decor.length; i++){
 			for (int j = 0; j < decor[i].length; j++) {
@@ -222,21 +222,21 @@ public class Partie {
 			System.out.print("|");
 			for(j=0;j<this.decor()[i].length;j++){
 				if(this.occupe(j, i)!=null){
-					if((this.occupe(j, i).getClass().equals(Guerrier.class))){
-						//System.out.print("G");
-					}else if((this.occupe(j, i).getClass().equals(Peintre.class))){
-						//System.out.print("P");
+					if((this.occupe(j, i).equals(Guerrier.class))){
+						System.out.print("G");
+					}else if((this.occupe(j, i).equals(Peintre.class))){
+						System.out.print("P");
 					}
 				}else{
 					System.out.print(" ");
 				}
 				if(this.decor[i][j].valeur()!=0){
-					//System.out.print("V");
+					System.out.print("V");
 				}else{
-					//System.out.print(".");
+					System.out.print("0");
 				}
 				coul=this.decor()[i][j].couleur();
-				/*switch(coul){
+				switch(coul){
 					case codes.blanc : System.out.print("b");
 					break;
 					case codes.rouge : System.out.print("r");
@@ -245,12 +245,7 @@ public class Partie {
 					break;
 					case codes.couleurMur : System.out.print("m");
 					break;
-				}*/
-				if(this.blocke(j, i)==(this.decor()[i][j].couleur()==codes.couleurMur)){
-					System.out.print("   ");
-				}else{
-					System.out.print(" X ");
-				};
+				}
 				System.out.print("|");
 			}
 			System.out.print("\n");

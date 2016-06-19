@@ -79,7 +79,7 @@ public class Grande extends Application {
 	Pane pane;
 	Rectangle mapj1;
 	Rectangle mapj2;
-	Circle cercle;
+	
 	Personnage pers;
 	
 	@Override
@@ -305,14 +305,7 @@ public class Grande extends Application {
 						
 						pers = Main.Main.p.occupe(i-1,j-1);
 						if (pers!=null) {
-							cercle = new Circle();
-							cercle.setRadius(14);
-							cercle.setCenterX(15);
-							cercle.setCenterY(15);
-							cercle.setStroke(Color.BLACK);
-							cercle.setFill(couleur1);
-							//if(pers.equipe().getLEquipeSTP()==2) cercle.setFill(couleur2);
-							pane.getChildren().add(cercle);
+							System.out.println(pers.equipe());
 							if(pers.getClass().equals(Guerrier.class)){
 								image = new Image("file:images/epee.png");
 								guerrier = new ImageView(image);
@@ -326,7 +319,7 @@ public class Grande extends Application {
 								peintre.setFitHeight(31);
 								pane.getChildren().add(peintre);
 							}
-						}
+						} 
 						
 						
 						if ((i == y & j == x) | (i == y2) & (j == x2)) {
@@ -369,16 +362,8 @@ public class Grande extends Application {
 						
 						pers = Main.Main.p.occupe(i-1,j-1);
 						if (pers!=null) {
-							cercle = new Circle();
-							cercle.setRadius(14);
-							cercle.setCenterX(15);
-							cercle.setCenterY(15);
-							cercle.setStroke(Color.BLACK);
-							cercle.setFill(couleur1);
-							//if(pers.equipe().getLEquipeSTP()==2) cercle.setFill(couleur2);
-							pane.getChildren().add(cercle);
 							if(pers.getClass().equals(Guerrier.class)){
-								image = new Image("file:images/epee.png");
+								image = new Image("file:images/balise.png");
 								guerrier = new ImageView(image);
 								guerrier.setFitWidth(31);
 								guerrier.setFitHeight(31);
@@ -390,7 +375,7 @@ public class Grande extends Application {
 								peintre.setFitHeight(31);
 								pane.getChildren().add(peintre);
 							}
-						}
+						} 
 						
 						
 						if ((i == y & j == x) | (i == y2) & (j == x2)) {
