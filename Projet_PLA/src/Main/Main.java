@@ -29,13 +29,13 @@ public class Main {
 		//verifier codes pour chaque type de personnage codes.attaquer à codes.attaquer + 3
 		
 		//Partie jeu;
-		p=parser.buildGame("test1.xml","test1.xml");
+		p=parser.buildGame("joueur1.xml","joueur2.xml");
 		//jeu.ajoutMurs(500);
 		
 		//p.ajoutMursMap();
-		/*
-		p.affichageText();
 		
+		p.affichageText();
+		/*
 		try {
 		    Thread.sleep(1000);                 //1000 milliseconds is one second.
 		} catch(InterruptedException ex) {

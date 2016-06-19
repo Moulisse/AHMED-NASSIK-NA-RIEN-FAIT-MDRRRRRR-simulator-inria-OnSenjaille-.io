@@ -32,8 +32,8 @@ public class Grande extends Application {
 	int timer2 = 0;
 	int timertour = 0;
 
-	public String nom1 = "�quipe 1";
-	public String nom2 = "�quipe 2";
+	public String nom1 = "equipe 1";
+	public String nom2 = "equipe 2";
 	public Color couleur1 = Color.web("#7CFC00");
 	public Color couleur2 = Color.web("#1E90FF");
 	public int nb_p1 = 2;
@@ -58,7 +58,7 @@ public class Grande extends Application {
 	Text temps = new Text();
 
 	int i, j, k;
-	long duree = 60;
+	long duree = 300;
 	long t0 = duree;
 
 	Image image;
@@ -374,7 +374,10 @@ public class Grande extends Application {
 							cercle.setCenterX(15);
 							cercle.setCenterY(15);
 							cercle.setStroke(Color.BLACK);
-							cercle.setFill(couleur1);
+							if(pers.equipe().equals(Main.Main.p.getJ1()))
+								cercle.setFill(couleur1);
+							if(pers.equipe().equals(Main.Main.p.getJ2()))
+								cercle.setFill(couleur2);
 							//if(pers.equipe().getLEquipeSTP()==2) cercle.setFill(couleur2);
 							pane.getChildren().add(cercle);
 							if(pers.getClass().equals(Guerrier.class)){
