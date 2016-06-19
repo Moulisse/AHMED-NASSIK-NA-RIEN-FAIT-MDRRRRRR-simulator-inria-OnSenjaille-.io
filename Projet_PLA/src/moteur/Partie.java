@@ -233,7 +233,7 @@ public class Partie {
 				if(this.decor[i][j].valeur()!=0){
 					System.out.print("V");
 				}else{
-					System.out.print("0");
+					System.out.print(".");
 				}
 				coul=this.decor()[i][j].couleur();
 				switch(coul){

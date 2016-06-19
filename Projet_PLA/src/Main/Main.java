@@ -27,7 +27,7 @@ public class Main {
 		//verifier codes pour chaque type de personnage codes.attaquer à codes.attaquer + 3
 		
 		//Partie jeu;
-		p=parser.buildGame("automatemesh.xml","automatemesh.xml");
+		p=parser.buildGame("test1.xml","test1.xml");
 		//jeu.ajoutMurs(500);
 		
 		p.ajoutMursMap();
