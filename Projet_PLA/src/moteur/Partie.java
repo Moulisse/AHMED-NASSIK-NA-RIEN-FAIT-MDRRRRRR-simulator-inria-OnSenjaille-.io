@@ -246,11 +246,6 @@ public class Partie {
 					case codes.couleurMur : System.out.print("m");
 					break;
 				}*/
-				if(this.blocke(j, i)==(this.decor()[i][j].couleur()==codes.couleurMur)){
-					System.out.print("   ");
-				}else{
-					System.out.print(" X ");
-				};
 				System.out.print("|");
 			}
 			System.out.print("\n");
