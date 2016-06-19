@@ -15,14 +15,13 @@ public class Ordonnanceur {
 	
 	public void tour(){
 		List<Integer> conds;
-		int act;
+		ActionFutur act;
 		List<ActionFutur> actions = new ArrayList<ActionFutur>();
 		for(Personnage p : part.personnages()){
 			//System.out.println("LE PERSONNAGE EST EN POS : X= "+p.position().getX()+" Y="+p.position().getY());
 			conds = this.calculConditions(p);
-			act = p.automate().action(p.etat(), conds);
-			System.out.print(act+" : ");
-			actions.add(new ActionFutur(p,act));
+			act = p.automate().action(p, conds);
+			actions.add(act);
 		}
 		Collections.sort(actions);
 		double roll;

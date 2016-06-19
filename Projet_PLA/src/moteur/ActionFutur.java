@@ -6,10 +6,12 @@ public class ActionFutur implements Comparable<ActionFutur>{
 	private Personnage perso;
 	private int codeAction;
 	private Position cible;
+	private int futurEtat;
 	
-	ActionFutur(Personnage p,int i){
+	ActionFutur(Personnage p,int i,int et){
 		perso = p;
 		cible = new Position(0,0);
+		futurEtat=et;
 		
 		if(i>=codes.avancer&&i<=codes.avancer+3){
 
@@ -31,6 +33,7 @@ public class ActionFutur implements Comparable<ActionFutur>{
 		}
 		System.out.println("\n");
 		
+		
 	}
 	
 	public Position cible(){
@@ -47,7 +50,7 @@ public class ActionFutur implements Comparable<ActionFutur>{
 			this.perso.suivreBalise();
 		}else{
 			
-			System.out.print(this.type.toString());
+			this.perso().setEtat(futurEtat);
 			
 			switch (type){
 			case MOUVEMENT :
