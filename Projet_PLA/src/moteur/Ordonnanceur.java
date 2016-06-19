@@ -78,8 +78,8 @@ public class Ordonnanceur {
 		 * conditions.add(11);
 		 * }
 		*/
-		int X=p.partie().decor().length;
-		int Y=p.partie().decor()[0].length;
+		int X=p.partie().decor()[0].length;
+		int Y=p.partie().decor().length;
 	
 		boolean nord_accessible = false;
 		boolean est_accessible = false;
