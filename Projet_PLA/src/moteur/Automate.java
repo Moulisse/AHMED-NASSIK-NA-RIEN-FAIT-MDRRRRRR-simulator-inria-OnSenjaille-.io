@@ -22,28 +22,36 @@ public class Automate {
 	//PREMIERE COLONNE EST LES CONDITIONS
 	//prend en entée l'état actuel et le symbole et renvoie le nouvelle état;
 	public int transition(int etat,int symbole){
+		/*
+		for(int j=0;j<transitions.length;j++){
+			for(int i=0)
+		}
+		*/
 		for(int i=0;i<transitions.length;i++){
-			if (transitions[i][0]==symbole) 
-				return transitions[i][etat];
+			System.out.print("#"+etat+" "+ symbole+" "+transitions[i][etat+1]+"\n");
+			if (transitions[i][0]==symbole)
+				return transitions[i][etat+1];
 		}
 		return 0; //symbole non trouvé
 	}
 	
 	//prend en entée l'état actuel et le symbole et renvoie le nouvelle état;
-		public int action(int etat,List<Integer> symboles){
-			List<Integer> actionsPossibles = new ArrayList<Integer>();
+		public ActionFutur action(Personnage perso,List<Integer> symboles){
+			List<ActionFutur> actionsPossibles = new ArrayList<ActionFutur>();
 			int i;
 			//i<position.getY()+ hauteur de l'automate d'action (nombre de conditions). 
 			for(i=position.getY();i<position.getY()+this.transitions.length;i++){
 			//System.out.println("position.getY()+i "+(position.getY()+i)+"position.getX()+etat+1 "+(position.getX()+etat+1));
 				//System.out.println("[position.getY()+i] "+(position.getY()+i)+"[position.getX()] "+ (position.getX()));
 				if (symboles.contains(partie.decor()[i][position.getX()].valeur()))
-					if (partie.decor()[i][position.getX()+etat+1].valeur()!=0){
-						actionsPossibles.add(partie.decor()[i][position.getX()+etat+1].valeur());
+					if (partie.decor()[i][position.getX()+perso.etat+1].valeur()!=0){
+						actionsPossibles.add(new ActionFutur(perso,
+								partie.decor()[i][position.getX()+perso.etat+1].valeur(),
+								transition(perso.etat(), partie.decor()[i][position.getX()].valeur())));
 					}
 			}
 			if (actionsPossibles.isEmpty())
-				return 0;
+				return new ActionFutur(perso,codes.Attendre,perso.etat());
 			else{
 				int roll = (int)(Math.random()*(actionsPossibles.size()));
 				return actionsPossibles.get(roll);

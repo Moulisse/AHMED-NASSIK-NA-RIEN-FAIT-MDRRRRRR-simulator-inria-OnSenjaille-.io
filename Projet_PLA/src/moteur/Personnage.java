@@ -161,6 +161,10 @@ public abstract class Personnage {
 	public void setEtat(int e){
 		etat = e;
 	}
+	
+	public void updateEtat(int symbole){
+		this.etat=this.automate.transition(etat, symbole);
+	}
 	/*
 	public void setAutomateTransition(int t[][])
 	{

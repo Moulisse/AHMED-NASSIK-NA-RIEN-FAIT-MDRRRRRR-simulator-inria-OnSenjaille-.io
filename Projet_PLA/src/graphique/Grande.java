@@ -367,7 +367,7 @@ public class Grande extends Application {
 							rekt.setHeight(30);
 						}
 						
-						pers = Main.Main.p.occupe(i-1,j-1);
+						pers = Main.Main.p.occupe(j-1,i-1);
 						if (pers!=null) {
 							cercle = new Circle();
 							cercle.setRadius(14);
