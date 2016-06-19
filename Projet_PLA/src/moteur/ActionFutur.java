@@ -31,7 +31,6 @@ public class ActionFutur implements Comparable<ActionFutur>{
 		}else {
 			type = TypeAction.RATE; //bug code inconnue.
 		}
-		System.out.println("\n");
 		
 		
 	}
@@ -54,7 +53,10 @@ public class ActionFutur implements Comparable<ActionFutur>{
 			
 			switch (type){
 			case MOUVEMENT :
-				if (!this.perso.partie().blocke(this.cible().getX(), this.cible().getY())){
+				boolean wall = this.perso.partie().blocke(this.cible().getX(), this.cible().getY());
+				boolean present = this.perso.partie().occupe(this.cible().getX(), this.cible().getY())!=null;
+				
+				if ((!wall)&&(present)){
 					this.perso.avancer(codeAction);
 				}else{
 					this.perso.avancer(4);

@@ -25,7 +25,6 @@ public class Automate {
 		
 		
 		for(int i=0;i<transitions.length;i++){
-			System.out.print("#"+etat+" "+ symbole+" "+transitions[i][etat+1]+"\n");
 			if (transitions[i][0]==symbole)
 				return transitions[i][etat+1];
 		}
@@ -70,9 +69,9 @@ public class Automate {
 		}
 		
 		public void afficherActions(){
-			for(int i=this.position.getY();i<transitions.length;i++){
-				for(int j=this.position.getX();j<transitions[i].length;j++){
-					System.out.print(this.partie.decor()[i][j].valeur()+" ");
+			for(int i=this.position.getX();i<transitions.length;i++){
+				for(int j=this.position.getY();j<transitions[i].length;j++){
+					System.out.print(this.partie.decor()[i][j].valeur()+" | ");
 				}
 				System.out.print("\n");
 			}

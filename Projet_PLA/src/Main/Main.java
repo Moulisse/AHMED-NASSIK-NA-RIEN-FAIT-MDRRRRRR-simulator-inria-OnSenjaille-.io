@@ -33,7 +33,7 @@ public class Main {
 		//jeu.ajoutMurs(500);
 		
 		//p.ajoutMursMap();
-		
+		/*
 		p.affichageText();
 		
 		try {
@@ -50,8 +50,8 @@ public class Main {
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
-		}
-		//Application.launch(Grande.class, args);
+		}*/
+		Application.launch(Grande.class, args);
 
 	}
 
