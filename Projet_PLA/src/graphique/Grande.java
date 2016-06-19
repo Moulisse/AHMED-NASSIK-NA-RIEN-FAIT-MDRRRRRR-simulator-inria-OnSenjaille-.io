@@ -58,7 +58,7 @@ public class Grande extends Application {
 	Text temps = new Text();
 
 	int i, j, k;
-	long duree = 300;
+	long duree = 30;
 	long t0 = duree;
 
 	Image image;
@@ -244,7 +244,9 @@ public class Grande extends Application {
 				
 				if (timertour==0){
 					Main.Main.p.tour();
-					timertour=15;
+					sum1=Main.Main.p.nbCasesPeinteB();
+					sum2=Main.Main.p.nbCasesPeinteR();
+					timertour=2;
 				}
 				if (timertour > 0)
 					timertour--;
@@ -311,6 +313,12 @@ public class Grande extends Application {
 							cercle.setCenterY(15);
 							cercle.setStroke(Color.BLACK);
 							cercle.setFill(couleur1);
+							if(pers.equipe().equals(Main.Main.p.getJ2()))
+								cercle.setFill(couleur2);
+							if (tab[i-1][j-1].couleur() == codes.bleu)
+								rekt.setFill(couleur1);
+							if (tab[i-1][j-1].couleur() == codes.rouge)
+								rekt.setFill(couleur2);
 							//if(pers.equipe().getLEquipeSTP()==2) cercle.setFill(couleur2);
 							pane.getChildren().add(cercle);
 							if(pers.getClass().equals(Guerrier.class)){
@@ -374,8 +382,7 @@ public class Grande extends Application {
 							cercle.setCenterX(15);
 							cercle.setCenterY(15);
 							cercle.setStroke(Color.BLACK);
-							if(pers.equipe().equals(Main.Main.p.getJ1()))
-								cercle.setFill(couleur1);
+							cercle.setFill(couleur1);
 							if(pers.equipe().equals(Main.Main.p.getJ2()))
 								cercle.setFill(couleur2);
 							//if(pers.equipe().getLEquipeSTP()==2) cercle.setFill(couleur2);
@@ -530,6 +537,29 @@ public class Grande extends Application {
 					avance2[1] = avance2[0];
 					avance2[0] = 4;
 				}
+				
+				
+				
+				
+				if (ke.getCode().toString() == "SPACE") {
+					if(Main.Main.p.getJ1().balise().active()){
+						Main.Main.p.getJ1().balise().desactiverBalise();
+					}else{
+						Main.Main.p.getJ1().balise().placerBalise(new Position(x-1,y-1));
+					}
+				}
+				if (ke.getCode().toString() == "NUMPAD0") {
+					if(Main.Main.p.getJ2().balise().active()){
+						Main.Main.p.getJ2().balise().desactiverBalise();
+					}else{
+						Main.Main.p.getJ2().balise().placerBalise(new Position(x2-1,y2-1));
+					}
+				}
+				
+				
+				
+				System.out.println(ke.getCode().toString());
+				
 
 				if (ke.getCode().toString() == "ESCAPE") {
 					System.exit(0);

@@ -36,7 +36,7 @@ public class Automate {
 			List<ActionFutur> actionsPossibles = new ArrayList<ActionFutur>();
 			int i;
 			
-			this.afficherActions();
+			//this.afficherActions();
 			
 			//i<position.getY()+ hauteur de l'automate d'action (nombre de conditions). 
 			for(i=position.getY();i<position.getY()+this.transitions.length;i++){

@@ -32,7 +32,7 @@ public class Main {
 		p=parser.buildGame("joueur1.xml","joueur2.xml");
 		//jeu.ajoutMurs(500);
 		
-		//p.ajoutMursMap();
+		p.ajoutMursMap();
 		
 		p.affichageText();
 		/*

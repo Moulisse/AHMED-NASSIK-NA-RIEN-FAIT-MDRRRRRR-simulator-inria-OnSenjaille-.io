@@ -53,8 +53,8 @@ public class ActionFutur implements Comparable<ActionFutur>{
 			
 			switch (type){
 			case MOUVEMENT :
-				System.out.print("Position :"+this.perso().position().getX()+" "+this.perso().position().getY()+"\n");
-				System.out.print("Cible :"+this.cible().getX()+" "+this.cible().getY()+"\n");
+				//System.out.print("Position :"+this.perso().position().getX()+" "+this.perso().position().getY()+"\n");
+				//System.out.print("Cible :"+this.cible().getX()+" "+this.cible().getY()+"\n");
 				
 				boolean wall = this.perso.partie().blocke(this.cible().getX(), this.cible().getY());
 				boolean present = this.perso.partie().occupe(this.cible().getX(), this.cible().getY())!=null;
@@ -69,6 +69,7 @@ public class ActionFutur implements Comparable<ActionFutur>{
 				this.perso().rate();
 				break;
 			case FRAPPE :
+				System.out.print("Et bim un bourpif");
 				if(this.perso().getClass().equals(Guerrier.class)){
 					((Guerrier)this.perso).frapper(codeAction);
 				}

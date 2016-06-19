@@ -16,6 +16,8 @@ public class Guerrier extends Personnage {
 	public void frapper(int code){
 		Personnage cible=null;	//verif au niveau de l'ordonanceur.
 
+		System.out.print("code : "+code+"\n");
+		
 		switch (code){
 		case 0 :	//Nord
 			cible = this.partie.occupe(pos.getX(),pos.getY()-1);
@@ -34,6 +36,7 @@ public class Guerrier extends Personnage {
 			break;
 		}
 		if (cible != null)
+			System.out.print("Craaaaaak \n");
 			cible.beaten();
 	}
 	

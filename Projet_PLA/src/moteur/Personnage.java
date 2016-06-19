@@ -31,6 +31,7 @@ public abstract class Personnage {
 	
 	public void beaten(){
 		sante=0;
+		partie.personnages().remove(this);
 	}
 	
 	public void setPartie(Partie p){
@@ -131,19 +132,23 @@ public abstract class Personnage {
 	public void avancer(int code){
 		switch (code){
 		case 0 :	//Nord
-			if(!this.partie().blocke(this.position().getX(),this.position().getY()-1))
+			if(!this.partie().blocke(this.position().getX(),this.position().getY()-1)&&
+					(this.partie().occupe(this.position().getX(), this.position().getY()-1)==null))
 				pos.setY(position().getY()-1);
 			break;
 		case 1 : 	//Est
-			if(!this.partie().blocke(this.position().getX()+1,this.position().getY()))
+			if(!this.partie().blocke(this.position().getX()+1,this.position().getY())&&
+					(this.partie().occupe(this.position().getX()+1, this.position().getY())==null))
 				pos.setX(position().getX()+1);
 			break;
 		case 2 : 	//Sud
-			if(!this.partie().blocke(this.position().getX(),this.position().getY()+1))
+			if(!this.partie().blocke(this.position().getX(),this.position().getY()+1)&&
+					(this.partie().occupe(this.position().getX(), this.position().getY()+1)==null))
 				pos.setY(position().getY()+1);
 			break;
 		case 3 : 	//Ouest
-			if(!this.partie().blocke(this.position().getX()-1,this.position().getY()))
+			if(!this.partie().blocke(this.position().getX()-1,this.position().getY())&&
+					(this.partie().occupe(this.position().getX()-1, this.position().getY())==null))
 				pos.setX(position().getX()-1);
 			break;
 		default : 	//Sur Place
