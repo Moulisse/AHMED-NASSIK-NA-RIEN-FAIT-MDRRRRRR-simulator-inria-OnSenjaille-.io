@@ -132,7 +132,7 @@ public class Ordonnanceur {
 		boolean BleueEl_O=false;
 
 		
-		if(p.position().getY()-1>2)
+		if(p.position().getY()-1>=0)
 		{
 			//Personnage au nord
 			if (p.partie().occupe(p.position().getX(), p.position().getY()-1)!=null){
@@ -175,7 +175,7 @@ public class Ordonnanceur {
 			}
 		}
 		
-		if(p.position().getX()+1<X-2)
+		if(p.position().getX()-1<=X-1)
 		{
 			//Personnage a l'est
 			if (p.partie().occupe(p.position().getX()+1, p.position().getY())!=null){
@@ -209,14 +209,14 @@ public class Ordonnanceur {
 			{
 				conditions.add(codes.murEst);
 			}
-			if(p.position().getX()+2<X-2)
+			if(p.position().getX()+2<=X-1)
 			{
 				est2_accessible = true;
 			}
 			est_accessible=true;
 		}
 		
-		if(p.position().getY()+1<Y-2)
+		if(p.position().getY()+1<=Y-1)
 		{
 			//Personnage au sud
 			if (p.partie().occupe(p.position().getX(), p.position().getY()+1)!=null){
@@ -251,13 +251,13 @@ public class Ordonnanceur {
 				conditions.add(codes.murSud);
 			}
 			sud_accessible=true;
-			if(p.position().getY()+2<Y-2)
+			if(p.position().getY()+2<=Y-1)
 			{
 				sud2_accessible = true;
 			}
 		}
 		
-		if(p.position().getX()-1>2)
+		if(p.position().getX()-1>=0)
 		{
 			//Personnage a l'ouest
 			if (p.partie().occupe(p.position().getX()-1, p.position().getY())!=null){
@@ -292,7 +292,7 @@ public class Ordonnanceur {
 				conditions.add(codes.murOuest);
 			}
 			ouest_accessible=true;
-			if(p.position().getX()-2>2)
+			if(p.position().getX()-2>=0)
 			{
 				ouest2_accessible = true;
 			}
@@ -619,4 +619,3 @@ public class Ordonnanceur {
 			return conditions;
 		}
 }
-
