@@ -42,6 +42,7 @@ public class Main {
 		while(true){
 			p.tour();
 			p.affichageText();
+			p.affichePersoPos();
 			try {
 			    Thread.sleep(1000);                 //1000 milliseconds is one second.
 			} catch(InterruptedException ex) {

@@ -312,5 +312,12 @@ public class Partie {
 		return this.decor[0].length;
 	}
 	
+	public void affichePersoPos()
+	{
+		for(Personnage p : personnages){
+			p.stringPosition();
+
+	}
+	}
 	
 }
