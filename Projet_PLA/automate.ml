@@ -395,12 +395,12 @@ let aut2 =
    Peintre);;
  *)
 (*let test=[tour_de_map;peintre_simple];;*)
-let test=[guerrier_moins_con_R;peintre_moins_con_R];;
+let test=[guerrier_moins_con_B;peintre_moins_con_B;guerrier_moins_con_B;peintre_moins_con_B;guerrier_moins_con_B;peintre_moins_con_B;guerrier_moins_con_B;peintre_moins_con_B];;
 (*let test=[guerrier_moins_con_B;peintre_moins_con_B;guerrier_moins_con_R;peintre_moins_con_R];;*)
 
 (* TEST *)
 
-let fichier = open_out "joueur2.xml";;
+let fichier = open_out "joueur1.xml";;
 let () = write_xml fichier test 0;;
   close_out fichier;;
  
