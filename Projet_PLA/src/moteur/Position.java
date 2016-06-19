@@ -10,6 +10,10 @@ public class Position {
 		this.y = y;
 	}
 	
+	public boolean equals(Position p){
+		return this.x==p.getX()&&this.y==p.getY();
+	}
+	
 	public int getX(){
 		return x;
 	}

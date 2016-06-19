@@ -27,35 +27,37 @@ public class Ordonnanceur {
 		double roll;
 		for(ActionFutur a : actions){
 			for(ActionFutur b : actions){
-				if(a.type()==TypeAction.FRAPPE&&b.type()==TypeAction.FRAPPE){
-					if(a.cible()==b.perso().position()&&b.cible()==a.perso().position()){ //Si les guerriers s'attaque tout les deux
-						roll = Math.random();
-						if (roll<=0.33){
-							a.setType(TypeAction.RATE);
-						}else if(roll>=0.66){
-							b.setType(TypeAction.RATE);
-						} //si 0.33<roll<0.66 les guerrier s'entretue 
-					}
-				}
-				if(a.type()==TypeAction.PEINT&&b.type()==TypeAction.PEINT){
-					if(a.cible()==b.cible()){ //Si deux peintre peignent la même case
-						if (!a.sameColor(b)){
+				if(!a.equals(b)){
+					if(a.type().equals(TypeAction.FRAPPE)&&b.type().equals(TypeAction.FRAPPE)){
+						if(a.cible()==b.perso().position()&&b.cible()==a.perso().position()){ //Si les guerriers s'attaque tout les deux
 							roll = Math.random();
-							if (roll<=0.5){
+							if (roll<=0.33){
 								a.setType(TypeAction.RATE);
-							}else{
+							}else if(roll>=0.66){
 								b.setType(TypeAction.RATE);
+							} //si 0.33<roll<0.66 les guerrier s'entretue 
+						}
+					}
+					if(a.type().equals(TypeAction.PEINT)&&b.type().equals(TypeAction.PEINT)){
+						if(a.cible()==b.cible()){ //Si deux peintre peignent la même case
+							if (!a.sameColor(b)){
+								roll = Math.random();
+								if (roll<=0.5){
+									a.setType(TypeAction.RATE);
+								}else{
+									b.setType(TypeAction.RATE);
+								}
 							}
 						}
 					}
-				}
-				if(a.type()==TypeAction.MOUVEMENT&&b.type()==TypeAction.MOUVEMENT){	
-					if(a.cible()==b.cible()){ //Si deux personnages avance sur la même case.
-						roll = Math.random();
-						if (roll<=0.50){
-							a.setCible(4); //Avancer sur place.
-						}else{
-							b.setCible(4);
+					if(a.type().equals(TypeAction.MOUVEMENT)&&b.type().equals(TypeAction.MOUVEMENT)){	
+						if(a.cible().equals(b.cible())){ //Si deux personnages avance sur la même case.
+							roll = Math.random();
+							if (roll<=0.50){
+								a.setCible(4); //Avancer sur place.
+							}else{
+								b.setCible(4);
+							}
 						}
 					}
 				}

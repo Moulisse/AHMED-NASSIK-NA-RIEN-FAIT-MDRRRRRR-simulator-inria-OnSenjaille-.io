@@ -53,13 +53,15 @@ public class ActionFutur implements Comparable<ActionFutur>{
 			
 			switch (type){
 			case MOUVEMENT :
+				System.out.print("Position :"+this.perso().position().getX()+" "+this.perso().position().getY()+"\n");
+				System.out.print("Cible :"+this.cible().getX()+" "+this.cible().getY()+"\n");
+				
 				boolean wall = this.perso.partie().blocke(this.cible().getX(), this.cible().getY());
 				boolean present = this.perso.partie().occupe(this.cible().getX(), this.cible().getY())!=null;
 				
-				if (!(wall&&present)){
+				if (!(wall||present)){
 					this.perso.avancer(codeAction);
 				}else{
-					System.exit(0);
 					this.perso.avancer(4);
 				}
 				break;
@@ -109,18 +111,23 @@ public class ActionFutur implements Comparable<ActionFutur>{
 		case 0 :	//Nord
 			cible.setX(perso.position().getX());
 			cible.setY(perso.position().getY()-1);
+			break;
 		case 1 : 	//Est
 			cible.setX(perso.position().getX()+1);
 			cible.setY(perso.position().getY());
+			break;
 		case 2 : 	//Sud
 			cible.setX(perso.position().getX());
 			cible.setY(perso.position().getY()+1);
+			break;
 		case 3 : 	//Ouest
 			cible.setX(perso.position().getX()-1);
 			cible.setY(perso.position().getY());
+			break;
 		case 4 : 	//Sur Place
 			cible.setX(perso.position().getX());
 			cible.setY(perso.position().getY());
+			break;
 		}
 	}
 	public int compareTo(ActionFutur arg0) {
