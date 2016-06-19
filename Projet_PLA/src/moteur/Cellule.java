@@ -37,7 +37,6 @@ public class Cellule {
 	
 	public void peindre(int c){
 		couleur = c;
-		
 		if(valeur==codes.rouge){
 			if(this.valeur>=codes.peindreB&&this.valeur<=codes.peindreB+4){
 				this.valeur=this.valeur-codes.peindreB+codes.peindreR;
@@ -80,5 +79,7 @@ public class Cellule {
 				this.valeur=this.valeur - codes.caseRougeNord + codes.caseBleuNord;
 			}	
 		}
+		
 	}
+	
 }

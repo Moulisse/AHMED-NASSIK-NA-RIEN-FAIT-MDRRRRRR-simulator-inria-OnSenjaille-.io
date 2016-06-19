@@ -31,8 +31,7 @@ public class Peintre extends Personnage{
 			case 3 : 	//Ouest
 				this.partie.decor()[x-1][y].peindre(couleur);
 				break;
-			default : this.partie.decor()[x][y].peindre(couleur); 
-			break;	//Sur Place
+			default : this.partie.decor()[x][y].peindre(couleur); break;	//Sur Place
 			}
 		}
 	}
