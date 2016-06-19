@@ -10,6 +10,8 @@ public class Partie {
 	private Cellule decor[][];
 	private Ordonnanceur ordonnanceur;
 	private List<Personnage> personnages;//penser a distinguer la team des personnages
+	private Joueur equipe1;
+	private Joueur equipe2;
 	public Partie() {
 		this.decor = new Cellule[10][10];
 		for(int i = 0; i < decor.length; i++){
@@ -76,12 +78,30 @@ public class Partie {
 		this.ordonnanceur = new Ordonnanceur(this);
 		this.personnages=new ArrayList<Personnage>();
 	}
+	
+	
+	public void setJoueur1(Joueur j){
+		equipe1 = j;
+	}
+	
+	public void setJoueur2(Joueur j){
+		equipe2 = j;
+	}
+	
+	public Joueur getJ1(){
+		return equipe1;
+	}
+	
+	public Joueur getJ2(){
+		return equipe2;
+	}
+	
+	
 	/*
 	public Partie(int nbLigne,int nbColonne) {
 		this.decor = new Cellule[nbLigne+2][nbColonne+2];
 		
 	
-		
 		
 		for(int i = 0; i < decor.length; i++){
 			for (int j = 0; j < decor[i].length; j++) {

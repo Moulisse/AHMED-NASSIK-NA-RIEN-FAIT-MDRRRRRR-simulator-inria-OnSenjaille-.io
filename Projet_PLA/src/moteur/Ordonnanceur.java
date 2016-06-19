@@ -29,7 +29,7 @@ public class Ordonnanceur {
 			for(ActionFutur b : actions){
 				if(!a.equals(b)){
 					if(a.type().equals(TypeAction.FRAPPE)&&b.type().equals(TypeAction.FRAPPE)){
-						if(a.cible()==b.perso().position()&&b.cible()==a.perso().position()){ //Si les guerriers s'attaque tout les deux
+						if(a.cible().equals(b.perso().position())&&b.cible().equals(a.perso().position())){ //Si les guerriers s'attaque tout les deux
 							roll = Math.random();
 							if (roll<=0.33){
 								a.setType(TypeAction.RATE);
@@ -39,7 +39,7 @@ public class Ordonnanceur {
 						}
 					}
 					if(a.type().equals(TypeAction.PEINT)&&b.type().equals(TypeAction.PEINT)){
-						if(a.cible()==b.cible()){ //Si deux peintre peignent la même case
+						if(a.cible().equals(b.cible())){ //Si deux peintre peignent la même case
 							if (!a.sameColor(b)){
 								roll = Math.random();
 								if (roll<=0.5){

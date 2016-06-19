@@ -375,7 +375,9 @@ public class ParserXML {
 		joueur2 = createPlayer(partieInitiale, fichierJoueur2, nbAuto(fichierJoueur1),longueurAutoMax,numeroTest);
 
 		// initialisation JOUEUR 1
-
+		
+		partieInitiale.setJoueur1(joueur1);
+		partieInitiale.setJoueur2(joueur2);
 		partieInitiale.ajouterListe(joueur1.getPersonnages());
 		System.out.println("Il ya : "+ joueur1.getPersonnages().size()+" pour le joueur 1");
 		partieInitiale.ajouterListe(joueur2.getPersonnages());
