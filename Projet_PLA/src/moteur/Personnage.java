@@ -213,7 +213,6 @@ public abstract class Personnage {
 	{
 		System.out.println("Position du perso : Y "+this.position().getY()+ "X : "+this.position().getX());
 
-
 	}
 	
 	
