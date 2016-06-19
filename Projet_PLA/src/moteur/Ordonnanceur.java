@@ -219,7 +219,7 @@ public class Ordonnanceur {
 		if(p.position().getY()+1<=Y-1)
 		{
 			//Personnage au sud
-			if (p.partie().occupe(p.position().getX()+1, p.position().getY())!=null){
+			if (p.partie().occupe(p.position().getX(), p.position().getY()+1)!=null){
 				
 				//Allie
 				if(p.partie().occupe(p.position().getX(), p.position().getY()+1).equipe()==p.equipe()){
