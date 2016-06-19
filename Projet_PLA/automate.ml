@@ -44,14 +44,14 @@ let (cellule_to_int: cellule -> int) = function
 let (condition_to_int: condition -> int) =  function
   | EnnemiEloigne (cellule) -> 1+(cellule_to_int cellule )
   | Ennemi (cellule) -> 5+(cellule_to_int cellule )
-  | Allie (cellule) -> 8+(cellule_to_int cellule )
-  | CaseBlancheEloignee (cellule) -> 12+(cellule_to_int cellule )
-  | CaseRougeEloignee (cellule) -> 16+(cellule_to_int cellule )
-  | CaseBleuEloignee (cellule) -> 20+(cellule_to_int cellule )
-  | CaseBlanche (cellule) -> 24+(cellule_to_int cellule )
-  | CaseRouge (cellule) -> 29+(cellule_to_int cellule )
-  | CaseBleu (cellule) -> 34+(cellule_to_int cellule )
-  | Mur (cellule) -> 38+(cellule_to_int cellule )
+  | Allie (cellule) -> 9+(cellule_to_int cellule )
+  | CaseBlancheEloignee (cellule) -> 13+(cellule_to_int cellule )
+  | CaseRougeEloignee (cellule) -> 17+(cellule_to_int cellule )
+  | CaseBleuEloignee (cellule) -> 21+(cellule_to_int cellule )
+  | CaseBlanche (cellule) -> 25+(cellule_to_int cellule )
+  | CaseRouge (cellule) -> 30+(cellule_to_int cellule )
+  | CaseBleu (cellule) -> 35+(cellule_to_int cellule )
+  | Mur (cellule) -> 40+(cellule_to_int cellule )
 ;;
 
 
