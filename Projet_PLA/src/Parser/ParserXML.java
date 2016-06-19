@@ -143,6 +143,10 @@ public class ParserXML {
 		System.out.println("Nombre de lignes automate actions : " + action.getAttributeValue("nb_l")
 				+ "\nNombre de colonnes automate action : " + action.getAttributeValue("nb_c"));
 
+		if(Integer.parseInt(action.getAttributeValue("nb_c"))>5){
+			System.err.print("UN AUTOMATE POSSEDE TROP D'ETAT : MAXIMUM = 5");
+			System.exit(0);}
+		
 		int actions[][] = new int[Integer.parseInt(action.getAttributeValue("nb_l"))][Integer.parseInt(action.getAttributeValue("nb_c"))];
 
 		List listLignesAction = action.getChildren("l");
@@ -302,7 +306,7 @@ public class ParserXML {
 
 	public Partie buildGame(String fichierJoueur1, String fichierJoueur2) {
 		int nbTotalAutomates = nbAuto(fichierJoueur1) + nbAuto(fichierJoueur2);
-		if(nbAuto(fichierJoueur1)!=(nbAuto(fichierJoueur2))){System.out.println("LES DEUX JOUEURS N'ONT PAS LE MEME NOMBRE DE PERSONNAGE"); 
+		if(nbAuto(fichierJoueur1)!=(nbAuto(fichierJoueur2))){System.err.println("LES DEUX JOUEURS N'ONT PAS LE MEME NOMBRE DE PERSONNAGE"); 
 		System.exit(0);
 		}
 		// hauteur max : 40
