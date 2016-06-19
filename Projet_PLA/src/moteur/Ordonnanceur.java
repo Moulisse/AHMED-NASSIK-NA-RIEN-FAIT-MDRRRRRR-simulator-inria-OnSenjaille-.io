@@ -21,8 +21,10 @@ public class Ordonnanceur {
 			//System.out.println("LE PERSONNAGE EST EN POS : X= "+p.position().getX()+" Y="+p.position().getY());
 			conds = this.calculConditions(p);
 			act = p.automate().action(p, conds);
+			System.out.print(p.etat()+" | ");
 			actions.add(act);
 		}
+		System.out.print("\n");
 		Collections.sort(actions);
 		double roll;
 		for(ActionFutur a : actions){

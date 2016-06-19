@@ -35,7 +35,7 @@ public class Main {
 		//p.ajoutMursMap();
 		
 		p.affichageText();
-		/*
+		
 		try {
 		    Thread.sleep(1000);                 //1000 milliseconds is one second.
 		} catch(InterruptedException ex) {
@@ -50,8 +50,8 @@ public class Main {
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
-		}*/
-		Application.launch(Grande.class, args);
+		}
+		//Application.launch(Grande.class, args);
 
 	}
 
