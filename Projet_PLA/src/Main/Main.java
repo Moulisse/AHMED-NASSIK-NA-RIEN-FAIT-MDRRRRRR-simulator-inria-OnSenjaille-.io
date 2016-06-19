@@ -1,8 +1,8 @@
 package Main;
 
 import Parser.ParserXML;
-//import graphique.Grande;
-//import javafx.application.Application;
+import graphique.Grande;
+import javafx.application.Application;
 import moteur.*;
 
 
@@ -34,7 +34,7 @@ public class Main {
 		
 		p.affichageText();
 		
-		try {
+		/*try {
 		    Thread.sleep(1000);                 //1000 milliseconds is one second.
 		} catch(InterruptedException ex) {
 		    Thread.currentThread().interrupt();
@@ -47,8 +47,8 @@ public class Main {
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
-		}
-		//Application.launch(Grande.class, args);
+		}*/
+		Application.launch(Grande.class, args);
 
 	}
 
