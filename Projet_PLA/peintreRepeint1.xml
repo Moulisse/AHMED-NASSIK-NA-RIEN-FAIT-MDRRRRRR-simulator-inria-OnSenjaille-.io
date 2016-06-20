@@ -8,11 +8,11 @@
 		<action nb_l="2" nb_c="2">
 			<l>
 				<c>27</c>
-				<c>54</c>
+				<c>46</c>
 			</l>
 			<l>
-				<c>32</c>
-				<c>46</c>
+				<c>29</c>
+				<c>56</c>
 			</l>
 		</action>
 		<transition nb_l="2" nb_c="2">
@@ -21,7 +21,7 @@
 				<c>0</c>
 			</l>
 			<l>
-				<c>32</c>
+				<c>29</c>
 				<c>0</c>
 			</l>
 		</transition>
