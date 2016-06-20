@@ -10,7 +10,7 @@ public class mainXMLtest {
 		//verifier codes pour chaque type de personnage codes.attaquer à codes.attaquer + 3
 		
 		//Partie jeu;
-		Partie jeu=parser.buildGame("test3.xml","test3.xml");
+		Partie jeu=parser.buildGame("test3.xml","test3.xml",0);
 		//jeu.ajoutMurs(500);
 		
 		jeu.ajoutMursMap();

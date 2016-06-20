@@ -37,12 +37,13 @@ public class Cellule {
 	
 	public void peindre(int c){
 		couleur = c;
+		
 		if(valeur==codes.rouge){
 			if(this.valeur>=codes.peindreB&&this.valeur<=codes.peindreB+4){
 				this.valeur=this.valeur-codes.peindreB+codes.peindreR;
 			}
 
-			else if(valeur>=codes.caseBlancheEloigneeNord&&valeur<=codes.caseBlancheEloigneeOuest){
+			/*else if(valeur>=codes.caseBlancheEloigneeNord&&valeur<=codes.caseBlancheEloigneeOuest){
 				this.valeur=this.valeur - codes.caseBlancheEloigneeNord + codes.caseRougeEloigneeNord;
 			}
 			
@@ -56,13 +57,13 @@ public class Cellule {
 			
 			else if(valeur>=codes.caseBleuNord&&valeur<=codes.caseBleuOuest){
 				this.valeur=this.valeur - codes.caseBleuNord + codes.caseRougeNord;
-			}	
+			}	*/
 		
 		}
 		else if(valeur==codes.bleu){
 			if(this.valeur>=codes.peindreR&&this.valeur<=codes.peindreR+4)
 				this.valeur=this.valeur-codes.peindreR+codes.peindreB;
-			
+			/*
 			else if(valeur>=codes.caseBlancheEloigneeNord&&valeur<=codes.caseBlancheEloigneeOuest){
 				this.valeur=this.valeur - codes.caseBlancheEloigneeNord + codes.caseBleuEloigneeNord;
 			}
@@ -77,8 +78,9 @@ public class Cellule {
 			
 			else if(valeur>=codes.caseRougeNord&&valeur<=codes.caseRougeOuest){
 				this.valeur=this.valeur - codes.caseRougeNord + codes.caseBleuNord;
-			}	
+			}	*/
 		}
+		
 		
 	}
 	

@@ -65,9 +65,19 @@ public abstract class Personnage {
 		double roll;
 		
 		if (diffX==0&&diffY<0){ //Balise au Nord
-			this.avancer(0);
+			if(!this.partie.blocke(this.pos.getX(), this.pos.getY()-1)){
+				this.avancer(0);
+			}else if(!this.partie.blocke(this.pos.getX()+1, this.pos.getY())){
+				this.avancer(1);
+			}else if(!this.partie.blocke(this.pos.getX()-1, this.pos.getY())){
+				this.avancer(3);
+			}
 		} else if(diffX>0&&diffY<0){ //Balise au Nord-Est
-			if(diffX>(-diffY)){
+			if(this.partie.blocke(this.pos.getX(), this.pos.getY()-1)){
+				this.avancer(1);
+			}else if(this.partie.blocke(this.pos.getX()+1, this.pos.getY())){
+				this.avancer(0);
+			}else if(diffX>(-diffY)){
 				this.avancer(1);
 			}else if(diffX<((-diffY))){
 				this.avancer(0);
@@ -80,9 +90,20 @@ public abstract class Personnage {
 				}
 			}
 		} else if(diffX>0&&diffY==0){ //Balise a l'Est
-			this.avancer(1);
+			if(!this.partie.blocke(this.pos.getX()+1, this.pos.getY())){
+				this.avancer(1);
+			}else if(!this.partie.blocke(this.pos.getX(), this.pos.getY()-1)){
+				this.avancer(0);
+			}else if(!this.partie.blocke(this.pos.getX(), this.pos.getY()+1)){
+				this.avancer(2);
+			}
+			
 		} else if(diffX>0&&diffY>0){ //Balise au Sud-Est
-			if(diffX>(diffY)){
+			if(this.partie.blocke(this.pos.getX(), this.pos.getY()+1)){
+				this.avancer(1);
+			}else if(this.partie.blocke(this.pos.getX()+1, this.pos.getY())){
+				this.avancer(2);
+			}else if(diffX>(diffY)){
 				this.avancer(1);
 			}else if(diffX<(diffY)){
 				this.avancer(2);
@@ -95,12 +116,22 @@ public abstract class Personnage {
 				}
 			}
 		} else if(diffX==0&&diffY>0){ //Balise au Sud
-			this.avancer(2);
-		} else if(diffX<0&&diffY>0){ //Balise au Sud-Ouest
-			if((-diffX)>diffY){
+			if(!this.partie.blocke(this.pos.getX(), this.pos.getY()+1)){
+				this.avancer(2);
+			}else if(!this.partie.blocke(this.pos.getX()-1, this.pos.getY())){
+				this.avancer(3);
+			}else if(!this.partie.blocke(this.pos.getX()+1, this.pos.getY())){
 				this.avancer(1);
+			}
+		} else if(diffX<0&&diffY>0){ //Balise au Sud-Ouest
+			if(this.partie.blocke(this.pos.getX(), this.pos.getY()+1)){
+				this.avancer(3);
+			}else if(this.partie.blocke(this.pos.getX()-1, this.pos.getY())){
+				this.avancer(2);
+			}else if((-diffX)>diffY){
+				this.avancer(3);
 			}else if((-diffX)<diffY){
-				this.avancer(0);
+				this.avancer(2);
 			}else{
 				roll=Math.random();
 				if(roll>0.5){
@@ -110,9 +141,20 @@ public abstract class Personnage {
 				}
 			}
 		} else if(diffX<0&&diffY==0){ //Balise a l'Ouest
-			this.avancer(3);
+			if(!this.partie.blocke(this.pos.getX()-1, this.pos.getY())){
+				this.avancer(3);
+			}else if(!this.partie.blocke(this.pos.getX(), this.pos.getY()+1)){
+				this.avancer(2);
+			}else if(!this.partie.blocke(this.pos.getX(), this.pos.getY()-1)){
+				this.avancer(0);
+			}
+			
 		} else if(diffX<0&&diffY<0){ //Balise au Nord-Ouest
-			if((-diffX)>(-diffY)){
+			if(this.partie.blocke(this.pos.getX(), this.pos.getY()-1)){
+				this.avancer(3);
+			}else if(this.partie.blocke(this.pos.getX()-1, this.pos.getY())){
+				this.avancer(0);
+			}else if((-diffX)>(-diffY)){
 				this.avancer(3);
 			}else if((-diffX)<(-diffY)){
 				this.avancer(0);
@@ -125,7 +167,7 @@ public abstract class Personnage {
 				}
 			}
 		} else if(diffX==0&&diffY==0){
-			avancer(4);
+			this.avancer(4);
 		}
 	}
 	
