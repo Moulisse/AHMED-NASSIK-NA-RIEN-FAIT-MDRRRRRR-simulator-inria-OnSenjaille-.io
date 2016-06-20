@@ -42,12 +42,12 @@ public class Guerrier extends Personnage {
 	
 	
 	
-	public boolean actionIntedite(){
+	public boolean actionInterdite(){
 		List<Integer> actionsInterdites=new ArrayList<Integer>();
 		actionsInterdites.add(codes.peindreB);
 		actionsInterdites.add(codes.peindreR);
 
-			return super.actionIntedite(actionsInterdites);
+			return super.actionInterdite(actionsInterdites);
 		
 	}
 	

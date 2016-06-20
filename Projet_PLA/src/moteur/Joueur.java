@@ -37,4 +37,18 @@ public class Joueur {
 	}
 	
 	
+	public void verifAutomates(){
+		for(Personnage pers : this.personnages){
+			if(pers.getClass().equals(Guerrier.class)){
+				((Guerrier)pers).actionInterdite();
+			}
+			else
+			{
+				((Peintre)pers).actionInterdite();
+			}
+		}
+		
+	}
+	
+	
 }

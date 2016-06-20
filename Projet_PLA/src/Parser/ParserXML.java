@@ -144,7 +144,7 @@ public class ParserXML {
 		System.out.println("Nombre de lignes automate actions : " + action.getAttributeValue("nb_l")
 				+ "\nNombre de colonnes automate action : " + action.getAttributeValue("nb_c"));
 
-		if(Integer.parseInt(action.getAttributeValue("nb_c"))>5){
+		if(Integer.parseInt(action.getAttributeValue("nb_c"))>6){
 			System.err.print("UN AUTOMATE POSSEDE TROP D'ETAT : MAXIMUM = 5");
 			System.exit(0);}
 		
@@ -248,7 +248,29 @@ public class ParserXML {
 			
 			break;
 		case 2 : 
+			
+			if(joueur1==null)
+			{
+				newPos=partie.placementAleatoire();
+			}
+			else
+			{
+				newPos=joueur1.getPersonnages().get(0).automate().Position();
+			}
+		
 			break;
+			
+		case 3:
+			if(joueur1==null)
+			{
+				newPos.setX(3);
+				newPos.setY(20);
+			}
+			else
+			{
+				newPos.setX(5);
+				newPos.setY(20);
+			}
 		}
 		
 
@@ -273,6 +295,9 @@ public class ParserXML {
 		else{System.out.println("non occuoe");}
 		if(persoCourant==null){System.out.println("YOOKROZEKROEZKROZKEROZKEROZKR");}
 		persoCourant.setPartie(partie);
+		
+		
+		
 		return persoCourant;
 
 	}
@@ -327,9 +352,9 @@ public class ParserXML {
 		
 	//0:Partie buildGame(X.xml,Y.xml,0)
 	//1: spawn proche sur meme ligne
-	//Partie buildGame(guerrierLigneR.xml,guerrierLigneB.xml,1)
+	//Partie buildGame("guerrierLigneR.xml","guerrierLigneB.xml",1)
 	//2: un peintre qui repeint directement automate ennemi
-	//Partie buildGame(guerrierLigneR.xml,guerrierLigneB.xml,2)
+	//Partie buildGame("peintreRepeint1.xml","peintreRepeint2.xml",2)
 	//3: deux peintres qui essaye de peindre la meme case
 	//Partie buildGame(peintreCaseR.xml,peindreCaseB.xml,3)
 	//4: reagissent qu'à la balise
@@ -377,7 +402,9 @@ public class ParserXML {
 		// initialisation JOUEUR 1
 		
 		partieInitiale.setJoueur1(joueur1);
+		//joueur1.verifAutomates();
 		partieInitiale.setJoueur2(joueur2);
+		//joueur2.verifAutomates();
 		partieInitiale.ajouterListe(joueur1.getPersonnages());
 		System.out.println("Il ya : "+ joueur1.getPersonnages().size()+" pour le joueur 1");
 		partieInitiale.ajouterListe(joueur2.getPersonnages());

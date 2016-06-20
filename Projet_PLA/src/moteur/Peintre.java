@@ -38,11 +38,11 @@ public class Peintre extends Personnage{
 	
 	
 	
-	public boolean actionIntedite(){
+	public boolean actionInterdite(){
 		List<Integer> actionsInterdites=new ArrayList<Integer>();
 		actionsInterdites.add(codes.frapper);
 
-			return super.actionIntedite(actionsInterdites);
+			return super.actionInterdite(actionsInterdites);
 		
 	}
 	

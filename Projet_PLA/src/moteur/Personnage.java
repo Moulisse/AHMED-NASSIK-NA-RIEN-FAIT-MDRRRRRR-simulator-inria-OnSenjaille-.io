@@ -220,11 +220,11 @@ public abstract class Personnage {
 	}*/
 
 	//renvoie true s'il le personnage possède une action interdites
-	public boolean actionIntedite(List<Integer> actionsInterdites){
+	public boolean actionInterdite(List<Integer> actionsInterdites){
 		int code;
 		
 		int hauteurTransi=this.automate().getTransitions().length;
-
+		int longueurTransi=this.automate().getTransitions()[0].length;
 		/*List<Integer> actionsPersonnage=null;
 
 		//on récupère la premiere colonne(conditions)
@@ -242,14 +242,16 @@ public abstract class Personnage {
 		
 		for(int i=0;i<hauteurTransi;i++)
 		{
-			if(this.automate().getTransitions()[i][0]==code){
-				System.out.println("AUTOMATE ERRONE ACTION DE VOTRE PERSONNAGE DE TYPE "+this.getClass()+" CONTIENT UNE ACTION NON AUTORISEE");
+			for(int j=0;j<longueurTransi;j++)
+			{
+			if(partie.decor()[automate().Position().getY()+i][automate().Position().getX()+j].valeur()==code){
+				System.err.println("AUTOMATE ERRONE ACTION DE VOTRE PERSONNAGE DE TYPE "+this.getClass()+" CONTIENT UNE ACTION NON AUTORISEE");
 				System.exit(0);
 				return true;
 				}
 		}
 		
-
+		}
 		
 		}	
 	return false;

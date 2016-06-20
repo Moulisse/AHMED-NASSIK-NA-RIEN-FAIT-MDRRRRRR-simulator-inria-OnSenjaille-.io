@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<automates>
+
+
+	<nb_aut>1</nb_aut>
+	<au personnage="guerrier">
+
+		<action nb_l="2" nb_c="3">
+			<l>
+				<c>6</c>
+				<c>49</c>
+				<c>49</c>
+			</l>
+			<l>
+				<c>26</c>
+				<c>45</c>
+				<c>45</c>
+			</l>
+		</action>
+		<transition nb_l="2" nb_c="3">
+			<l>
+				<c>6</c>
+				<c>1</c>
+				<c>1</c>
+			</l>
+			<l>
+				<c>26</c>
+				<c>0</c>
+				<c>0</c>
+			</l>
+		</transition>
+	</au>
+
+</automates>

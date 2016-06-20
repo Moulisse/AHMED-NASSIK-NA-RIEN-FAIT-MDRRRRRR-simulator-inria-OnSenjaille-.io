@@ -82,7 +82,11 @@ public class Automate {
 			return this.transitions;
 		}
 		
+		public Position Position(){
+			return position;
+		}
 		
+
 		
 	
 }
