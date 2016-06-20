@@ -42,14 +42,16 @@ public class Mainvincent {
 		//5: game normale
 		//Partie buildGame(teamNormaleR.xml,teamNormaleB.xml,5)
 		
-		int i=2;
+		int i=3;
 		
 		switch(i){
-		case 0:p=parser.buildGame("joueur1.xml","joueur2.xml",0);break;
+		case 0:p=parser.buildGame("joueur1.xml","joueur2.xml",0);
+		p.ajoutMursMap();
+		break;
 		case 1:p=parser.buildGame("guerrierLigneR.xml","guerrierLigneB.xml",1);break;
 		case 2:p=parser.buildGame("peintreRepeint1.xml","peintreRepeint2.xml",2);break;
 		case 3:p=parser.buildGame("PeintrevsPeintre1.xml","PeintrevsPeintre2.xml",3);break;
-		
+		case 4:p=parser.buildGame("BaliseOnly1.xml","BaliseOnly2.xml",4);break;
 		}
 		//p=parser.buildGame("joueur1.xml","joueur2.xml",0);
 		//p=parser.buildGame("guerrierLigneR.xml","guerrierLigneB.xml",1);
