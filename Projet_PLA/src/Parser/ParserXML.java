@@ -252,14 +252,18 @@ public class ParserXML {
 			if(joueur1==null)
 			{
 				newPos=partie.placementAleatoire();
+				newPos.setY(2);
 			}
 			else
 			{
-				newPos=joueur1.getPersonnages().get(0).automate().Position();
+				int top=joueur1.getPersonnages().get(0).automate().Position().getY()-5;
+				if (top<2)top=2;
+				newPos=new Position(joueur1.getPersonnages().get(0).automate().Position().getX(),top);
 			}
-		
+			
 			break;
 			
+		
 		case 3:
 			if(joueur1==null)
 			{
@@ -271,6 +275,7 @@ public class ParserXML {
 				newPos.setX(5);
 				newPos.setY(20);
 			}
+			break;
 		}
 		
 
