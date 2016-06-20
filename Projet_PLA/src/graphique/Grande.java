@@ -719,83 +719,7 @@ public class Grande extends Application {
 		o_couleur2_box.setVisible(false);
 		root.getChildren().add(o_couleur2_box);
 
-		image = new Image("file:images/o_peintres.png");
-		ImageView o_nbp1 = new ImageView(image);
-		o_nbp1.setX(330);
-		o_nbp1.setY(382);
-		l_option.add(o_nbp1);
-		o_nbp1.setVisible(false);
-		root.getChildren().add(o_nbp1);
-		ImageView o_nbp2 = new ImageView(image);
-		o_nbp2.setX(330);
-		o_nbp2.setY(767);
-		l_option.add(o_nbp2);
-		o_nbp2.setVisible(false);
-		root.getChildren().add(o_nbp2);
-
-		TextField o_nbp1_textfield = new TextField();
-		o_nbp1_textfield.setText(Integer.toString(nb_p1));
-		o_nbp1_textfield.setAlignment(Pos.CENTER);
-		o_nbp1_textfield.setPrefColumnCount(2);
-		o_nbp1_textfield.setStyle("-fx-background-color:#D5D5D5;     -fx-font-size: 28px;     -fx-padding: 0");
-		o_nbp1_textfield.setFocusTraversable(false);
-		HBox o_nbp1_box = new HBox();
-		o_nbp1_box.getChildren().add(o_nbp1_textfield);
-		o_nbp1_box.relocate(655, 373);
-		l_option.add(o_nbp1_box);
-		o_nbp1_box.setVisible(false);
-		root.getChildren().add(o_nbp1_box);
-		TextField o_nbp2_textfield = new TextField();
-		o_nbp2_textfield.setText(Integer.toString(nb_p2));
-		o_nbp2_textfield.setAlignment(Pos.CENTER);
-		o_nbp2_textfield.setPrefColumnCount(2);
-		o_nbp2_textfield.setStyle("-fx-background-color:#D5D5D5;     -fx-font-size: 28px;     -fx-padding: 0");
-		o_nbp2_textfield.setFocusTraversable(false);
-		HBox o_nbp2_box = new HBox();
-		o_nbp2_box.getChildren().add(o_nbp2_textfield);
-		o_nbp2_box.relocate(655, 755);
-		l_option.add(o_nbp2_box);
-		o_nbp2_box.setVisible(false);
-		root.getChildren().add(o_nbp2_box);
-
-		image = new Image("file:images/o_guerriers.png");
-		ImageView o_nbg1 = new ImageView(image);
-		o_nbg1.setX(330);
-		o_nbg1.setY(448);
-		l_option.add(o_nbg1);
-		o_nbg1.setVisible(false);
-		root.getChildren().add(o_nbg1);
-		ImageView o_nbg2 = new ImageView(image);
-		o_nbg2.setX(330);
-		o_nbg2.setY(833);
-		l_option.add(o_nbg2);
-		o_nbg2.setVisible(false);
-		root.getChildren().add(o_nbg2);
-
-		TextField o_nbg1_textfield = new TextField();
-		o_nbg1_textfield.setText(Integer.toString(nb_g1));
-		o_nbg1_textfield.setAlignment(Pos.CENTER);
-		o_nbg1_textfield.setPrefColumnCount(2);
-		o_nbg1_textfield.setStyle("-fx-background-color:#D5D5D5;     -fx-font-size: 28px;     -fx-padding: 0");
-		o_nbg1_textfield.setFocusTraversable(false);
-		HBox o_nbg1_box = new HBox();
-		o_nbg1_box.getChildren().add(o_nbg1_textfield);
-		o_nbg1_box.relocate(670, 440);
-		l_option.add(o_nbg1_box);
-		o_nbg1_box.setVisible(false);
-		root.getChildren().add(o_nbg1_box);
-		TextField o_nbg2_textfield = new TextField();
-		o_nbg2_textfield.setText(Integer.toString(nb_g2));
-		o_nbg2_textfield.setAlignment(Pos.CENTER);
-		o_nbg2_textfield.setPrefColumnCount(2);
-		o_nbg2_textfield.setStyle("-fx-background-color:#D5D5D5;     -fx-font-size: 28px;     -fx-padding: 0");
-		o_nbg2_textfield.setFocusTraversable(false);
-		HBox o_nbg2_box = new HBox();
-		o_nbg2_box.getChildren().add(o_nbg2_textfield);
-		o_nbg2_box.relocate(670, 825);
-		l_option.add(o_nbg2_box);
-		o_nbg2_box.setVisible(false);
-		root.getChildren().add(o_nbg2_box);
+		
 
 		// ============================ MENU ===========================
 		image = new Image("file:images/peinture_tache.png");
@@ -893,14 +817,7 @@ public class Grande extends Application {
 					nom2 = o_nom2_textfield.getText();
 				couleur1 = o_colorPicker1.getValue();
 				couleur2 = o_colorPicker2.getValue();
-				if (o_nbp1_textfield.getAnchor() != 0)
-					nb_p1 = Integer.parseInt(o_nbp1_textfield.getText());
-				if (o_nbp2_textfield.getAnchor() != 0)
-					nb_p2 = Integer.parseInt(o_nbp2_textfield.getText());
-				if (o_nbg1_textfield.getAnchor() != 0)
-					nb_g1 = Integer.parseInt(o_nbg1_textfield.getText());
-				if (o_nbg2_textfield.getAnchor() != 0)
-					nb_g2 = Integer.parseInt(o_nbg2_textfield.getText());
+				
 			}
 		};
 
