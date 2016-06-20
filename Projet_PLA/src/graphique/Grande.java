@@ -58,7 +58,7 @@ public class Grande extends Application {
 	Text temps = new Text();
 
 	int i, j, k;
-	long duree = 30;
+	long duree = 150;
 	long t0 = duree;
 
 	Image image;
@@ -548,7 +548,7 @@ public class Grande extends Application {
 						Main.Main.p.getJ1().balise().placerBalise(new Position(x-1,y-1));
 					}
 				}
-				if (ke.getCode().toString() == "NUMPAD0") {
+				if (ke.getCode().toString() == "ENTER") {
 					if(Main.Main.p.getJ2().balise().active()){
 						Main.Main.p.getJ2().balise().desactiverBalise();
 					}else{

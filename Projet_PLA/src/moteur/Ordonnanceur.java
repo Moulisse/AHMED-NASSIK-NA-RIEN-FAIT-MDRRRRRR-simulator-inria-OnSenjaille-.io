@@ -42,6 +42,7 @@ public class Ordonnanceur {
 						if(a.cible().equals(b.cible())){ //Si deux peintre peignent la même case
 							if (!a.sameColor(b)){
 								roll = Math.random();
+								System.out.print("Roll : "+roll);
 								if (roll<=0.5){
 									a.setType(TypeAction.RATE);
 								}else{
