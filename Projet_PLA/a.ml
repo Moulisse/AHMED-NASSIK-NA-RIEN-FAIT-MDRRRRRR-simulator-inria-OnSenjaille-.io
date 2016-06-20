@@ -13,7 +13,7 @@ type action =
 ;;
 
 type condition =
-  | EnnemiEloigne of cellule 
+| EnnemiEloigne of cellule 
   | Ennemi of cellule 
   | Allie of cellule 
   | CaseBlancheEloignee of cellule 
@@ -44,24 +44,24 @@ let (cellule_to_int: cellule -> int) = function
 let (condition_to_int: condition -> int) =  function
   | EnnemiEloigne (cellule) -> 1+(cellule_to_int cellule )
   | Ennemi (cellule) -> 5+(cellule_to_int cellule )
-  | Allie (cellule) -> 8+(cellule_to_int cellule )
-  | CaseBlancheEloignee (cellule) -> 12+(cellule_to_int cellule )
-  | CaseRougeEloignee (cellule) -> 16+(cellule_to_int cellule )
-  | CaseBleuEloignee (cellule) -> 20+(cellule_to_int cellule )
-  | CaseBlanche (cellule) -> 24+(cellule_to_int cellule )
-  | CaseRouge (cellule) -> 29+(cellule_to_int cellule )
-  | CaseBleu (cellule) -> 34+(cellule_to_int cellule )
-  | Mur (cellule) -> 38+(cellule_to_int cellule )
+  | Allie (cellule) -> 9+(cellule_to_int cellule )
+  | CaseBlancheEloignee (cellule) -> 13+(cellule_to_int cellule )
+  | CaseRougeEloignee (cellule) -> 17+(cellule_to_int cellule )
+  | CaseBleuEloignee (cellule) -> 21+(cellule_to_int cellule )
+  | CaseBlanche (cellule) -> 25+(cellule_to_int cellule )
+  | CaseRouge (cellule) -> 30+(cellule_to_int cellule )
+  | CaseBleu (cellule) -> 35+(cellule_to_int cellule )
+  | Mur (cellule) -> 40+(cellule_to_int cellule )
 ;;
 
 
 let (action_to_int: action -> int) = function
-  | Na -> 0
-  | Avancer (cellule) -> 43 + (cellule_to_int cellule)
-  | Frapper (cellule) -> 47 + (cellule_to_int cellule)
-  | Peindre_R (cellule) -> 51 + (cellule_to_int cellule)
-  | Peindre_B (cellule) -> 56 + (cellule_to_int cellule)
-  | Attendre -> 61
+ | Na -> 0
+ | Avancer (cellule) -> 44 + (cellule_to_int cellule)
+ | Frapper (cellule) -> 48 + (cellule_to_int cellule)
+ | Peindre_R (cellule) -> 52 + (cellule_to_int cellule)
+ | Peindre_B (cellule) -> 57 + (cellule_to_int cellule)
+ | Attendre -> 62
 ;;
   
 let (traduction_transition: transition -> int*int*int*int) = fun
@@ -102,12 +102,12 @@ let rec ajoute_trie ((e1,cond,act,e2):(int*int*int*int)) (l:(int*int*int*int)lis
   |(e3,cond2,act2,e4)::fin->if e3<e1
 			    then (e3,cond2,act2,e4)::ajoute_trie (e1,cond,act,e2) fin
 			    else (e3,cond2,act2,e4)::(e1,cond,act,e2)::fin;;
-  
+    
 let rec ajoute_transition (l:(int*int*int*int) list list) ((e1,cond,act,e2):(int*int*int*int))=
   match l with
   |[]->[[(e1,cond,act,e2)]]
   |a::fin -> if condition a = cond
-	     then let ()= Printf.printf "ajoute trie (%d,%d,%d,%d)\n" e1 cond act e2  in ajoute_trie (e1,cond,act,e2) a :: fin
+	     then ajoute_trie (e1,cond,act,e2) a :: fin
 	     else if condition a < cond
 	     then a::ajoute_transition fin (e1,cond,act,e2)
 	     else [(e1,cond,act,e2)]::l;;
@@ -124,21 +124,21 @@ let rec parcourir_aux (act:int) (l:(int*int*int*int) list) (nb_etat:int) (etat_a
 	then []
 	else (etat_actuel,cond,act,etat_actuel)::(parcourir_aux act [] nb_etat (etat_actuel+1) cond)
   |(e1,cond1,act1,e2)::fin->if etat_actuel=e1
-			    then (e1,cond1,act1,e2)::parcourir_aux act fin nb_etat (etat_actuel+1) cond
+			   then (e1,cond1,act1,e2)::parcourir_aux act fin nb_etat (etat_actuel+1) cond
 			    else (etat_actuel,cond,act,etat_actuel)::(parcourir_aux act l nb_etat (etat_actuel+1) cond);;
 
 let rec parcourir (act:int) (l:(int*int*int*int)list list) (nb_etat:int)=
   match l with
   |a::fin->(parcourir_aux act a nb_etat 0 (condition a))::parcourir act fin nb_etat
   |[]->[]
-	 
+    
 let completer (act:int) (l:(int*int*int*int) list) (nb_etats:int)=
   let r=regroupe_par_cond l
   in let y=parcourir act r nb_etats
      in List.concat y;;
   
   
-(* TRI *)
+  (* TRI *)
 
 let rec decoupe ((e1,cond,act1,e2) : (int*int*int*int))(l:(int*int*int*int) list):((int*int*int*int) list*(int*int*int*int) list)=
   match l with
@@ -237,6 +237,7 @@ let write_xml (fichier:out_channel) (list: (automate * personnage) list) (act:in
      and ()=write_nb_aut fichier (string_of_int (List.length list))
      and ()=write_aut fichier list_trad act
      in Printf.fprintf fichier "</automates>";;    
+
 (*
 (* AUTOMATES *)
 
