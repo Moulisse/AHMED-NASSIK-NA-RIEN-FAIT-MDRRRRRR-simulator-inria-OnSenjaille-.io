@@ -29,7 +29,7 @@ public class Main {
 		//verifier codes pour chaque type de personnage codes.attaquer à codes.attaquer + 3
 		
 		//Partie jeu;
-		p=parser.buildGame("joueur1.xml","joueur2.xml");
+		p=parser.buildGame("joueur1.xml","joueur2.xml",0);
 		//jeu.ajoutMurs(500);
 		
 		p.ajoutMursMap();
