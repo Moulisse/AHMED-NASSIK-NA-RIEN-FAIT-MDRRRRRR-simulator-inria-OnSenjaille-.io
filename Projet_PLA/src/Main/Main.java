@@ -29,7 +29,7 @@ public class Main {
 		//verifier codes pour chaque type de personnage codes.attaquer à codes.attaquer + 3
 		
 		//Partie jeu;
-		int i=1;
+		int i=2;
 		
 		switch(i){
 		case 0:
