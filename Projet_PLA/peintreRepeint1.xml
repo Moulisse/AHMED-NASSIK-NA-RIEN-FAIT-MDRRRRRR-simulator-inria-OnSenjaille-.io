@@ -5,24 +5,28 @@
 	<nb_aut>1</nb_aut>
 	<au personnage="peintre">
 
-		<action nb_l="2" nb_c="2">
+		<action nb_l="2" nb_c="3">
 			<l>
 				<c>27</c>
+				<c>0</c>
 				<c>46</c>
 			</l>
 			<l>
 				<c>29</c>
 				<c>56</c>
+				<c>0</c>
 			</l>
 		</action>
-		<transition nb_l="2" nb_c="2">
+		<transition nb_l="2" nb_c="3">
 			<l>
 				<c>27</c>
+				<c>0</c>
 				<c>0</c>
 			</l>
 			<l>
 				<c>29</c>
-				<c>0</c>
+				<c>1</c>
+				<c>1</c>
 			</l>
 		</transition>
 	</au>
