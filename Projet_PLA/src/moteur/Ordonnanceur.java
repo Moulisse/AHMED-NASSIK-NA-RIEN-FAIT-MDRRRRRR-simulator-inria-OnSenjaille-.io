@@ -35,19 +35,18 @@ public class Ordonnanceur {
 								a.setType(TypeAction.RATE);
 							}else if(roll>=0.66){
 								b.setType(TypeAction.RATE);
-							} //si 0.33<roll<0.66 les guerrier s'entretue 
+							} //si 0.33<roll<0.66 les guerriers s'entretue 
 						}
 					}
-					if(a.type().equals(TypeAction.PEINT)&&b.type().equals(TypeAction.PEINT)){
+					if(a.type().toString()==TypeAction.PEINT.toString()&&b.type().toString()==(TypeAction.PEINT.toString())){
+						//System.out.print("Splash \n");
 						if(a.cible().equals(b.cible())){ //Si deux peintre peignent la même case
-							if (!a.sameColor(b)){
-								roll = Math.random();
-								System.out.print("Roll : "+roll);
-								if (roll<=0.5){
-									a.setType(TypeAction.RATE);
-								}else{
-									b.setType(TypeAction.RATE);
-								}
+							roll = Math.random();
+							System.out.print("Roll : "+roll);
+							if (roll<=0.5){
+								a.setType(TypeAction.RATE);
+							}else{
+								b.setType(TypeAction.RATE);
 							}
 						}
 					}

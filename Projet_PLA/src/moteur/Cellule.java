@@ -38,9 +38,10 @@ public class Cellule {
 	public void peindre(int c){
 		couleur = c;
 		
-		if(valeur==codes.rouge){
+		if(couleur==codes.rouge){
 			if(this.valeur>=codes.peindreB&&this.valeur<=codes.peindreB+4){
 				this.valeur=this.valeur-codes.peindreB+codes.peindreR;
+				System.out.println(codes.peindreR+" : "+this.valeur);
 			}
 
 			/*else if(valeur>=codes.caseBlancheEloigneeNord&&valeur<=codes.caseBlancheEloigneeOuest){
@@ -60,9 +61,10 @@ public class Cellule {
 			}	*/
 		
 		}
-		else if(valeur==codes.bleu){
+		if(couleur==codes.bleu){
 			if(this.valeur>=codes.peindreR&&this.valeur<=codes.peindreR+4)
 				this.valeur=this.valeur-codes.peindreR+codes.peindreB;
+				System.out.println(codes.peindreB+" : "+this.valeur);
 			/*
 			else if(valeur>=codes.caseBlancheEloigneeNord&&valeur<=codes.caseBlancheEloigneeOuest){
 				this.valeur=this.valeur - codes.caseBlancheEloigneeNord + codes.caseBleuEloigneeNord;
