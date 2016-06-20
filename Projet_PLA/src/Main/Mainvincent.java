@@ -42,7 +42,7 @@ public class Mainvincent {
 		//5: game normale
 		//Partie buildGame(teamNormaleR.xml,teamNormaleB.xml,5)
 		
-		int i=3;
+		int i=2;
 		
 		switch(i){
 		case 0:p=parser.buildGame("joueur1.xml","joueur2.xml",0);

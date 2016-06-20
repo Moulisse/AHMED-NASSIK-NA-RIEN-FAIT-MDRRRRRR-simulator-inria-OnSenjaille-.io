@@ -29,7 +29,7 @@ public class Main {
 		//verifier codes pour chaque type de personnage codes.attaquer à codes.attaquer + 3
 		
 		//Partie jeu;
-		int i=0;
+		int i=2;
 		
 		switch(i){
 		case 0:
@@ -37,7 +37,7 @@ public class Main {
 			p.ajoutMursMap();
 			break;
 		case 1:p=parser.buildGame("guerrierLigneR.xml","guerrierLigneB.xml",1);break;
-		case 2:p=parser.buildGame("peintreRepeint2.xml","peintreRepeint1.xml",2);break;
+		case 2:p=parser.buildGame("peintreRepeint1.xml","peintreRepeint2.xml",2);break;
 		case 3:p=parser.buildGame("PeintrevsPeintre1.xml","PeintrevsPeintre2.xml",3);break;
 		}
 		//jeu.ajoutMurs(500);

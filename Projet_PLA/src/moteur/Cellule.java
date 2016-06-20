@@ -62,9 +62,10 @@ public class Cellule {
 		
 		}
 		if(couleur==codes.bleu){
-			if(this.valeur>=codes.peindreR&&this.valeur<=codes.peindreR+4)
-				this.valeur=this.valeur-codes.peindreR+codes.peindreB;
+			if(this.valeur>=codes.peindreR&&this.valeur<=codes.peindreR+4){
+				this.valeur=(this.valeur)-(codes.peindreR)+(codes.peindreB);
 				System.out.println(codes.peindreB+" : "+this.valeur);
+			}
 			/*
 			else if(valeur>=codes.caseBlancheEloigneeNord&&valeur<=codes.caseBlancheEloigneeOuest){
 				this.valeur=this.valeur - codes.caseBlancheEloigneeNord + codes.caseBleuEloigneeNord;
