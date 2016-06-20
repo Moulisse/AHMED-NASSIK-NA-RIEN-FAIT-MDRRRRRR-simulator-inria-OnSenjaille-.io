@@ -29,11 +29,11 @@ public class Main {
 		//verifier codes pour chaque type de personnage codes.attaquer à codes.attaquer + 3
 		
 		//Partie jeu;
-		int i=2;
+		int i=1;
 		
 		switch(i){
 		case 0:
-			p=parser.buildGame("joueur2OP.xml","joueur1OP.xml",0);
+			p=parser.buildGame("joueur1.xml","joueur2.xml",0);
 			p.ajoutMursMap();
 			break;
 		case 1:p=parser.buildGame("guerrierLigneR.xml","guerrierLigneB.xml",1);break;

@@ -246,7 +246,7 @@ public class Grande extends Application {
 					Main.Main.p.tour();
 					sum1=Main.Main.p.nbCasesPeinteB();
 					sum2=Main.Main.p.nbCasesPeinteR();
-					timertour=2;
+					timertour=8;
 				}
 				if (timertour > 0)
 					timertour--;
