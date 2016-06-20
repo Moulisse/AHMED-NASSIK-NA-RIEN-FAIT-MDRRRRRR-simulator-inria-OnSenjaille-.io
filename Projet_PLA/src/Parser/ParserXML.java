@@ -33,7 +33,8 @@ public class ParserXML {
 		partieOfficial.affichageText();
 	}*/
 
-	
+	Joueur joueur1=null;
+	Joueur joueur2=null;
 	 
 
 	public ParserXML(){
@@ -227,20 +228,20 @@ public class ParserXML {
 		System.out.println("X: "+automatePosition.getX()+" Y : "+automatePosition.getY());
 			Position newPos = new Position();
 		switch (numeroTest){
-		case 0 :	//Nord
+		case 0 :
 			
 			newPos=partie.placementAleatoire();
 			break;
-		case 1 : 	//Est
+		case 1 : 	
 			
-			if(partie.occupe(3,20)!=null)
+			if(joueur1==null)
 			{
-				newPos.setX(15);
+				newPos.setX(3);
 				newPos.setY(20);
 			}
 			else
 			{
-				newPos.setX(3);
+				newPos.setX(15);
 				newPos.setY(20);
 			}
 			
@@ -367,10 +368,11 @@ public class ParserXML {
 																		// la
 																		// hauteur
 
+
 	//	System.out.println("taille map : "+partieInitiale.decor().length);
-		Joueur joueur1 = createPlayer(partieInitiale, fichierJoueur1, 0,longueurAutoMax,numeroTest);
+		joueur1 = createPlayer(partieInitiale, fichierJoueur1, 0,longueurAutoMax,numeroTest);
 		//les deux joueurs doivent avoir le meme nombre d'automate
-		Joueur joueur2 = createPlayer(partieInitiale, fichierJoueur2, nbAuto(fichierJoueur1),longueurAutoMax,numeroTest);
+		joueur2 = createPlayer(partieInitiale, fichierJoueur2, nbAuto(fichierJoueur1),longueurAutoMax,numeroTest);
 
 		// initialisation JOUEUR 1
 		

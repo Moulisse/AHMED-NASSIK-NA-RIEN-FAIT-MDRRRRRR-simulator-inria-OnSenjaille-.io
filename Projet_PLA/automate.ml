@@ -13,7 +13,7 @@ type action =
 ;;
 
 type condition =
-  | EnnemiEloigne of cellule 
+| EnnemiEloigne of cellule 
   | Ennemi of cellule 
   | Allie of cellule 
   | CaseBlancheEloignee of cellule 
@@ -381,6 +381,26 @@ let peintre_moins_con_R =
     (1,Mur(O),Avancer(E),0);
     (1,Mur(N),Avancer(S),0);
     (1,Mur(S),Avancer(N),0)],Peintre);;
+
+
+let Mesh_warrior=
+  ([(0,Ennemi(N),Attaquer(Nord),0);
+  ([(0,Ennemi(N),Attaquer(Nord),0);
+  ([(0,Ennemi(N),Attaquer(Nord),0);
+  ([(0,Ennemi(N),Attaquer(Nord),0);
+  ([(0,Ennemi(N),Attaquer(Nord),0);
+  ([(0,Ennemi(N),Attaquer(Nord),0);
+  ([(0,Ennemi(N),Attaquer(Nord),0);
+  ([(0,Ennemi(N),Attaquer(Nord),0);
+  ([(0,Ennemi(N),Attaquer(Nord),0);
+  ([(0,Ennemi(N),Attaquer(Nord),0);
+  ([(0,Ennemi(N),Attaquer(Nord),0);
+  ([(0,Ennemi(N),Attaquer(Nord),0);
+
+
+
+
+
 (*
 let a = traduction_automate tour_de_map;;
 let (b1,b2) = tri_aut a;;
